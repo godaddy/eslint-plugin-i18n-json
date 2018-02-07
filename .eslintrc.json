@@ -1,0 +1,13 @@
+{
+  "env": {
+    "node": true,
+    "es6": true,
+    "jest": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "extends": [
+    "airbnb-base" 
+  ]
+}
