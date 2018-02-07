@@ -1,0 +1,53 @@
+/* eslint-disable global-require */
+const sortTranslations = require('./src/sort-translations');
+
+const translationFiles = {};
+
+module.exports = {
+  rules: {
+    'valid-json': require('./src/valid-json'),
+    'valid-message-syntax': require('./src/valid-message-syntax'),
+    'identical-keys': require('./src/identical-keys'),
+  },
+  processors: {
+    '.json': {
+      preprocess: (source, filePath) => {
+        translationFiles[filePath] = source;
+        // augment the json into a comment
+        // along with the source path :D
+        // so we can pass it to the rules
+        return [
+          `/* ${source.trim()} *//* ${filePath} */\n`,
+        ];
+      },
+      // since we only return one line in the preprocess step,
+      // we only care about the first array of errors
+      postprocess: ([errors], filePath) => {
+        const source = translationFiles[filePath];
+        // delete global reference
+        // in order to prevent a large memory build up
+        // during the life of the eslint process.
+        delete translationFiles[filePath];
+        return [
+          ...errors,
+          ...sortTranslations(source),
+        ];
+      },
+      supportsAutofix: true,
+    },
+  },
+  configs: {
+    recommended: {
+      plugins: [
+        'i18n-json',
+      ],
+      rules: {
+        'i18n-json/valid-message-syntax': [2, {
+          syntax: 'icu', // default syntax
+        }],
+        'i18n-json/valid-json': 2,
+        'i18n-json/identical-keys': 0,
+      },
+    },
+  },
+};

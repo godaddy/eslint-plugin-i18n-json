@@ -1,0 +1,16 @@
+{
+  "author": "",
+  "description": "",
+  "devDependencies": {
+    "eslint": "^4.15.0",
+    "eslint-plugin-i18n-json": "^2.0.0"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "name": "multiple-files-per-locale",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --fix --ext .json translations"
+  },
+  "version": "1.0.0"
+}

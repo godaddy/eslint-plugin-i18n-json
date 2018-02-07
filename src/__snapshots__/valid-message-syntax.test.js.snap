@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot Tests for Invalid Code custom message format (upper case only) 1`] = `
+"
+- Expected
++ Received
+
+  Object {
+-   \\"translationKeyA\\": \\"ValidMessage<String>\\",
+-   \\"translationKeyB\\": \\"ValidMessage<String>\\",
++   \\"translationKeyA\\": \\"String('translation value a') ===> MESSAGE MUST BE IN UPPERCASE!\\",
++   \\"translationKeyB\\": \\"String('translation value b') ===> MESSAGE MUST BE IN UPPERCASE!\\",
+  }"
+`;
+
+exports[`Snapshot Tests for Invalid Code nested translations - icu syntax check 1`] = `
+"
+- Expected
++ Received
+
+  Object {
+    \\"levelOne\\": Object {
+      \\"levelTwo\\": Object {
+-       \\"translationKeyC\\": \\"ValidMessage<String>\\",
++       \\"translationKeyC\\": \\"String('translation value c {') ===> Expected '0', [1-9] or [^ tnr,.+={}#] but end of input found.\\",
+      },
+-     \\"translationKeyB\\": \\"ValidMessage<String>\\",
++     \\"translationKeyB\\": \\"String('translation value b {') ===> Expected '0', [1-9] or [^ tnr,.+={}#] but end of input found.\\",
+    },
+  }"
+`;
+
+exports[`Snapshot Tests for Invalid Code no arrays or numbers 1`] = `
+"
+- Expected
++ Received
+
+  Object {
+-   \\"levelOne\\": \\"ObjectContaining<ValidMessages> | ValidMessage<String>\\",
+-   \\"levelTwo\\": \\"ValidMessage<String>\\",
++   \\"levelOne\\": \\"Array [] ===> TypeError: An Array cannot be a translation value.\\",
++   \\"levelTwo\\": \\"Number(5) ===> Message must be a String.\\",
+  }"
+`;
+
+exports[`Snapshot Tests for Invalid Code no empty objects 1`] = `
+"
+- Expected
++ Received
+
+  Object {
+-   \\"levelOne\\": \\"ObjectContaining<ValidMessages> | ValidMessage<String>\\",
++   \\"levelOne\\": \\"Object {} ===> SyntaxError: Empty object.\\",
+  }"
+`;
+
+exports[`Snapshot Tests for Invalid Code using "non-empty-string" validator and has empty messages 1`] = `
+"
+- Expected
++ Received
+
+  Object {
+-   \\"translationKeyA\\": \\"ValidMessage<String>\\",
+-   \\"translationKeyB\\": \\"ValidMessage<String>\\",
++   \\"translationKeyA\\": \\"String('') ===> Message is Empty.\\",
++   \\"translationKeyB\\": \\"null ===> Message is Empty.\\",
+  }"
+`;

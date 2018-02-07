@@ -1,0 +1,11 @@
+{
+  "login": {
+    "form": {
+      "cancel": "Cancel",
+      "resetPassword": "Reset Password",
+      "submit": "Login Now!"
+    },
+    "invalidAuth": "Wrong Username or Password",
+    "lastLoginAt": "Last Login at {lastLoginTime, time, short}"
+  }
+}

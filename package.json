@@ -1,0 +1,62 @@
+{
+  "name": "eslint-plugin-i18n-json",
+  "version": "2.0.0",
+  "description": "Fully extendable eslint plugin for JSON i18n translation files.",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint index.js src/ --fix",
+    "test": "jest --coverage"
+  },
+  "files": [
+    "src",
+    "README.md",
+    "index.js"
+  ],
+  "repository": { 
+      "type": "git",
+      "url": "git@github.com:godaddy/eslint-plugin-i18n-json"
+  },
+  "keywords": [
+    "eslint",
+    "json",
+    "i18n",
+    "translations",
+    "internationalization",
+    "intl",
+    "linter"
+  ],
+  "author": "GoDaddy Operating Company, LLC",
+  "contributors": [
+    "Mayank Jethva <mjethva@godaddy.com>"
+  ],
+  "jest": {
+    "roots": [
+      "src/"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ]
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "eslint": ">=4.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.15.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "espree": "^3.5.2",
+    "jest": "^22.0.4",
+    "strip-ansi": "^4.0.0"
+  },
+  "dependencies": {
+    "intl-messageformat-parser": "^1.4.0",
+    "jest-diff": "^22.0.3",
+    "jsonlint": "^1.6.2",
+    "lodash.get": "^4.4.2",
+    "lodash.isequal": "^4.5.0",
+    "lodash.isplainobject": "^4.0.6",
+    "lodash.set": "^4.3.2",
+    "pretty-format": "^22.0.3"
+  }
+}

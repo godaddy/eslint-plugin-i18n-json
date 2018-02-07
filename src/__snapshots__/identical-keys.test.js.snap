@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot Tests for Invalid Code map of comparison files - structure mismatch 1`] = `
+"
+- Expected
++ Received
+
+  Object {
+    \\"translationLevelOne\\": Object {
+-     \\"translationKeyA\\": \\"Message<String>\\",
+-     \\"translationsLevelTwo\\": Object {
+-       \\"translationKeyB\\": \\"Message<String>\\",
+-       \\"translationsLevelThree\\": Object {
+-         \\"translationKeyC\\": \\"Message<String>\\",
++     \\"translationKeyY\\": \\"Message<String>\\",
++     \\"translationKeyZ\\": \\"Message<String>\\",
+    },
+-     },
+-   },
+  }"
+`;
+
+exports[`Snapshot Tests for Invalid Code single comparison file - structure mismatch 1`] = `
+"
+- Expected
++ Received
+
+  Object {
+    \\"translationLevelOne\\": Object {
+-     \\"translationKeyA\\": \\"Message<String>\\",
+-     \\"translationsLevelTwo\\": Object {
+-       \\"translationKeyB\\": \\"Message<String>\\",
+-       \\"translationsLevelThree\\": Object {
+-         \\"translationKeyC\\": \\"Message<String>\\",
++     \\"translationKeyY\\": \\"Message<String>\\",
++     \\"translationKeyZ\\": \\"Message<String>\\",
+    },
+-     },
+-   },
+  }"
+`;
+
+exports[`Snapshot Tests for Invalid Code structure generator function - structure mismatch 1`] = `
+"
+- Expected
++ Received
+
+  Object {
+-   \\"other-key\\": \\"Message<String>\\",
++   \\"translationLevelOne\\": Object {
++     \\"translationKeyY\\": \\"Message<String>\\",
++     \\"translationKeyZ\\": \\"Message<String>\\",
++   },
+  }"
+`;
