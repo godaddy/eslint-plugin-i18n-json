@@ -1,5 +1,7 @@
 # eslint-plugin-i18n-json
 
+![Latest npm version](https://img.shields.io/npm/v/eslint-plugin-i18n-json.svg)
+
 > Fully extendable eslint plugin for JSON i18n translation files.
 
 ![](assets/logo.png)
