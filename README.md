@@ -28,7 +28,7 @@
 - validate syntax per message
   - rule: `i18n-json/valid-message-syntax`
   - default syntax check is for ICU Message Syntax
-  - can support any message syntax through custom validators. (link to customer message validator example)
+  - can support any message syntax through custom validators. [Example](examples/custom-message-syntax/)
 
 - ensure translation files have identical keys
   - `i18n-json/identical-keys`
