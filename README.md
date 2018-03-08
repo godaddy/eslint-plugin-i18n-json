@@ -170,7 +170,7 @@ Check out the [Examples](examples/) folder to see different use cases.
         //custom-syntax-validator.js example
         module.exports = (message, key) => {
           // each message should be in all caps.
-          if(message.toLowercase() !== message.toUppercase()){
+          if(message !== message.toUppercase()){
             throw new SyntaxError('MESSAGE MUST BE IN ALL CAPS!')
           }
         }
