@@ -25,7 +25,7 @@ const validJSON = ([{
   } catch (e) {
     const [, lineNumber = 0] = e.message.match(lineRegex) || [];
     errors.push({
-      message: `Invalid JSON. ${e}`,
+      message: `\nInvalid JSON. ${e}`,
       loc: {
         start: {
           line: Number.parseInt(lineNumber, 10),
