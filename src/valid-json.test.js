@@ -15,6 +15,14 @@ jest.mock('./json-linter-pass.js', () => () => ({}), {
   virtual: true,
 });
 
+jest.mock('chalk', () => {
+  return {
+    bold: {
+      red: jest.fn((str) => str)
+    }
+  }
+});
+
 ruleTester.run('valid-json', rule, {
   valid: [
     {
@@ -49,7 +57,7 @@ ruleTester.run('valid-json', rule, {
       options: [],
       errors: [
         {
-          message: /Invalid JSON.*/,
+          message: /\nInvalid JSON\.\n\n.*/,
           line: 2,
           col: 0,
         },
@@ -62,7 +70,7 @@ ruleTester.run('valid-json', rule, {
       options: [],
       errors: [
         {
-          message: /Invalid JSON.*/,
+          message: /\nInvalid JSON\.\n\n.*/,
           line: 1,
           col: 0,
         },
@@ -80,7 +88,7 @@ ruleTester.run('valid-json', rule, {
       ],
       errors: [
         {
-          message: /Invalid JSON.*/,
+          message: /\nInvalid JSON\.\n\n.*/,
           line: 5,
           col: 0,
         },
@@ -94,7 +102,7 @@ ruleTester.run('valid-json', rule, {
       options: [],
       errors: [
         {
-          message: /Invalid JSON\. SyntaxError: Translation file must be a JSON object\./,
+          message: /\nInvalid JSON\.\n\n.*SyntaxError: Translation file must be a JSON object\./,
           line: 0,
           col: 0,
         },

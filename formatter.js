@@ -28,7 +28,7 @@ const formatter = (results) => {
     })
 
     messagesOutput = messages.map(({ ruleId, severity, message }) => {
-      let messageHeader = `${severity === 1 ? `${logSymbols.warning} ${chalk.inverse.yellow('Warning')}` : `${logSymbols.error} ${chalk.inverse.red('Error')}`}`;
+      let messageHeader = `${severity === 1 ? `${logSymbols.warning} ${chalk.inverse.yellow(' WARNING ')}` : `${logSymbols.error} ${chalk.inverse.red(' ERROR ')}`}`;
       messageHeader += ' ' + chalk.white(`(${ruleId})`);
       return `\n\n${[messageHeader, indentString(message, 2)].join('\n')}`;
     }).join('');
@@ -39,8 +39,8 @@ const formatter = (results) => {
   let formattedReport = outputs.join('\n\n');
 
   // add in aggregate error and warnings count
-  const totalErrorsFormatted = `${logSymbols.error} ${chalk.bold.red(total.errors)} ${chalk.bold.red(plur('Error', total.errors))}`;
-  const totalWarningsFormatted = `${logSymbols.warning} ${chalk.bold.yellow(total.warnings)} ${chalk.bold.yellow(plur('Warning', total.warnings))}`
+  const totalErrorsFormatted = `${chalk.bold.red('>')} ${logSymbols.error} ${chalk.bold.red(total.errors)} ${chalk.bold.red(plur('ERROR', total.errors))}`;
+  const totalWarningsFormatted = `${chalk.bold.yellow('>')} ${logSymbols.warning} ${chalk.bold.yellow(total.warnings)} ${chalk.bold.yellow(plur('WARNING', total.warnings))}`
 
   formattedReport += '\n\n' + `${totalErrorsFormatted}\n${totalWarningsFormatted}`;
   return (total.errors + total.warnings > 0) ? formattedReport : '';
