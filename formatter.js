@@ -7,21 +7,23 @@ const chalk = require('chalk');
 const plur = require('plur');
 const logSymbols = require('log-symbols');
 const indentString = require('indent-string');
+const path = require('path');
+
+const CWD = process.cwd();
 
 const formatter = (results) => {
   const total = {
     errors: 0,
     warnings: 0
   };
-
   const outputs = results.map(({ filePath, messages , errorCount, warningCount}) => {
     if(errorCount + warningCount === 0){
       return ''; 
     }
     total.errors += errorCount;
     total.warnings += warningCount;
-
-    const header = `${chalk.underline.white(filePath)}`
+    const relativePath = path.relative(CWD, filePath);
+    const header = `${chalk.underline.white(relativePath)}`
     
     messages.sort((a , b) => {
       return b.severity - a.severity; //display errors first
@@ -34,7 +36,7 @@ const formatter = (results) => {
     }).join('');
 
     return [header, messagesOutput].join('\n');
-  });
+  }).filter((output) => output.trim().length > 0 );
 
   let formattedReport = outputs.join('\n\n');
 

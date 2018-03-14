@@ -55,8 +55,6 @@ exports[`formatter will not display any message for an individual file which doe
 ✖  ERROR  (some-rule)
   file is bad
 
-
-
 > ✖ 1 ERROR
 > ⚠ 0 WARNINGS"
 `;

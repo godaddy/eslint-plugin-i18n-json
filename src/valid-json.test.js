@@ -15,13 +15,11 @@ jest.mock('./json-linter-pass.js', () => () => ({}), {
   virtual: true,
 });
 
-jest.mock('chalk', () => {
-  return {
-    bold: {
-      red: jest.fn((str) => str)
-    }
-  }
-});
+jest.mock('chalk', () => ({
+  bold: {
+    red: jest.fn(str => str),
+  },
+}));
 
 ruleTester.run('valid-json', rule, {
   valid: [
