@@ -4,7 +4,7 @@
   "description": "Fully extendable eslint plugin for JSON i18n translation files.",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint index.js src/ --fix",
+    "lint": "eslint index.js formatter.js src/ --fix",
     "test": "jest --coverage"
   },
   "files": [

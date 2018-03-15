@@ -94,8 +94,8 @@ simple
       }
     }
     ```
-    - *Also, the following builtin formatters provided by eslint also work well: `compact`, `unix`, `visualstudio`, `json`. (https://github.com/eslint/eslint/tree/master/lib/formatters). Example usage: `eslint --fix --ext .json --format compact translations/`*
-
+    - *Also, the following builtin formatters provided by eslint also work well: `compact`, `unix`, `visualstudio`, `json`.* [Learn more here](https://eslint.org/docs/user-guide/formatters/)
+      - Example usage: `eslint --fix --ext .json --format compact translations/`
 
 5) >npm run lint
 
