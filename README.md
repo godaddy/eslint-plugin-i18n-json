@@ -4,8 +4,6 @@
 
 > Fully extendable eslint plugin for JSON i18n translation files.
 
-![](assets/logo.png)
-
 ## Table of Contents
 
 - [Features](#features)
