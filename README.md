@@ -4,8 +4,6 @@
 
 > Fully extendable eslint plugin for JSON i18n translation files.
 
-![](assets/logo.png)
-
 ## Table of Contents
 
 - [Features](#features)
@@ -28,7 +26,7 @@
 - validate syntax per message
   - rule: `i18n-json/valid-message-syntax`
   - default syntax check is for ICU Message Syntax
-  - can support any message syntax through custom validators. (link to customer message validator example)
+  - can support any message syntax through custom validators. [Example](examples/custom-message-syntax/)
 
 - ensure translation files have identical keys
   - `i18n-json/identical-keys`
@@ -207,7 +205,7 @@ Check out the [Examples](examples/) folder to see different use cases.
         //custom-syntax-validator.js example
         module.exports = (message, key) => {
           // each message should be in all caps.
-          if(message.toLowercase() !== message.toUppercase()){
+          if(message !== message.toUppercase()){
             throw new SyntaxError('MESSAGE MUST BE IN ALL CAPS!')
           }
         }
@@ -279,10 +277,10 @@ Check out the [Examples](examples/) folder to see different use cases.
 - **None of the translations in the examples provided reflect actual GoDaddy translations.** They were just created using Google Translate for example's sake 😉.
 
 ## Special Thanks 👏
-  - Jest platform packages
-  - intl-messageformat-parser
-  - report formatter ui heavily inspired from: https://github.com/sindresorhus/eslint-formatter-pretty
-  - iconmonstr for the globe icon: https://iconmonstr.com/language-11-svg
+
+- Jest platform packages
+- intl-messageformat-parser
+- report formatter ui heavily inspired from: https://github.com/sindresorhus/eslint-formatter-pretty
 
 ## License 📋
 
