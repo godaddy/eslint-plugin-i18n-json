@@ -238,7 +238,6 @@ Check out the [Examples](examples/) folder to see different use cases.
 ## Special Thanks
   - Jest platform packages
   - intl-messageformat-parser
-  - iconmonstr for the globe icon: https://iconmonstr.com/language-11-svg
 
 ## License
 
