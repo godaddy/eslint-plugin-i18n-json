@@ -276,7 +276,7 @@ Check out the [Examples](examples/) folder to see different use cases.
 
 ## Disclaimer
 
-- **None of the translations in the examples provided reflect actual GoDaddy translations.** They were just created using Google Translate for example sake 😉.
+- **None of the translations in the examples provided reflect actual GoDaddy translations.** They were just created using Google Translate for example's sake 😉.
 
 ## Special Thanks 👏
   - Jest platform packages

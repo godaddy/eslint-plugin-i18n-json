@@ -5,7 +5,6 @@ exports[`formatter returns an empty string when there aren't any warnings or err
 exports[`formatter will display errors before warnings 1`] = `
 "bad/file
 
-
 ✖  ERROR  (some-rule)
   file is bad
 
@@ -25,18 +24,15 @@ exports[`formatter will display errors before warnings 1`] = `
 exports[`formatter will display issues across many files 1`] = `
 "bad/file
 
-
 ✖  ERROR  (some-rule)
   file is bad
 
 bad/file2
 
-
 ⚠  WARNING  (some-rule)
   file has a warning
 
 bad/file3
-
 
 ✖  ERROR  (some-rule)
   file is bad
@@ -50,7 +46,6 @@ bad/file3
 
 exports[`formatter will not display any message for an individual file which does not have any warnings or errors 1`] = `
 "bad/file
-
 
 ✖  ERROR  (some-rule)
   file is bad

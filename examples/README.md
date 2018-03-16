@@ -6,4 +6,4 @@
 
 ## Disclaimer
 
-- *None of the translations in the examples reflect actual GoDaddy translations for the various languages used.* They were just created using Google Translate for example sake 😉.
+- *None of the translations in the examples reflect actual GoDaddy translations for the various languages used.* They were just created using Google Translate for example's sake 😉.

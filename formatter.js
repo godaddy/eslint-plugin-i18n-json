@@ -3,6 +3,8 @@
   Heavily inspired from https://github.com/sindresorhus/eslint-formatter-pretty.
 */
 
+/* eslint no-useless-concat: "off" */
+
 const chalk = require('chalk');
 const plur = require('plur');
 const logSymbols = require('log-symbols');
@@ -12,43 +14,48 @@ const path = require('path');
 const CWD = process.cwd();
 
 const formatter = (results) => {
-  const total = {
-    errors: 0,
-    warnings: 0,
-  };
-  const outputs = results.map(({
+  let totalErrorsCount = 0;
+  let totalWarningsCount = 0;
+
+  const formattedLintMessagesPerFile = results.map(({
     filePath,
-    messages,
-    errorCount,
-    warningCount,
+    messages: fileMessages,
+    errorCount: fileErrorCount,
+    warningCount: fileWarningCount,
   }) => {
-    if (errorCount + warningCount === 0) {
+    if (fileErrorCount + fileWarningCount === 0) {
       return '';
     }
-    total.errors += errorCount;
-    total.warnings += warningCount;
+
+    totalErrorsCount += fileErrorCount;
+    totalWarningsCount += fileWarningCount;
+
     const relativePath = path.relative(CWD, filePath);
-    const header = `${chalk.underline.white(relativePath)}`;
+    const fileMessagesHeader = chalk.underline.white(relativePath);
 
-    messages.sort((a, b) => b.severity - a.severity);
+    fileMessages.sort((a, b) => b.severity - a.severity); // display errors first
 
-    const messagesOutput = messages.map(({ ruleId, severity, message }) => {
-      let messageHeader = `${severity === 1 ? `${logSymbols.warning} ${chalk.inverse.yellow(' WARNING ')}` : `${logSymbols.error} ${chalk.inverse.red(' ERROR ')}`}`;
-      messageHeader += ` ${chalk.white(`(${ruleId})`)}`;
-      return `\n\n${[messageHeader, indentString(message, 2)].join('\n')}`;
+    const formattedFileMessages = fileMessages.map(({ ruleId, severity, message }) => {
+      let messageHeader = severity === 1 ? `${logSymbols.warning} ${chalk.inverse.yellow(' WARNING ')}`
+        : `${logSymbols.error} ${chalk.inverse.red(' ERROR ')}`;
+
+      messageHeader += (` ${chalk.white(`(${ruleId})`)}`);
+
+      return `\n\n${messageHeader}\n${indentString(message, 2)}`;
     }).join('');
 
-    return [header, messagesOutput].join('\n');
-  }).filter(output => output.trim().length > 0);
+    return `${fileMessagesHeader}${formattedFileMessages}`;
+  }).filter(fileLintMessages => fileLintMessages.trim().length > 0);
 
-  let formattedReport = outputs.join('\n\n');
+  let aggregateReport = formattedLintMessagesPerFile.join('\n\n');
 
-  // add in aggregate error and warnings count
-  const totalErrorsFormatted = `${chalk.bold.red('>')} ${logSymbols.error} ${chalk.bold.red(total.errors)} ${chalk.bold.red(plur('ERROR', total.errors))}`;
-  const totalWarningsFormatted = `${chalk.bold.yellow('>')} ${logSymbols.warning} ${chalk.bold.yellow(total.warnings)} ${chalk.bold.yellow(plur('WARNING', total.warnings))}`;
+  // append in total error and warnings count to aggregrate report
+  const totalErrorsCountFormatted = `${chalk.bold.red('>')} ${logSymbols.error} ${chalk.bold.red(totalErrorsCount)} ${chalk.bold.red(plur('ERROR', totalErrorsCount))}`;
+  const totalWarningsCountFormatted = `${chalk.bold.yellow('>')} ${logSymbols.warning} ${chalk.bold.yellow(totalWarningsCount)} ${chalk.bold.yellow(plur('WARNING', totalWarningsCount))}`;
 
-  formattedReport += `\n\n${totalErrorsFormatted}\n${totalWarningsFormatted}`;
-  return (total.errors + total.warnings > 0) ? formattedReport : '';
+  aggregateReport += `\n\n${totalErrorsCountFormatted}\n${totalWarningsCountFormatted}`;
+
+  return (totalErrorsCount + totalWarningsCount > 0) ? aggregateReport : '';
 };
 
 module.exports = formatter;
