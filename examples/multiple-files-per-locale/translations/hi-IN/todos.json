@@ -1,0 +1,9 @@
+{
+  "todos.addTodo": "नया टोडो जोड़ें",
+  "todos.count": "आपके पास {count, plural, =0 {कोई टॉडोस नहीं है} other {# टोडो है} }",
+  "todos.greeting": "स्वागत हे {userName}",
+  "todos.markCompleted": "पूर्ण के रूप में चिह्नित करें",
+  "todos.nextPage": "आगामी",
+  "todos.previousPage": "पिछला",
+  "todos.removeTodo": "टूडू को मिटाएं"
+}

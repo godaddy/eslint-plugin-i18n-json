@@ -4,17 +4,17 @@
   "description": "Fully extendable eslint plugin for JSON i18n translation files.",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint index.js src/ --fix",
-    "test": "jest --coverage"
+    "lint": "eslint index.js formatter*.js src/ --fix",
+    "test": "npm run lint && jest --coverage"
   },
   "files": [
     "src",
-    "README.md",
-    "index.js"
+    "index.js",
+    "formatter.js"
   ],
-  "repository": { 
-      "type": "git",
-      "url": "git@github.com:godaddy/eslint-plugin-i18n-json"
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:godaddy/eslint-plugin-i18n-json"
   },
   "keywords": [
     "eslint",
@@ -31,13 +31,18 @@
   ],
   "jest": {
     "roots": [
-      "src/"
+      "src/",
+      "<rootDir>"
     ],
     "collectCoverageFrom": [
-      "src/**/*.js"
+      "src/**/*.js",
+      "formatter.js"
     ]
   },
   "license": "MIT",
+  "engines": {
+    "node": ">=6.0.0"
+  },
   "peerDependencies": {
     "eslint": ">=4.0.0"
   },
@@ -50,6 +55,8 @@
     "strip-ansi": "^4.0.0"
   },
   "dependencies": {
+    "chalk": "^2.3.2",
+    "indent-string": "^3.2.0",
     "intl-messageformat-parser": "^1.4.0",
     "jest-diff": "^22.0.3",
     "jsonlint": "^1.6.2",
@@ -57,6 +64,8 @@
     "lodash.isequal": "^4.5.0",
     "lodash.isplainobject": "^4.0.6",
     "lodash.set": "^4.3.2",
+    "log-symbols": "^2.2.0",
+    "plur": "^2.1.2",
     "pretty-format": "^22.0.3"
   }
 }

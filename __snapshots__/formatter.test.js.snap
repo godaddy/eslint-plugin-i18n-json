@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`formatter returns an empty string when there aren't any warnings or errors across all files 1`] = `""`;
+
+exports[`formatter will display errors before warnings 1`] = `
+"bad/file
+
+✖  ERROR  (some-rule)
+  file is bad
+
+✖  ERROR  (some-rule)
+  file is pretty bad
+
+⚠  WARNING  (some-rule)
+  file has first warning
+
+⚠  WARNING  (some-rule)
+  file has second warning
+
+> ✖ 2 ERRORS
+> ⚠ 2 WARNINGS"
+`;
+
+exports[`formatter will display issues across many files 1`] = `
+"bad/file
+
+✖  ERROR  (some-rule)
+  file is bad
+
+bad/file2
+
+⚠  WARNING  (some-rule)
+  file has a warning
+
+bad/file3
+
+✖  ERROR  (some-rule)
+  file is bad
+
+⚠  WARNING  (some-rule)
+  file has a warning
+
+> ✖ 2 ERRORS
+> ⚠ 2 WARNINGS"
+`;
+
+exports[`formatter will not display any message for an individual file which does not have any warnings or errors 1`] = `
+"bad/file
+
+✖  ERROR  (some-rule)
+  file is bad
+
+> ✖ 1 ERROR
+> ⚠ 0 WARNINGS"
+`;

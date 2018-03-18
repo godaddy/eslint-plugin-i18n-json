@@ -17,7 +17,7 @@
 - [License](#license)
 
 
-## Features
+## Features 🚀
 
 - lint JSON translation files
   - rule: `i18n-json/valid-json`
@@ -35,8 +35,12 @@
 - sort translation keys in ascending order through eslint auto-fix
 - supports **any level of nesting** in the translation file. (escapes `.` in key names)
 
-**Note: Check out the [Examples](examples/) folder to see different use cases and project setups.
-Requires eslint 4.0+**
+**Note: Check out the [Examples](examples/) folder to see different use cases and project setups.**
+
+### Requires
+
+- eslint >= 4.0.0
+- node >= 6.0.0
 
 
 ## Getting Started
@@ -66,8 +70,8 @@ simple
 ```
 
 **In this project directory, do the following:**
-1) >npm install --save-dev eslint-plugin-i18n-json 
-2) Create a `.eslintrc.js` file in the root dir of your project.
+1) >npm install --save-dev eslint-plugin-i18n-json
+2) Create a `.eslintrc.js` file in the root dir of your project. For this example: `/simple/.eslintrc.js`.
 3) paste in the following:
     ```javascript
     {
@@ -78,15 +82,18 @@ simple
     ```
 4) add this npm script to your `package.json` file.
 
-    - **note: without the `--fix` option, sorting the translation file won't work**
+    - **note:**
+      - without the `--fix` option, sorting the translation file won't work
+      - the default eslint report formatter, `stylish`, doesn't handle lint messages of varying length well. Hence, we have also built a `custom report formatter` well suited for this plugin.
     ```JSON
     {
       "scripts": {
-        "lint": "eslint --fix --ext .json translations"
+        "lint": "eslint --fix --ext .json --format node_modules/eslint-plugin-i18n-json/formatter.js translations/"
       }
     }
     ```
-
+    - *Also, the following builtin formatters provided by eslint also work well: `compact`, `unix`, `visualstudio`, `json`.* [Learn more here](https://eslint.org/docs/user-guide/formatters/)
+      - Example usage: `eslint --fix --ext .json --format compact translations/`
 
 5) >npm run lint
 
@@ -94,8 +101,7 @@ simple
 
     *Example where we have invalid ICU message syntax.*
     
-    **(ascii cinema link)**
-    <a align="center" href="https://asciinema.org/a/jIu2dJVuVucawqaFmgjuSUPg0" target="_blank"><img src="https://asciinema.org/a/jIu2dJVuVucawqaFmgjuSUPg0.png" /></a>
+    ![](assets/invalid-icu-syntax-screenshot.png)
 
 ## Examples
 Check out the [Examples](examples/) folder to see different use cases.
@@ -103,6 +109,33 @@ Check out the [Examples](examples/) folder to see different use cases.
 ## Configuring the rules
 - Simply update your `.eslintrc.*` with overrides for the individual rules.
 - Eslint severities: 2 = error, 1 = warning, 0 = off
+- Example of the module's default rule configuration:
+  - see below for more information about how to further configure each rule. (some options may require switching to a `.eslintrc.js` file)
+
+  ```javascript
+  // eslintrc.json
+  {
+    "rules": {
+        "i18n-json/valid-message-syntax": [2, {
+          syntax: 'icu',
+        }],
+        "i18n-json/valid-json": 2,
+        "i18n-json/identical-keys": 0,
+    }
+  }
+  ```
+  ```javascript
+  // .eslintrc.js
+  module.exports = {
+    'rules': {
+        'i18n-json/valid-message-syntax': [2, {
+          syntax: 'icu',
+        }],
+        'i18n-json/valid-json': 2,
+        'i18n-json/identical-keys': 0,
+    }
+  }
+  ```
 
 ## Rules
 
@@ -133,6 +166,10 @@ Check out the [Examples](examples/) folder to see different use cases.
           }
         }
         ```
+
+  Example output for Invalid JSON.
+
+  ![](assets/invalid-json-screenshot.png)
 
 ### i18n-json/valid-message-syntax
 
@@ -173,10 +210,10 @@ Check out the [Examples](examples/) folder to see different use cases.
           }
         }
         ```
-      - Output from the `custom-message-syntax` example where each message must have the word 'PIZZA' prepended to it. 
+  Output from the [custom-message-syntax](/examples/custom-message-syntax) example 
+  where each message must have the word 'PIZZA' prepended to it.
 
-        **(ascii cinema link)**
-        <a href="https://asciinema.org/a/J7dGuSfQ2yoyUHfS95EFcInfU" target="_blank"><img src="https://asciinema.org/a/J7dGuSfQ2yoyUHfS95EFcInfU.png" /></a>
+  ![](assets/invalid-custom-syntax-screenshot.png)
     
 ### i18n-json/identical-keys
 
@@ -230,15 +267,21 @@ Check out the [Examples](examples/) folder to see different use cases.
         return translations;
       };
       ```
-    - Output from the `multiple-files-per-locale` example where we removed/added some keys at `es-MX/login.json` which should have the same key structure as `en-US/login.json`.
 
-      **(ascii cinema link)**
-      <a href="https://asciinema.org/a/upyyqbbz2eRT1knDCLcBVMeZv" target="_blank"><img src="https://asciinema.org/a/upyyqbbz2eRT1knDCLcBVMeZv.png" /></a>
+  Output from the slightly advanced [identical keys](/examples/multiple-keys-per-locale) example where some keys from the reference translation file (`en-US`) were not found during comparison.
 
-## Special Thanks
-  - Jest platform packages
-  - intl-messageformat-parser
+  ![](assets/identical-keys-error-screenshot.png)
 
-## License
+## Disclaimer
+
+- **None of the translations in the examples provided reflect actual GoDaddy translations.** They were just created using Google Translate for example's sake 😉.
+
+## Special Thanks 👏
+
+- Jest platform packages
+- intl-messageformat-parser
+- report formatter ui heavily inspired from: https://github.com/sindresorhus/eslint-formatter-pretty
+
+## License 📋
 
 MIT

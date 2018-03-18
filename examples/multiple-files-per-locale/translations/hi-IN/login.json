@@ -1,0 +1,11 @@
+{
+  "login": {
+    "form": {
+      "cancel": "रद्द करना",
+      "resetPassword": "पासवर्ड रीसेट",
+      "submit": "अब प्रवेश करें!"
+    },
+    "invalidAuth": "गलत उपयोगकर्ता नाम या पासवर्ड",
+    "lastLoginAt": "पर अंतिम लॉगिन {lastLoginTime, time, short}"
+  }
+}

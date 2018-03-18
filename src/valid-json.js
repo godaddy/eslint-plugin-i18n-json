@@ -2,6 +2,7 @@
 
 const jsonlint = require('jsonlint');
 const isPlainObject = require('lodash.isplainobject');
+const chalk = require('chalk');
 
 const lineRegex = /line\s+(\d+):?/i;
 
@@ -25,7 +26,7 @@ const validJSON = ([{
   } catch (e) {
     const [, lineNumber = 0] = e.message.match(lineRegex) || [];
     errors.push({
-      message: `Invalid JSON. ${e}`,
+      message: `\n${chalk.bold.red('Invalid JSON.')}\n\n${e}`,
       loc: {
         start: {
           line: Number.parseInt(lineNumber, 10),
