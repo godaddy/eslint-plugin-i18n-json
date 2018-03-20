@@ -286,7 +286,7 @@ Check out the [Examples](examples/) folder to see different use cases.
 
 - report formatter ui heavily inspired from: https://github.com/sindresorhus/eslint-formatter-pretty
 
-- ["Translate" icon](https://thenounproject.com/term/translate/1007332) created by Björn Andersson from [the Noun Project](https://thenounproject.com/). Used with attribution under Creative Commons.
+- ["Translate" icon](https://thenounproject.com/term/translate/1007332) created by Björn Andersson, from [the Noun Project](https://thenounproject.com/). Used with attribution under Creative Commons.
 
 ## License 📋
 
