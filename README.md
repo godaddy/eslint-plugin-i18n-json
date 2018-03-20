@@ -5,7 +5,7 @@
 > Fully extendable eslint plugin for JSON i18n translation files.
 
 <p align="center">
-  <img src="assets/logo-transparent.png" alt="Drawing" style="width: 400px;"/>
+<img src="assets/logo-transparent.png" width="400"/>
 </p>
 
 ## Table of Contents
