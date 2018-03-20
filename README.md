@@ -4,6 +4,8 @@
 
 > Fully extendable eslint plugin for JSON i18n translation files.
 
+![](assets/logo-transparent.png)
+
 ## Table of Contents
 
 - [Features](#features)
@@ -279,8 +281,12 @@ Check out the [Examples](examples/) folder to see different use cases.
 ## Special Thanks 👏
 
 - Jest platform packages
+
 - intl-messageformat-parser
+
 - report formatter ui heavily inspired from: https://github.com/sindresorhus/eslint-formatter-pretty
+
+- ["Translate" icon](https://thenounproject.com/term/translate/1007332) created by Björn Andersson from [the Noun Project](https://thenounproject.com/). Used with attribution under Creative Commons.
 
 ## License 📋
 
