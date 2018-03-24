@@ -11,8 +11,9 @@
 ## Table of Contents
 
 - [Features](#features)
-- [Getting Started](#getting-started)
+- [Getting started](#getting-started)
 - [Examples](#examples)
+- [Configuring your .eslintrc file](#configuring-your-eslintrc-file)
 - [Rules](#example)
   - [i18n-json/valid-json](#i18n-jsonvalid-json)
   - [i18n-json/valid-message-syntax](#i18n-jsonvalid-message-syntax)
@@ -110,7 +111,7 @@ simple
 ## Examples
 Check out the [Examples](examples/) folder to see different use cases.
 
-## Configuring the rules
+## Configuring your .eslintrc file
 - Simply update your `.eslintrc.*` with overrides for the individual rules.
 - Eslint severities: 2 = error, 1 = warning, 0 = off
 - Example of the module's default rule configuration:
