@@ -8,6 +8,8 @@
 <img src="assets/logo-transparent.png" width="400"/>
 </p>
 
+[**🎉 Check out the introduction blog post**](https://godaddy.github.io/2018/04/02/introducing-eslint-plugin-i18n-json/)
+
 ## Table of Contents
 
 - [Features](#features)
