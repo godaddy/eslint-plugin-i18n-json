@@ -1,6 +1,10 @@
 const set = require('lodash.set');
 const diff = require('jest-diff');
 const deepForOwn = require('./deep-for-own');
+const DIFF_OPTIONS = {
+  expand: false,
+  contextLines: 1
+};
 
 // we don't care what the actual values are.
 // lodash.set will automatically convert a previous string value
@@ -15,7 +19,7 @@ const compareTranslationsStructure = (translationsA, translationsB) => {
   deepForOwn(translationsB, (value, key, path) => {
     set(augmentedTranslationsB, path, 'Message<String>');
   });
-  return diff(augmentedTranslationsA, augmentedTranslationsB);
+  return diff(augmentedTranslationsA, augmentedTranslationsB, DIFF_OPTIONS);
 };
 
 module.exports = compareTranslationsStructure;
