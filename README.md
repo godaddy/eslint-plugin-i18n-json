@@ -8,7 +8,7 @@
 <img src="assets/logo-transparent.png" width="400"/>
 </p>
 
-🎉[**Check out the introduction blog post**](https://godaddy.github.io/2018/04/02/introducing-eslint-plugin-i18n-json/)
+🎉 [**Check out the introduction blog post**](https://godaddy.github.io/2018/04/02/introducing-eslint-plugin-i18n-json/)
 
 ## Table of Contents
 
@@ -82,8 +82,8 @@ simple
 3) paste in the following:
     ```javascript
     {
-      "extends": [
-        "plugin:i18n-json/recommended"
+      'extends': [
+        'plugin:i18n-json/recommended'
       ],
     }
     ```
@@ -120,14 +120,14 @@ Check out the [Examples](examples/) folder to see different use cases.
   - see below for more information about how to further configure each rule. (some options may require switching to a `.eslintrc.js` file)
 
   ```javascript
-  // eslintrc.json
+  // .eslintrc.json
   {
     "rules": {
         "i18n-json/valid-message-syntax": [2, {
-          syntax: 'icu',
+          syntax: "icu"
         }],
         "i18n-json/valid-json": 2,
-        "i18n-json/identical-keys": 0,
+        "i18n-json/identical-keys": 0
     }
   }
   ```
@@ -160,15 +160,15 @@ Check out the [Examples](examples/) folder to see different use cases.
         ```javascript
         // .eslintrc.js
         rules: {
-          "i18n-json/valid-json": [2, {
+          'i18n-json/valid-json': [2, {
             linter: path.resolve('path/to/custom-linter.js')
           }]
         }
         ```
         ```javascript
-        //custom-linter.js
+        // custom-linter.js
         module.exports = (source) => {
-          if(isBad(source)){
+          if(isBad(source)) {
             throw new SyntaxError('invalid syntax');
           }
         }
@@ -189,7 +189,7 @@ Check out the [Examples](examples/) folder to see different use cases.
       ```javascript
       // .eslintrc.js
       rules: {
-        "i18n-json/valid-message-syntax": [2, {
+        'i18n-json/valid-message-syntax': [2, {
           syntax: 'non-empty-string'
         }]
       }
@@ -203,17 +203,17 @@ Check out the [Examples](examples/) folder to see different use cases.
         ```javascript
         // .eslintrc.js
         rules: {
-          "i18n-json/valid-message-syntax": [2, {
+          'i18n-json/valid-message-syntax': [2, {
             syntax: path.resolve('path/to/custom-syntax-validator.js')
           }]
         }
         ```
         ```javascript
-        //custom-syntax-validator.js example
+        // custom-syntax-validator.js example
         module.exports = (message, key) => {
           // each message should be in all caps.
-          if(message !== message.toUppercase()){
-            throw new SyntaxError('MESSAGE MUST BE IN ALL CAPS!')
+          if(message !== message.toUpperCase()) {
+            throw new SyntaxError('MESSAGE MUST BE IN ALL CAPS!');
           }
         }
         ```
@@ -234,7 +234,7 @@ Check out the [Examples](examples/) folder to see different use cases.
       ```javascript
       // .eslintrc.js
       rules: {
-        "i18n-json/identical-keys": [2, {
+        'i18n-json/identical-keys': [2, {
           filePath: path.resolve('path/to/locale/en-US.json')
         }]
       }
@@ -244,11 +244,11 @@ Check out the [Examples](examples/) folder to see different use cases.
       ```javascript
       // .eslintrc.js
       rules: {
-        "i18n-json/identical-keys": [2, {
+        'i18n-json/identical-keys': [2, {
           filePath: {
             'login.json': path.resolve('./translations/en-US/login.json'),
             'search-results.json': path.resolve('./translations/en-US/search-results.json'),
-            'todos.json': path.resolve('./translations/en-US/todos.json')
+            'todos.json': path.resolve('./translations/en-US/todos.json'),
           }
         }]
       }
@@ -262,7 +262,7 @@ Check out the [Examples](examples/) folder to see different use cases.
       ```javascript
       // .eslintrc.js
       rules: {
-        "i18n-json/identical-keys": [2, {
+        'i18n-json/identical-keys': [2, {
           filePath: path.resolve('path/to/key-structure-generator.js')
         }]
       }
