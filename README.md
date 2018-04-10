@@ -12,16 +12,16 @@
 
 ## Table of Contents
 
-- [Features](#features)
+- [Features](#features-)
 - [Getting started](#getting-started)
 - [Examples](#examples)
 - [Configuring your .eslintrc file](#configuring-your-eslintrc-file)
-- [Rules](#example)
+- [Rules](#rules)
   - [i18n-json/valid-json](#i18n-jsonvalid-json)
   - [i18n-json/valid-message-syntax](#i18n-jsonvalid-message-syntax)
   - [i18n-json/identical-keys](#i18n-jsonidentical-keys)
-- [Special Thanks](#special-thanks)
-- [License](#license)
+- [Special Thanks](#special-thanks-)
+- [License](#license-)
 
 
 ## Features 🚀
