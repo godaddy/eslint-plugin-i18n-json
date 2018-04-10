@@ -1,9 +1,10 @@
 const set = require('lodash.set');
 const diff = require('jest-diff');
 const deepForOwn = require('./deep-for-own');
+
 const DIFF_OPTIONS = {
   expand: false,
-  contextLines: 1
+  contextLines: 1,
 };
 
 // we don't care what the actual values are.
