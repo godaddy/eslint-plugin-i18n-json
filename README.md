@@ -8,20 +8,20 @@
 <img src="assets/logo-transparent.png" width="400"/>
 </p>
 
-🎉[**Check out the introduction blog post**](https://godaddy.github.io/2018/04/02/introducing-eslint-plugin-i18n-json/)
+🎉 [**Check out the introduction blog post**](https://godaddy.github.io/2018/04/02/introducing-eslint-plugin-i18n-json/)
 
 ## Table of Contents
 
-- [Features](#features)
+- [Features](#features-)
 - [Getting started](#getting-started)
 - [Examples](#examples)
 - [Configuring your .eslintrc file](#configuring-your-eslintrc-file)
-- [Rules](#example)
+- [Rules](#rules)
   - [i18n-json/valid-json](#i18n-jsonvalid-json)
   - [i18n-json/valid-message-syntax](#i18n-jsonvalid-message-syntax)
   - [i18n-json/identical-keys](#i18n-jsonidentical-keys)
-- [Special Thanks](#special-thanks)
-- [License](#license)
+- [Special Thanks](#special-thanks-)
+- [License](#license-)
 
 
 ## Features 🚀
@@ -81,18 +81,18 @@ simple
 2) Create a `.eslintrc.js` file in the root dir of your project. For this example: `/simple/.eslintrc.js`.
 3) paste in the following:
     ```javascript
-    {
-      "extends": [
-        "plugin:i18n-json/recommended"
+    module.exports = {
+      extends: [
+        'plugin:i18n-json/recommended',
       ],
-    }
+    };
     ```
 4) add this npm script to your `package.json` file.
 
     - **note:**
       - without the `--fix` option, sorting the translation file won't work
       - the default eslint report formatter, `stylish`, doesn't handle lint messages of varying length well. Hence, we have also built a `custom report formatter` well suited for this plugin.
-    ```JSON
+    ```json
     {
       "scripts": {
         "lint": "eslint --fix --ext .json --format node_modules/eslint-plugin-i18n-json/formatter.js translations/"
@@ -119,29 +119,29 @@ Check out the [Examples](examples/) folder to see different use cases.
 - Example of the module's default rule configuration:
   - see below for more information about how to further configure each rule. (some options may require switching to a `.eslintrc.js` file)
 
-  ```javascript
-  // eslintrc.json
+  ```json
+  // .eslintrc.json
   {
     "rules": {
         "i18n-json/valid-message-syntax": [2, {
-          syntax: 'icu',
+          "syntax": "icu"
         }],
         "i18n-json/valid-json": 2,
-        "i18n-json/identical-keys": 0,
+        "i18n-json/identical-keys": 0
     }
   }
   ```
   ```javascript
   // .eslintrc.js
   module.exports = {
-    'rules': {
-        'i18n-json/valid-message-syntax': [2, {
-          syntax: 'icu',
-        }],
-        'i18n-json/valid-json': 2,
-        'i18n-json/identical-keys': 0,
-    }
-  }
+    rules: {
+      'i18n-json/valid-message-syntax': [2, {
+        syntax: 'icu',
+      }],
+      'i18n-json/valid-json': 2,
+      'i18n-json/identical-keys': 0,
+    },
+  };
   ```
 
 ## Rules
@@ -159,19 +159,21 @@ Check out the [Examples](examples/) folder to see different use cases.
       - It **should throw an Error**, just like `JSON.parse`.
         ```javascript
         // .eslintrc.js
-        rules: {
-          "i18n-json/valid-json": [2, {
-            linter: path.resolve('path/to/custom-linter.js')
-          }]
-        }
+        module.exports = {
+          rules: {
+            'i18n-json/valid-json': [2, {
+              linter: path.resolve('path/to/custom-linter.js'),
+            }],
+          },
+        };
         ```
         ```javascript
-        //custom-linter.js
+        // custom-linter.js
         module.exports = (source) => {
-          if(isBad(source)){
+          if (isBad(source)) {
             throw new SyntaxError('invalid syntax');
           }
-        }
+        };
         ```
 
   Example output for Invalid JSON.
@@ -185,14 +187,15 @@ Check out the [Examples](examples/) folder to see different use cases.
 - **options**
   - `syntax`: String (Optional). Default value: `icu`.
     - **Can be a built in validator: `icu`, `non-empty-string`.**
-
       ```javascript
       // .eslintrc.js
-      rules: {
-        "i18n-json/valid-message-syntax": [2, {
-          syntax: 'non-empty-string'
-        }]
-      }
+      module.exports = {
+        rules: {
+          'i18n-json/valid-message-syntax': [2, {
+            syntax: 'non-empty-string',
+          }],
+        },
+      };
       ```
   
     - **Can be an absolute path to a module which exports a Syntax Validator Function.**
@@ -202,20 +205,22 @@ Check out the [Examples](examples/) folder to see different use cases.
       - It **should throw an Error**, just like `JSON.parse` on invalid syntax.
         ```javascript
         // .eslintrc.js
-        rules: {
-          "i18n-json/valid-message-syntax": [2, {
-            syntax: path.resolve('path/to/custom-syntax-validator.js')
-          }]
-        }
+        module.exports = {
+          rules: {
+            'i18n-json/valid-message-syntax': [2, {
+              syntax: path.resolve('path/to/custom-syntax-validator.js'),
+            }],
+          },
+        };
         ```
         ```javascript
-        //custom-syntax-validator.js example
+        // custom-syntax-validator.js example
         module.exports = (message, key) => {
           // each message should be in all caps.
-          if(message !== message.toUppercase()){
-            throw new SyntaxError('MESSAGE MUST BE IN ALL CAPS!')
+          if (message !== message.toUpperCase()) {
+            throw new SyntaxError('MESSAGE MUST BE IN ALL CAPS!');
           }
-        }
+        };
         ```
   Output from the [custom-message-syntax](/examples/custom-message-syntax) example 
   where each message must have the word 'PIZZA' prepended to it.
@@ -233,25 +238,29 @@ Check out the [Examples](examples/) folder to see different use cases.
     - **Can be an absolute path to the reference translation file.**
       ```javascript
       // .eslintrc.js
-      rules: {
-        "i18n-json/identical-keys": [2, {
-          filePath: path.resolve('path/to/locale/en-US.json')
-        }]
-      }
+      module.exports = {
+        rules: {
+          'i18n-json/identical-keys': [2, {
+            filePath: path.resolve('path/to/locale/en-US.json'),
+          }],
+        },
+      };
       ```
 
     - **Can be an Object which contains a Mapping for how to choose a reference translation file. (chosen by suffix match)**
       ```javascript
       // .eslintrc.js
-      rules: {
-        "i18n-json/identical-keys": [2, {
-          filePath: {
-            'login.json': path.resolve('./translations/en-US/login.json'),
-            'search-results.json': path.resolve('./translations/en-US/search-results.json'),
-            'todos.json': path.resolve('./translations/en-US/todos.json')
-          }
-        }]
-      }
+      module.exports = {
+        rules: {
+          'i18n-json/identical-keys': [2, {
+            filePath: {
+              'login.json': path.resolve('./translations/en-US/login.json'),
+              'search-results.json': path.resolve('./translations/en-US/search-results.json'),
+              'todos.json': path.resolve('./translations/en-US/todos.json'),
+            },
+          }],
+        },
+      };
       ```
       - values in the path must be the absolute file path to the reference translation file.
       - the plugin will do a **suffix** match on the current file's path to determine which reference translation file to choose.
@@ -261,11 +270,13 @@ Check out the [Examples](examples/) folder to see different use cases.
       - `Function(translations: Object, currentFileAbsolutePath: String) : Object`
       ```javascript
       // .eslintrc.js
-      rules: {
-        "i18n-json/identical-keys": [2, {
-          filePath: path.resolve('path/to/key-structure-generator.js')
-        }]
-      }
+      module.exports = {
+        rules: {
+          'i18n-json/identical-keys': [2, {
+            filePath: path.resolve('path/to/key-structure-generator.js'),
+          }],
+        },
+      };
       ```
       ```javascript
       // key-structure-generator.js example
