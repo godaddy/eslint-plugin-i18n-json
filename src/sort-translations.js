@@ -34,6 +34,7 @@ const sortTranslations = (source) => {
 
   if (!equal(originalTranslationPaths, sortedTranslationPaths)) {
     return [{
+      message: 'Keys should be sorted, please use --fix',
       fix: {
         range: [0, source.length],
         text: JSON.stringify(sortedTranslations, null, 2),
