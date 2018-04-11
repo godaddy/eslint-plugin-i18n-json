@@ -5,7 +5,7 @@ exports[`Snapshot Tests for Invalid Code map of comparison files - structure mis
 - Expected
 + Received
 
-  Object {
+@@ -2,10 +2,5 @@
     \\"translationLevelOne\\": Object {
 -     \\"translationKeyA\\": \\"Message<String>\\",
 -     \\"translationsLevelTwo\\": Object {
@@ -25,7 +25,7 @@ exports[`Snapshot Tests for Invalid Code single comparison file - structure mism
 - Expected
 + Received
 
-  Object {
+@@ -2,10 +2,5 @@
     \\"translationLevelOne\\": Object {
 -     \\"translationKeyA\\": \\"Message<String>\\",
 -     \\"translationsLevelTwo\\": Object {
