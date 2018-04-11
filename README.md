@@ -1,6 +1,7 @@
 # eslint-plugin-i18n-json
 
 [![Latest npm version](https://img.shields.io/npm/v/eslint-plugin-i18n-json.svg)](https://www.npmjs.com/package/eslint-plugin-i18n-json)
+[![Build Status](https://travis-ci.org/godaddy/eslint-plugin-i18n-json.svg?branch=master)](https://travis-ci.org/godaddy/eslint-plugin-i18n-json)
 
 > Fully extendable eslint plugin for JSON i18n translation files.
 
@@ -8,7 +9,7 @@
 <img src="assets/logo-transparent.png" width="400"/>
 </p>
 
-🎉 [**Check out the introduction blog post**](https://godaddy.github.io/2018/04/02/introducing-eslint-plugin-i18n-json/)
+🎉 [**Check out the introductory blog post!**](https://godaddy.github.io/2018/04/02/introducing-eslint-plugin-i18n-json/)
 
 ## Table of Contents
 
