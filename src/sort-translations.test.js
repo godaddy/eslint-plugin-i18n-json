@@ -32,6 +32,7 @@ describe('sortTranslations', () => {
       },
       line: 0,
       column: 0,
+      "message": "Keys should be sorted, please use --fix",
     }]);
   });
   it('will sort nested translations if not already sorted in ASC order', () => {
@@ -66,6 +67,7 @@ describe('sortTranslations', () => {
       },
       line: 0,
       column: 0,
+      "message": "Keys should be sorted, please use --fix",
     }]);
   });
   it('does not fail with other data types in the object', () => {
@@ -100,6 +102,7 @@ describe('sortTranslations', () => {
       },
       line: 0,
       column: 0,
+      "message": "Keys should be sorted, please use --fix",
     }]);
   });
 });
