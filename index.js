@@ -1,5 +1,4 @@
 /* eslint-disable global-require */
-const sortTranslations = require('./src/sort-translations');
 
 const translationFiles = {};
 
@@ -8,6 +7,7 @@ module.exports = {
     'valid-json': require('./src/valid-json'),
     'valid-message-syntax': require('./src/valid-message-syntax'),
     'identical-keys': require('./src/identical-keys'),
+    'sorted-keys': require('./src/sorted-keys'),
   },
   processors: {
     '.json': {
@@ -23,14 +23,13 @@ module.exports = {
       // since we only return one line in the preprocess step,
       // we only care about the first array of errors
       postprocess: ([errors], filePath) => {
-        const source = translationFiles[filePath];
         // delete global reference
         // in order to prevent a large memory build up
         // during the life of the eslint process.
         delete translationFiles[filePath];
+
         return [
           ...errors,
-          ...sortTranslations(source),
         ];
       },
       supportsAutofix: true,
@@ -46,6 +45,10 @@ module.exports = {
           syntax: 'icu', // default syntax
         }],
         'i18n-json/valid-json': 2,
+        'i18n-json/sorted-keys': [2, {
+          order: 'desc',
+          indentSpaces: 2,
+        }],
         'i18n-json/identical-keys': 0,
       },
     },

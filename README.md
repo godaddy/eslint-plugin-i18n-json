@@ -21,6 +21,7 @@
   - [i18n-json/valid-json](#i18n-jsonvalid-json)
   - [i18n-json/valid-message-syntax](#i18n-jsonvalid-message-syntax)
   - [i18n-json/identical-keys](#i18n-jsonidentical-keys)
+  - [i18n-json/sorted-keys](#i18n-jsonsorted-keys)
 - [Special Thanks](#special-thanks-)
 - [License](#license-)
 
@@ -41,6 +42,8 @@
   - supports different custom mappings and on the fly key structure generation
 
 - sort translation keys in ascending order through eslint auto-fix
+  - `i18n-json/sorted-keys`
+
 - supports **any level of nesting** in the translation file. (escapes `.` in key names)
 
 **Note: Check out the [Examples](examples/) folder to see different use cases and project setups.**
@@ -61,7 +64,10 @@ Right out of the box you get the following through our recommended ruleset `i18n
 - i18n-json/valid-message-syntax
   - default ICU Message syntax validation (using `intl-messageformat-parser`)
   - default severity: error | 2
-- automatic ascending sort of all keys in the translation file. (supports sorting nested objects)
+- i18n-json/sorted-keys
+  - automatic ascending sort of all keys in the translation file.
+  - configurable to sort in descending order
+  - Does a level order traversal of keys, and supports sorting nested objects
 
 Let's say your translations project directory looks like the following, (project name: simple)
 ```
@@ -128,10 +134,15 @@ Check out the [Examples](examples/) folder to see different use cases.
           "syntax": "icu"
         }],
         "i18n-json/valid-json": 2,
+        "i18n-json/sorted-keys": [2, {
+          "order": "asc",
+          "indentSpaces": 2,
+        }],
         "i18n-json/identical-keys": 0
     }
   }
   ```
+
   ```javascript
   // .eslintrc.js
   module.exports = {
@@ -140,6 +151,10 @@ Check out the [Examples](examples/) folder to see different use cases.
         syntax: 'icu',
       }],
       'i18n-json/valid-json': 2,
+      'i18n-json/sorted-keys': [2, {
+        order: 'asc',
+        indentSpaces: 2,
+      }],
       'i18n-json/identical-keys': 0,
     },
   };
@@ -290,6 +305,21 @@ Check out the [Examples](examples/) folder to see different use cases.
   Output from the slightly advanced [identical keys](/examples/multiple-keys-per-locale) example where some keys from the reference translation file (`en-US`) were not found during comparison.
 
   ![](assets/identical-keys-error-screenshot.png)
+
+### i18n-json/sorted-keys
+
+- automatic ascending sort of all keys in the translation file.
+- default severity: error | 2
+- **options**
+  - `order`: String (Optional). Default value: `asc`. Sort order of translation keys. The rule does a level order traversal of object keys. Supports nested objects.
+  - `indentSpaces` : Number (Optional). Default value: `2`. The number of spaces to indent the emitted sorted translations with. (Will be passed to `JSON.stringify` when generating fixed output).
+
+  In the case `--fix` is not supplied to eslint, and the `i18n-json/sorted-keys` rule is not switched off, it will emit an
+  `error` (or `warning`) if it detects an invalid sort order of keys.
+
+  ![](assets/fixable-sorting-notice.png)
+
+
 
 ## Disclaimer
 
