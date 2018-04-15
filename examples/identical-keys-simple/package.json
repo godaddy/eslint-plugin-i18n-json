@@ -2,7 +2,7 @@
   "author": "",
   "description": "",
   "devDependencies": {
-    "eslint": "^4.0.0",
+    "eslint": "^4.15.0",
     "eslint-plugin-i18n-json": "^2.0.0"
   },
   "license": "MIT",
@@ -10,7 +10,7 @@
   "name": "identical-keys-simple",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint --ext .json  --format node_modules/eslint-plugin-i18n-json/formatter.js translations/"
+    "lint": "eslint --fix --ext .json translations"
   },
   "version": "1.0.0"
 }

@@ -10,6 +10,6 @@ module.exports = {
     "i18n-json/identical-keys": [2, {
       // each file's key structure compared with this file.
       filePath: path.resolve('./translations/en-US/index.json')
-    }]
+    }] 
   }
 }
