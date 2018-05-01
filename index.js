@@ -46,7 +46,7 @@ module.exports = {
         }],
         'i18n-json/valid-json': 2,
         'i18n-json/sorted-keys': [2, {
-          order: 'desc',
+          order: 'asc',
           indentSpaces: 2,
         }],
         'i18n-json/identical-keys': 0,

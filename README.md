@@ -70,7 +70,8 @@ Right out of the box you get the following through our recommended ruleset `i18n
   - Does a level order traversal of keys, and supports sorting nested objects
 
 Let's say your translations project directory looks like the following, (project name: simple)
-```
+
+```BASH
 > tree simple -I node_modules
 
 simple
@@ -318,8 +319,6 @@ Check out the [Examples](examples/) folder to see different use cases.
   `error` (or `warning`) if it detects an invalid sort order of keys.
 
   ![](assets/fixable-sorting-notice.png)
-
-
 
 ## Disclaimer
 
