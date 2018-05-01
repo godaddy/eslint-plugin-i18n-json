@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-- coverting the sort feature into an actual eslint rule. branch `sorting-v2`.
+- converting the sort feature into an actual eslint rule. branch `sorting-v2`.
 
 ## [2.2.0] - 2018-03-30
 ### Bug Fixes
