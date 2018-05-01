@@ -41,7 +41,7 @@
   - `i18n-json/identical-keys`
   - supports different custom mappings and on the fly key structure generation
 
-- sort translation keys in ascending order through eslint auto-fix
+- Case sensitive sort translation keys in ascending order through eslint auto-fix
   - `i18n-json/sorted-keys`
 
 - supports **any level of nesting** in the translation file. (escapes `.` in key names)
@@ -65,7 +65,7 @@ Right out of the box you get the following through our recommended ruleset `i18n
   - default ICU Message syntax validation (using `intl-messageformat-parser`)
   - default severity: error | 2
 - i18n-json/sorted-keys
-  - automatic ascending sort of all keys in the translation file.
+  - automatic case-sensitive ascending sort of all keys in the translation file.
   - configurable to sort in descending order
   - Does a level order traversal of keys, and supports sorting nested objects
 
@@ -312,7 +312,7 @@ Check out the [Examples](examples/) folder to see different use cases.
 - automatic ascending sort of all keys in the translation file.
 - default severity: error | 2
 - **options**
-  - `order`: String (Optional). Default value: `asc`. Sort order of translation keys. The rule does a level order traversal of object keys. Supports nested objects.
+  - `order`: String (Optional). Default value: `asc`. Case-sensitive sort order of translation keys. The rule does a level order traversal of object keys. Supports nested objects.
   - `indentSpaces` : Number (Optional). Default value: `2`. The number of spaces to indent the emitted sorted translations with. (Will be passed to `JSON.stringify` when generating fixed output).
 
   In the case `--fix` is not supplied to eslint, and the `i18n-json/sorted-keys` rule is not switched off, it will emit an
