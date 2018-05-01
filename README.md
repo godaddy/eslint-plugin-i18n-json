@@ -289,7 +289,7 @@ Check out the [Examples](examples/) folder to see different use cases.
 
   Output from the slightly advanced [identical keys](/examples/multiple-keys-per-locale) example where some keys from the reference translation file (`en-US`) were not found during comparison.
 
-  ![](assets/identical-keys-error-screenshot.png)
+  ![](assets/identical-keys-error-screenshot-2018-04-30.png)
 
 ## Disclaimer
 
