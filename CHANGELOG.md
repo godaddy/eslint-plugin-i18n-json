@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - converting the sort feature into an actual eslint rule. branch `sorting-v2`.
 
-## [2.2.0] - 2018-03-30
+## [2.2.0] - 2018-04-30
 ### Bug Fixes
 
 **sorted-keys:** prevent eslint from failing when `--fix` is not passed.
