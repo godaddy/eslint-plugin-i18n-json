@@ -8,7 +8,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [2.3.0] - 2018-05-04
 ### Enhancements
 
-- **sorted-keys:** converted the sort feature into an actual eslint rule. See README for more details on use. [#13](https://github.com/godaddy/eslint-plugin-i18n-json/pull/13)
+- **sorted-keys:** converted the sort feature into an actual eslint rule (backwards compatible with <= 2.2.0). See README for more details on use. [#13]
+(https://github.com/godaddy/eslint-plugin-i18n-json/pull/13)
 - May the 4th be with you! :)
 
 ## [2.2.0] - 2018-04-30
