@@ -41,7 +41,7 @@
   - rule: `i18n-json/identical-keys`
   - supports different custom mappings and on the fly key structure generation
 
-- Sort translation keys in ascending order through eslint auto-fix (case-sensitive)
+- sort translation keys in ascending order through eslint auto-fix (case-sensitive)
   - rule: `i18n-json/sorted-keys`
 
 - The plugin supports **any level of nesting** in the translation file. (escapes `.` in key names)
