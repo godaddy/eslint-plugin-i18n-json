@@ -1,8 +1,8 @@
-const keyTraverals = require('./key-traversals');
+const keyTraversals = require('./key-traversals');
 
 describe('keyTraversals', () => {
   it('sorts object keys in descending case sensitive order', () => {
-    expect(keyTraverals.desc({
+    expect(keyTraversals.desc({
       C: 'value',
       B: 'value',
       A: 'value',

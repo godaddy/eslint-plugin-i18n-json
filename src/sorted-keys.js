@@ -25,7 +25,6 @@ const sortedKeys = ([{
     traversalOrder = keyTraversals.desc;
   }
 
-
   const sortedTranslations = {};
   const sortedTranslationPaths = [];
 
