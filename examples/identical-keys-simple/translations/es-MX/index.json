@@ -2,8 +2,7 @@
   "login": {
     "form": {
       "cancel": "Cancelar",
-      "resetPassword": "Restablecer la contraseña",
-      "submit": "¡Iniciar sesión!"
+      "resetPassword": "Restablecer la contraseña"
     },
     "invalidAuth": "Nombre de usuario o contraseña incorrectos",
     "lastLoginAt": "Último inicio de sesión en {lastLoginTime, time, short}"

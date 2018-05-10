@@ -9,7 +9,8 @@ module.exports = {
     // option for this rule the absolute path to the comparision file the plugin should require. 
     "i18n-json/identical-keys": [2, {
       // each file's key structure compared with this file.
-      filePath: path.resolve('./translations/en-US/index.json')
+      filePath: path.resolve('./translations/en-US/index.json'),
+      ignoreKeys: ['login.form.submit']
     }] 
   }
 }

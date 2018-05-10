@@ -37,7 +37,7 @@ const getKeyStructureFromMap = (filePathMap, sourceFilePath) => {
 const getKeyStructureToMatch = (options, currentTranslations, sourceFilePath) => {
   let keyStructure = null;
   let {
-    filePath,
+    filePath
   } = options;
 
   if (typeof filePath === 'string') {
@@ -85,7 +85,7 @@ const getKeyStructureToMatch = (options, currentTranslations, sourceFilePath) =>
     // keyStructure exported a function
     try {
       return {
-        keyStructure: keyStructure(currentTranslations, sourceFilePath),
+        keyStructure: keyStructure(currentTranslations, sourceFilePath, ignoreKeys),
       };
     } catch (e) {
       return {
@@ -144,7 +144,11 @@ const identicalKeys = ([comparsionOptions = {}], source, sourceFilePath) => {
     return errors;
   }
 
-  const diffString = compareTranslationsStructure(keyStructure, currentTranslations);
+  const {
+    ignoreKeys = []
+  } = comparsionOptions;
+
+  const diffString = compareTranslationsStructure(keyStructure, currentTranslations, ignoreKeys);
 
   if (noDifferenceRegex.test(diffString.trim())) {
     // success
@@ -174,8 +178,12 @@ module.exports = {
         filePath: {
           type: ['string', 'object'],
         },
+        ignoreKeys: {
+          type: ['array']
+        }
       },
       type: 'object',
+      additionalProperties: false,
     }],
   },
   create(context) {
