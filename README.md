@@ -300,6 +300,12 @@ Check out the [Examples](examples/) folder to see different use cases.
         return translations;
       };
       ```
+  - `ignoreKeys`: Array<String> (Optional). 
+    - Array of key paths which should be ignored when comparing files for identical keys. Ignoring a key path will **exclude it from comparison across all files**.
+    - Key paths are object property paths accepted by `lodash.get`. E.g, `headerMessage`,`login.form.submit`, `search.placeholder`. Escapes `.` already existing in key names.
+    - This can potentially help with i18n workflow where new translations are typically added to a single file first. E.g, en-US first then the rest.
+   - Letting this list go stale is not recommended.
+        
 
   Output from the slightly advanced [identical keys](/examples/multiple-keys-per-locale) example where some keys from the reference translation file (`en-US`) were not found during comparison.
 

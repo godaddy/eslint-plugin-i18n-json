@@ -11,6 +11,6 @@ module.exports = {
       // each file's key structure compared with this file.
       filePath: path.resolve('./translations/en-US/index.json'),
       ignoreKeys: ['login.form.submit']
-    }] 
+    }]
   }
 }

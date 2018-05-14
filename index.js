@@ -42,7 +42,7 @@ module.exports = {
       ],
       rules: {
         'i18n-json/valid-message-syntax': [2, {
-          syntax: 'icu', // default syntax
+          syntax: 'icu',
         }],
         'i18n-json/valid-json': 2,
         'i18n-json/sorted-keys': [2, {

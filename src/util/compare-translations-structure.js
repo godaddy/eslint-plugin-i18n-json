@@ -13,9 +13,10 @@ const DIFF_OPTIONS = {
 // reminder, deepForOwn goes from the root level to the deepest level (preorder)
 
 // ignoreKeys takes a key path which should be ignored when comparing translation files
-const shouldIgnore = (currentKeyPath, ignoreKeys) => {
+const shouldIgnoreKeyPath = (ignoreKeys) => (keyPathSplit) => {
+  const keyPath = keyPathSplit.join('.');
   return ignoreKeys.reduce((result, currentIgnoreKey) => {
-    return (currentKeyPath.join('.') === currentIgnoreKey) || result;
+    return (keyPath === currentIgnoreKey) || result;
   }, false);
 };
 
@@ -23,16 +24,21 @@ const compareTranslationsStructure = (translationsA, translationsB, ignoreKeys) 
 
   const augmentedTranslationsA = {};
   const augmentedTranslationsB = {};
+  
+  const shouldIgnore = shouldIgnoreKeyPath(ignoreKeys);
+
   deepForOwn(translationsA, (value, key, path) => {
     if(!shouldIgnore(path, ignoreKeys)){
       set(augmentedTranslationsA, path, 'Message<String>'); 
     }
   });
+
   deepForOwn(translationsB, (value, key, path) => {
     if(!shouldIgnore(path, ignoreKeys)){
       set(augmentedTranslationsB, path, 'Message<String>'); 
     }
   });
+
   return diff(augmentedTranslationsA, augmentedTranslationsB, DIFF_OPTIONS);
 };
 

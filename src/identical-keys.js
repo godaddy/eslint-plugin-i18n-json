@@ -134,6 +134,7 @@ const identicalKeys = ([comparsionOptions = {}], source, sourceFilePath) => {
     // will be caught with the valid-json rule.
     return [];
   }
+
   const {
     errors,
     keyStructure,
@@ -147,6 +148,18 @@ const identicalKeys = ([comparsionOptions = {}], source, sourceFilePath) => {
   const {
     ignoreKeys = []
   } = comparsionOptions;
+  
+  if(!Array.isArray(ignoreKeys)){
+    return [{
+      message: `\n "ignoreKeys" option should be an array.\n Please check the options for this rule.`,
+      loc: {
+        start: {
+          line: 0,
+          col: 0,
+        },
+      },
+    }];
+  }
 
   const diffString = compareTranslationsStructure(keyStructure, currentTranslations, ignoreKeys);
 
@@ -178,8 +191,8 @@ module.exports = {
         filePath: {
           type: ['string', 'object'],
         },
-        ignoreKeys: {
-          type: ['array']
+        ignore: {
+          type: 'array'
         }
       },
       type: 'object',
@@ -192,9 +205,11 @@ module.exports = {
         const {
           value: source,
         } = node.comments[0];
+
         const {
           value: sourceFilePath,
         } = node.comments[1];
+        
         const errors = identicalKeys(context.options, source, sourceFilePath.trim());
         errors.forEach((error) => {
           context.report(error);
