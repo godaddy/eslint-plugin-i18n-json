@@ -1,10 +1,12 @@
 const path = require('path');
 
 module.exports = {
-  "root": true, // since this example folder is embedded into the project. just ignore this.
-  "extends": [
+  root: true, // since this example folder is embedded into the project. just ignore this.
+  extends: [
     "plugin:i18n-json/recommended"
   ],
+  settings: {
+  },
   rules: {
     // option for this rule the absolute path to the comparision file the plugin should require. 
     "i18n-json/identical-keys": [2, {

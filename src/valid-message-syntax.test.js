@@ -105,6 +105,25 @@ ruleTester.run('valid-message-syntax', rule, {
         },
       ],
     },
+    // ignore keys
+    {
+      code: `
+      /*{
+          "translationKeyA": "invalid translation { value a",
+          "translationKeyB": "translation value b"
+      }*/
+      `,
+      options: [
+        {
+          syntax: 'icu',
+        },
+      ],
+      settings: {
+        'i18n-json/ignore-keys': [
+          'translationKeyA'
+        ]
+      }
+    },
   ],
   invalid: [
     // bad path for custom message format

@@ -5,8 +5,9 @@ const isPlainObject = require('lodash.isplainobject');
 const prettyFormat = require('pretty-format');
 const icuValidator = require('./message-validators/icu');
 const notEmpty = require('./message-validators/not-empty');
-const deepForOwn = require('./util/deep-for-own');
 const isString = require('./message-validators/is-string');
+const deepForOwn = require('./util/deep-for-own');
+const shouldIgnoreKeyPath = require('./util/should-ignore-key-path');
 
 /* Error tokens */
 const EMPTY_OBJECT = Symbol.for('EMPTY_OBJECT');
@@ -74,10 +75,16 @@ const createValidator = (syntax) => {
   };
 };
 
-const validMessageSyntax = ([options = {}], source) => {
+const validMessageSyntax = (context, source) => {
+  const {
+    options = [],
+    settings = {}
+  } = context;
+
   let {
     syntax,
-  } = options;
+  } = options[0] || {};
+  
   syntax = syntax && syntax.trim();
 
   let translations = null;
@@ -118,6 +125,9 @@ const validMessageSyntax = ([options = {}], source) => {
   }
 
   deepForOwn(translations, (value, key, path) => {
+    if(shouldIgnoreKeyPath(settings['i18n-json/ignore-keys'], path)){
+      return;
+    }
     // empty object itself is an error
     if (isPlainObject(value)) {
       if (Object.keys(value).length === 0) {
@@ -185,7 +195,7 @@ module.exports = {
         const {
           value: source,
         } = node.comments[0];
-        const errors = validMessageSyntax(context.options, source);
+        const errors = validMessageSyntax(context, source);
         errors.forEach((error) => {
           context.report(error);
         });

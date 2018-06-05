@@ -14,7 +14,6 @@
   "todos.count": "Tienes {count, plural, =0 {no todos} other { # todos} }",
   "todos.greeting": "Bienvenido {userName}",
   "todos.markCompleted": "Marca Completada",
-  "todos.nextPage": "Siguiente",
   "todos.previousPage": "Anterior",
   "todos.removeTodo": "Eliminar todo"
 }

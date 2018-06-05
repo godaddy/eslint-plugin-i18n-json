@@ -1,6 +1,7 @@
 const set = require('lodash.set');
 const diff = require('jest-diff');
 const deepForOwn = require('./deep-for-own');
+const shouldIgnoreKeyPath = require('./should-ignore-key-path');
 
 const DIFF_OPTIONS = {
   expand: false,
@@ -11,14 +12,20 @@ const DIFF_OPTIONS = {
 // lodash.set will automatically convert a previous string value
 // into an object, if the current path states that a key is nested inside.
 // reminder, deepForOwn goes from the root level to the deepest level (preorder)
-const compareTranslationsStructure = (translationsA, translationsB) => {
+const compareTranslationsStructure = (settings, translationsA, translationsB) => {
   const augmentedTranslationsA = {};
   const augmentedTranslationsB = {};
+  const ignoreKeysList = settings['i18n-json/ignore-keys'];
+
   deepForOwn(translationsA, (value, key, path) => {
-    set(augmentedTranslationsA, path, 'Message<String>');
+    if(!shouldIgnoreKeyPath(ignoreKeysList, path)){
+      set(augmentedTranslationsA, path, 'Message<String>');
+    }
   });
   deepForOwn(translationsB, (value, key, path) => {
-    set(augmentedTranslationsB, path, 'Message<String>');
+    if(!shouldIgnoreKeyPath(ignoreKeysList, path)){
+      set(augmentedTranslationsB, path, 'Message<String>');
+    }
   });
   return diff(augmentedTranslationsA, augmentedTranslationsB, DIFF_OPTIONS);
 };
