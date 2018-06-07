@@ -207,6 +207,31 @@ ruleTester.run('identical-keys', rule, {
         },
       ],
     },
+    // certain keys are globally ignored
+    {
+      code: `
+      /*{
+        "translationLevelOne": {
+          "translationKeyA": "value a",
+          "translationsLevelTwo": {
+            "translationsLevelThree": {
+              "translationKeyC": "value c"
+            }
+          }
+        }
+      }*//*file-path*/
+      `,
+      options: [
+        {
+          filePath: './compare-file-a.json',
+        },
+      ],
+      settings: {
+        'i18n-json/ignore-keys': [
+          'translationLevelOne.translationLevelTwo.translationKeyB'
+        ]
+      }
+    },
   ],
 });
 
