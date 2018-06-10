@@ -44,6 +44,9 @@
 - sort translation keys in ascending order through eslint auto-fix (case-sensitive)
   - rule: `i18n-json/sorted-keys`
 
+- ignore certain keys. Example: metadata keys, in progress translations, etc.
+  - setting key: `i18n-json/ignore-keys`
+
 - The plugin supports **any level of nesting** in the translation file. (escapes `.` in key names)
 
 **Note: Check out the [Examples](examples/) folder to see different use cases and project setups.**
