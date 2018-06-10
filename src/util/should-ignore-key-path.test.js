@@ -5,9 +5,19 @@ describe('shouldIgnoreKeyPath', () => {
     expect(shouldIgnoreKeyPath(undefined, ['some-key'])).toBe(false);
   });
   it('returns false if the keyPath is not in the ignoreKeysList array', () => {
-    expect(shouldIgnoreKeyPath(['some-key-1'], ['some-key-2'])).toBe(false);
+    const settings = {
+      'i18n-json/ignore-keys': [
+        'some-key-1'
+      ]
+    };
+    expect(shouldIgnoreKeyPath(settings, ['some-key-2'])).toBe(false);
   });
   it('returns true if the keyPath is in the ignoreKeysList array', () => {
-    expect(shouldIgnoreKeyPath(['some-key-1'], ['some-key-1'])).toBe(true);
+    const settings = {
+      'i18n-json/ignore-keys': [
+        'some-key-1'
+      ]
+    };
+    expect(shouldIgnoreKeyPath(settings, ['some-key-1'])).toBe(true);
   });
 });

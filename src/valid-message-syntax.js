@@ -125,7 +125,7 @@ const validMessageSyntax = (context, source) => {
   }
 
   deepForOwn(translations, (value, key, path) => {
-    if(shouldIgnoreKeyPath(settings['i18n-json/ignore-keys'], path)){
+    if(shouldIgnoreKeyPath(settings, path)){
       return;
     }
     // empty object itself is an error

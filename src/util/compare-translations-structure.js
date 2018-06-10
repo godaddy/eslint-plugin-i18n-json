@@ -15,15 +15,14 @@ const DIFF_OPTIONS = {
 const compareTranslationsStructure = (settings, translationsA, translationsB) => {
   const augmentedTranslationsA = {};
   const augmentedTranslationsB = {};
-  const ignoreKeysList = settings['i18n-json/ignore-keys'];
 
   deepForOwn(translationsA, (value, key, path) => {
-    if(!shouldIgnoreKeyPath(ignoreKeysList, path)){
+    if(!shouldIgnoreKeyPath(settings, path)){
       set(augmentedTranslationsA, path, 'Message<String>');
     }
   });
   deepForOwn(translationsB, (value, key, path) => {
-    if(!shouldIgnoreKeyPath(ignoreKeysList, path)){
+    if(!shouldIgnoreKeyPath(settings, path)){
       set(augmentedTranslationsB, path, 'Message<String>');
     }
   });

@@ -127,7 +127,7 @@ const getKeyStructureToMatch = (options = {}, currentTranslations, sourceFilePat
 
 const identicalKeys = (context, source, sourceFilePath) => {
   const {
-    options = [],
+    options,
     settings = {}
   } = context;
 
