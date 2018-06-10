@@ -16,5 +16,12 @@
   "todos.markCompleted": "Marca Completada",
   "todos.nextPage": "Siguiente",
   "todos.previousPage": "Anterior",
-  "todos.removeTodo": "Eliminar todo"
+  "todos.removeTodo": "Eliminar todo",
+  "translationMetadata": [
+    "version-1.0",
+    {
+      "lastUpdatedBy": "translator",
+      "campaign": "marketing-campaign-XYZ"
+    }
+  ]
 }

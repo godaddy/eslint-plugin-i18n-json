@@ -5,6 +5,17 @@ module.exports = {
   extends: [
     'plugin:i18n-json/recommended'
   ],
+  settings: {
+    /*
+      None of the key paths listed below
+      will be checked for valid i18n syntax
+      nor used in the identical-keys rule comparison.
+    */
+    'i18n-json/ignore-keys': [
+      'translationMetadata', 
+      'login.form.inProgressTranslationKey'
+    ]
+  },
   rules: {
     // option for this rule the absolute path to the comparision file the plugin should require. 
     'i18n-json/identical-keys': [2, {
