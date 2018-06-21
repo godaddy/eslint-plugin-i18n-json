@@ -7,7 +7,6 @@ const icuValidator = require('./message-validators/icu');
 const notEmpty = require('./message-validators/not-empty');
 const isString = require('./message-validators/is-string');
 const deepForOwn = require('./util/deep-for-own');
-const shouldIgnoreKeyPath = require('./util/should-ignore-key-path');
 
 /* Error tokens */
 const EMPTY_OBJECT = Symbol.for('EMPTY_OBJECT');
@@ -77,14 +76,14 @@ const createValidator = (syntax) => {
 
 const validMessageSyntax = (context, source) => {
   const {
-    options = [],
-    settings = {}
+    options,
+    settings = {},
   } = context;
 
   let {
     syntax,
   } = options[0] || {};
-  
+
   syntax = syntax && syntax.trim();
 
   let translations = null;
@@ -124,10 +123,9 @@ const validMessageSyntax = (context, source) => {
     }];
   }
 
+  const ignorePaths = settings['i18n-json/ignore-keys'] || [];
+
   deepForOwn(translations, (value, key, path) => {
-    if(shouldIgnoreKeyPath(settings, path)){
-      return;
-    }
     // empty object itself is an error
     if (isPlainObject(value)) {
       if (Object.keys(value).length === 0) {
@@ -148,6 +146,8 @@ const validMessageSyntax = (context, source) => {
         });
       }
     }
+  }, {
+    ignorePaths,
   });
 
   if (invalidMessages.length > 0) {

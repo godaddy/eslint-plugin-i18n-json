@@ -18,11 +18,15 @@
   "todos.nextPage": "Next",
   "todos.previousPage": "Previous",
   "todos.removeTodo": "Remove Todo",
-  "translationMetadata": [
-    "version-1.0",
-    {
-      "lastUpdatedBy": "translator",
-      "campaign": "marketing-campaign-XYZ"
-    }
-  ]
+  "translationMetadata": {
+    "campaigns": [
+      "marketing-campaign-XYZ"
+    ],
+    "lastUpdatedBy": "translator",
+    "placeholder_format_custom": [
+      "\\[\\[.*?\\]\\]"
+    ],
+    "string_format": "icu",
+    "version": "version-1.0"
+  }
 }

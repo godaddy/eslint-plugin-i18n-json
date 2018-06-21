@@ -110,7 +110,10 @@ ruleTester.run('valid-message-syntax', rule, {
       code: `
       /*{
           "translationKeyA": "invalid translation { value a",
-          "translationKeyB": "translation value b"
+          "translationKeyB": "translation value b",
+          "translationKeyC": {
+            "metadata": [ "value" ] 
+          }
       }*/
       `,
       options: [
@@ -120,9 +123,10 @@ ruleTester.run('valid-message-syntax', rule, {
       ],
       settings: {
         'i18n-json/ignore-keys': [
-          'translationKeyA'
-        ]
-      }
+          'translationKeyA',
+          'translationKeyC',
+        ],
+      },
     },
   ],
   invalid: [

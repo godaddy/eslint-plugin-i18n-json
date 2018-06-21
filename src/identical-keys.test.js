@@ -20,7 +20,7 @@ jest.mock('path/to/compare-file-b.json', () => ({
 jest.mock('path/to/compare-file-a.json', () => ({
   translationLevelOne: {
     translationKeyA: 'value a',
-    translationsLevelTwo: {
+    translationLevelTwo: {
       translationKeyB: 'value b',
       translationsLevelThree: {
         translationKeyC: 'value c',
@@ -55,7 +55,7 @@ ruleTester.run('identical-keys', rule, {
       /*{
         "translationLevelOne": {
           "translationKeyA": "value a",
-          "translationsLevelTwo": {
+          "translationLevelTwo": {
             "translationKeyB": "value b",
             "translationsLevelThree": {
               "translationKeyC": "value c"
@@ -76,7 +76,7 @@ ruleTester.run('identical-keys', rule, {
       /*{
         "translationLevelOne": {
           "translationKeyA": "value a",
-          "translationsLevelTwo": {
+          "translationLevelTwo": {
             "translationKeyB": "value b",
             "translationsLevelThree": {
               "translationKeyC": "value c"
@@ -125,10 +125,11 @@ ruleTester.run('identical-keys', rule, {
       code: `
       /*{
         "translationLevelOne": {
-          "translationsLevelTwo": {
-            "translationKeyB": "value b",
+          "translationKeyA": "value a",
+          "translationLevelTwo": {
+            "translationKeyD": "value d",
             "translationsLevelThree": {
-              "translationKeyC": "value c"
+              "translationKeyE": "value e"
             }
           }
         }
@@ -141,9 +142,9 @@ ruleTester.run('identical-keys', rule, {
       ],
       settings: {
         'i18n-json/ignore-keys': [
-          'translationLevelOne.translationKeyA'
-        ]
-      }
+          'translationLevelOne.translationLevelTwo',
+        ],
+      },
     },
   ],
   invalid: [

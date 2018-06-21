@@ -1,7 +1,6 @@
 const set = require('lodash.set');
 const diff = require('jest-diff');
 const deepForOwn = require('./deep-for-own');
-const shouldIgnoreKeyPath = require('./should-ignore-key-path');
 
 const DIFF_OPTIONS = {
   expand: false,
@@ -16,16 +15,18 @@ const compareTranslationsStructure = (settings, translationsA, translationsB) =>
   const augmentedTranslationsA = {};
   const augmentedTranslationsB = {};
 
+  const ignorePaths = settings['i18n-json/ignore-keys'] || [];
+
+  const opts = {
+    ignorePaths,
+  };
+
   deepForOwn(translationsA, (value, key, path) => {
-    if(!shouldIgnoreKeyPath(settings, path)){
-      set(augmentedTranslationsA, path, 'Message<String>');
-    }
-  });
+    set(augmentedTranslationsA, path, 'Message<String>');
+  }, opts);
   deepForOwn(translationsB, (value, key, path) => {
-    if(!shouldIgnoreKeyPath(settings, path)){
-      set(augmentedTranslationsB, path, 'Message<String>');
-    }
-  });
+    set(augmentedTranslationsB, path, 'Message<String>');
+  }, opts);
   return diff(augmentedTranslationsA, augmentedTranslationsB, DIFF_OPTIONS);
 };
 

@@ -17,11 +17,15 @@
   "todos.nextPage": "Siguiente",
   "todos.previousPage": "Anterior",
   "todos.removeTodo": "Eliminar todo",
-  "translationMetadata": [
-    "version-1.0",
-    {
-      "lastUpdatedBy": "translator",
-      "campaign": "marketing-campaign-XYZ"
-    }
-  ]
+  "translationMetadata": {
+    "campaigns": [
+      "marketing-campaign-XYZ"
+    ],
+    "lastUpdatedBy": "translator",
+    "placeholder_format_custom": [
+      "\\[\\[.*?\\]\\]"
+    ],
+    "string_format": "icu",
+    "version": "version-1.0"
+  }
 }
