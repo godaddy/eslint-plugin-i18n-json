@@ -330,6 +330,7 @@ Check out the [Examples](examples/) folder to see different use cases.
 - example usage: metadata keys with values not corresponding to the syntax specified or in progress translation keys which should not be used in comparisons.
 
 **Example setting configuration:**
+
   ```json
   // .eslintrc.json
   {
