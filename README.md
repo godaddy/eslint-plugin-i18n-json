@@ -44,8 +44,8 @@
 - sort translation keys in ascending order through eslint auto-fix (case-sensitive)
   - rule: `i18n-json/sorted-keys`
 
-- ignore certain keys. Example: metadata keys, in progress translations, etc.
-  - setting key: `i18n-json/ignore-keys`
+- ignore certain keys paths. Example: metadata keys, in progress translations, etc.
+  - setting key: `i18n-json/ignore-keys` [Example](examples/ignore-keys/)
 
 - The plugin supports **any level of nesting** in the translation file. (escapes `.` in key names)
 
@@ -320,6 +320,33 @@ Check out the [Examples](examples/) folder to see different use cases.
   `error` (or `warning`) if it detects an invalid sort order for translation keys.
 
   ![](assets/fixable-sorting-notice.png)
+
+## Settings
+
+### i18n-json/ignore-keys
+
+- list of key paths to ignore when checking syntax and doing key structure comparisions. [Example](examples/ignore-keys/)
+- if the key path points to an object, the nested paths are also ignored.
+- example usage: metadata keys with values not corresponding to the syntax specified or in progress translation keys which should not be used in comparisons.
+
+**Example setting configuration:**
+  ```json
+  // .eslintrc.json
+  {
+    "settings": {
+      /*
+        None of the key paths listed below
+        will be checked for valid i18n syntax
+        nor used in the identical-keys rule comparison.
+        (if the key path points to an object, the nested paths are also ignored)
+      */
+      "i18n-json/ignore-keys": [
+        "translationMetadata",
+        "login.form.inProgressTranslationKey"
+      ]
+    },
+  }
+  ```
 
 ## Disclaimer
 
