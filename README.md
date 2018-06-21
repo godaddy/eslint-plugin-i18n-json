@@ -331,20 +331,20 @@ Check out the [Examples](examples/) folder to see different use cases.
 
 **Example setting configuration:**
 
-  ```json
-  // .eslintrc.json
+  ```javascript
+  // .eslintrc.js
   {
-    "settings": {
+    settings: {
       /*
         None of the key paths listed below
         will be checked for valid i18n syntax
         nor used in the identical-keys rule comparison.
         (if the key path points to an object, the nested paths are also ignored)
       */
-      "i18n-json/ignore-keys": [
-        "translationMetadata",
-        "login.form.inProgressTranslationKey"
-      ]
+      'i18n-json/ignore-keys': [
+        'translationMetadata',
+        'login.form.inProgressTranslationKey',
+      ],
     },
   }
   ```
