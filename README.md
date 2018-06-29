@@ -22,6 +22,8 @@
   - [i18n-json/valid-message-syntax](#i18n-jsonvalid-message-syntax)
   - [i18n-json/identical-keys](#i18n-jsonidentical-keys)
   - [i18n-json/sorted-keys](#i18n-jsonsorted-keys)
+- [Settings](#settings)
+  - [i18n-json/ignore-keys](#i18n-jsonignore-keys)
 - [Special Thanks](#special-thanks-)
 - [License](#license-)
 
@@ -44,8 +46,8 @@
 - sort translation keys in ascending order through eslint auto-fix (case-sensitive)
   - rule: `i18n-json/sorted-keys`
 
-- ignore certain keys paths. Example: metadata keys, in progress translations, etc.
-  - setting key: `i18n-json/ignore-keys` [Example](examples/ignore-keys/)
+- ability to ignore certain keys. Example: metadata keys, in progress translations, etc.
+  - setting: `i18n-json/ignore-keys` [Example](examples/ignore-keys/)
 
 - The plugin supports **any level of nesting** in the translation file. (escapes `.` in key names)
 
