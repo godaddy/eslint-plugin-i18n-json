@@ -325,9 +325,18 @@ Check out the [Examples](examples/) folder to see different use cases.
 
 ### i18n-json/ignore-keys
 
-- list of key paths to ignore when checking syntax and doing key structure comparisions. [Example](examples/ignore-keys/)
+- list of key paths (case sensitive) to ignore when checking syntax and doing key structure comparisons. [Example](examples/ignore-keys/)
+- this setting is used by the following rules: `i18n-json/identical-keys` and `i18n-json/valid-syntax`
 - if the key path points to an object, the nested paths are also ignored.
-- example usage: metadata keys with values not corresponding to the syntax specified or in progress translation keys which should not be used in comparisons.
+  - e.g. if the key `a` was added to the `ignore-keys` list, then `a.b` will also be ignored.
+    ```json
+    {
+      "a": {
+        "b": "translation"
+      }
+    }
+    ```
+- example usage: metadata keys with values not corresponding to the syntax specified or work-in-progress translation keys which should not be used in comparisons.
 
 **Example setting configuration:**
 
@@ -338,12 +347,13 @@ Check out the [Examples](examples/) folder to see different use cases.
       /*
         None of the key paths listed below
         will be checked for valid i18n syntax
-        nor used in the identical-keys rule comparison.
+        nor be used in the identical-keys rule comparison.
         (if the key path points to an object, the nested paths are also ignored)
       */
       'i18n-json/ignore-keys': [
         'translationMetadata',
         'login.form.inProgressTranslationKey',
+        'some-key'
       ],
     },
   }

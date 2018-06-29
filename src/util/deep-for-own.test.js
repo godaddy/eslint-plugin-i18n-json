@@ -41,9 +41,6 @@ describe('deepForOwn', () => {
     const visited = [];
     deepForOwn(obj, (value, key) => {
       visited.push(key);
-      if (key === 'b') {
-        return false;
-      }
       return true;
     }, {
       ignorePaths: ['a.b', 'd.e.f', 'g'],

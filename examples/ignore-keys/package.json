@@ -7,7 +7,7 @@
   },
   "license": "MIT",
   "main": "index.js",
-  "name": "identical-keys-simple",
+  "name": "ignore-keys",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint --fix --ext .json  --format node_modules/eslint-plugin-i18n-json/formatter.js translations/"
