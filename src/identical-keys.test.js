@@ -7,7 +7,7 @@ const runRule = require('../test/run-rule');
 
 const ruleTester = new RuleTester();
 
-jest.mock('./compare-file-b.json', () => ({
+jest.mock('path/to/compare-file-b.json', () => ({
   translationLevelOne: {
     translationKeyA: 'value a',
     translationKeyB: 'value b',
@@ -17,10 +17,10 @@ jest.mock('./compare-file-b.json', () => ({
   virtual: true,
 });
 
-jest.mock('./compare-file-a.json', () => ({
+jest.mock('path/to/compare-file-a.json', () => ({
   translationLevelOne: {
     translationKeyA: 'value a',
-    translationsLevelTwo: {
+    translationLevelTwo: {
       translationKeyB: 'value b',
       translationsLevelThree: {
         translationKeyC: 'value c',
@@ -31,7 +31,7 @@ jest.mock('./compare-file-a.json', () => ({
   virtual: true,
 });
 
-jest.mock('./identity-structure.js', () => jest.fn()
+jest.mock('path/to/identity-structure.js', () => jest.fn()
   .mockImplementationOnce(t => t)
   .mockImplementationOnce(() => {
     throw new Error('something went wrong');
@@ -39,7 +39,7 @@ jest.mock('./identity-structure.js', () => jest.fn()
   virtual: true,
 });
 
-jest.mock('./wrong-structure-generator.js', () => jest.fn()
+jest.mock('path/to/wrong-structure-generator.js', () => jest.fn()
   .mockImplementationOnce(() => ({
     'other-key': 'other value',
   })), {
@@ -55,7 +55,7 @@ ruleTester.run('identical-keys', rule, {
       /*{
         "translationLevelOne": {
           "translationKeyA": "value a",
-          "translationsLevelTwo": {
+          "translationLevelTwo": {
             "translationKeyB": "value b",
             "translationsLevelThree": {
               "translationKeyC": "value c"
@@ -66,7 +66,7 @@ ruleTester.run('identical-keys', rule, {
       `,
       options: [
         {
-          filePath: './compare-file-a.json',
+          filePath: 'path/to/compare-file-a.json',
         },
       ],
     },
@@ -76,7 +76,7 @@ ruleTester.run('identical-keys', rule, {
       /*{
         "translationLevelOne": {
           "translationKeyA": "value a",
-          "translationsLevelTwo": {
+          "translationLevelTwo": {
             "translationKeyB": "value b",
             "translationsLevelThree": {
               "translationKeyC": "value c"
@@ -88,8 +88,8 @@ ruleTester.run('identical-keys', rule, {
       options: [
         {
           filePath: {
-            'compare-file-a.json': './compare-file-a.json',
-            'compare-file-b.json': './compare-file-b.json',
+            'compare-file-a.json': 'path/to/compare-file-a.json',
+            'compare-file-b.json': 'path/to/compare-file-b.json',
           },
         },
       ],
@@ -105,7 +105,7 @@ ruleTester.run('identical-keys', rule, {
       `,
       options: [
         {
-          filePath: './identity-structure.js',
+          filePath: 'path/to/identity-structure.js',
         },
       ],
     },
@@ -116,9 +116,35 @@ ruleTester.run('identical-keys', rule, {
       `,
       options: [
         {
-          filePath: './compare-file.json',
+          filePath: 'path/to/compare-file.json',
         },
       ],
+    },
+    // ignore-keys global setting
+    {
+      code: `
+      /*{
+        "translationLevelOne": {
+          "translationKeyA": "value a",
+          "translationLevelTwo": {
+            "translationKeyD": "value d",
+            "translationsLevelThree": {
+              "translationKeyE": "value e"
+            }
+          }
+        }
+      }*//*file-path*/
+      `,
+      options: [
+        {
+          filePath: 'path/to/compare-file-a.json',
+        },
+      ],
+      settings: {
+        'i18n-json/ignore-keys': [
+          'translationLevelOne.translationLevelTwo',
+        ],
+      },
     },
   ],
   invalid: [
@@ -127,7 +153,6 @@ ruleTester.run('identical-keys', rule, {
       code: `
       /*{}*//*file-path*/
       `,
-      options: [],
       errors: [
         {
           message: '"filePath" rule option not specified.',
@@ -142,7 +167,7 @@ ruleTester.run('identical-keys', rule, {
       `,
       options: [
         {
-          filePath: './identity-structure.js',
+          filePath: 'path/to/identity-structure.js',
         },
       ],
       errors: [
@@ -159,7 +184,7 @@ ruleTester.run('identical-keys', rule, {
       `,
       options: [
         {
-          filePath: './does-not-exist.js',
+          filePath: 'path/to/does-not-exist.js',
         },
       ],
       errors: [
@@ -177,7 +202,7 @@ ruleTester.run('identical-keys', rule, {
       options: [
         {
           filePath: {
-            'file.json': 'does-not-exist.json',
+            'file.json': 'path/to/does-not-exist.json',
           },
         },
       ],
@@ -196,7 +221,7 @@ ruleTester.run('identical-keys', rule, {
       options: [
         {
           filePath: {
-            'other-file.json': 'does-not-exist.json', // shouldn't require does-not-exist.json, since it doesn't match
+            'other-file.json': 'path/to/does-not-exist.json', // shouldn't require does-not-exist.json, since it doesn't match
           },
         },
       ],
@@ -230,7 +255,7 @@ describe('Snapshot Tests for Invalid Code', () => {
       `,
       options: [
         {
-          filePath: './compare-file-a.json',
+          filePath: 'path/to/compare-file-a.json',
         },
       ],
     });
@@ -249,7 +274,7 @@ describe('Snapshot Tests for Invalid Code', () => {
       options: [
         {
           filePath: {
-            'file.json': './compare-file-a.json',
+            'file.json': 'path/to/compare-file-a.json',
           },
         },
       ],
@@ -268,7 +293,7 @@ describe('Snapshot Tests for Invalid Code', () => {
       `,
       options: [
         {
-          filePath: './wrong-structure-generator.js',
+          filePath: 'path/to/wrong-structure-generator.js',
         },
       ],
     });

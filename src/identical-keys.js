@@ -34,7 +34,7 @@ const getKeyStructureFromMap = (filePathMap, sourceFilePath) => {
   }
 */
 
-const getKeyStructureToMatch = (options, currentTranslations, sourceFilePath) => {
+const getKeyStructureToMatch = (options = {}, currentTranslations, sourceFilePath) => {
   let keyStructure = null;
   let {
     filePath,
@@ -125,7 +125,14 @@ const getKeyStructureToMatch = (options, currentTranslations, sourceFilePath) =>
 };
 
 
-const identicalKeys = ([comparsionOptions = {}], source, sourceFilePath) => {
+const identicalKeys = (context, source, sourceFilePath) => {
+  const {
+    options,
+    settings = {},
+  } = context;
+
+  const comparisonOptions = options[0];
+
   let currentTranslations = null;
   try {
     currentTranslations = JSON.parse(source);
@@ -137,14 +144,14 @@ const identicalKeys = ([comparsionOptions = {}], source, sourceFilePath) => {
   const {
     errors,
     keyStructure,
-  } = getKeyStructureToMatch(comparsionOptions, currentTranslations, sourceFilePath);
+  } = getKeyStructureToMatch(comparisonOptions, currentTranslations, sourceFilePath);
 
   if (errors) {
     // errors generated from trying to get the key structure
     return errors;
   }
 
-  const diffString = compareTranslationsStructure(keyStructure, currentTranslations);
+  const diffString = compareTranslationsStructure(settings, keyStructure, currentTranslations);
 
   if (noDifferenceRegex.test(diffString.trim())) {
     // success
@@ -187,7 +194,7 @@ module.exports = {
         const {
           value: sourceFilePath,
         } = node.comments[1];
-        const errors = identicalKeys(context.options, source, sourceFilePath.trim());
+        const errors = identicalKeys(context, source, sourceFilePath.trim());
         errors.forEach((error) => {
           context.report(error);
         });

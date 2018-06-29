@@ -22,6 +22,8 @@
   - [i18n-json/valid-message-syntax](#i18n-jsonvalid-message-syntax)
   - [i18n-json/identical-keys](#i18n-jsonidentical-keys)
   - [i18n-json/sorted-keys](#i18n-jsonsorted-keys)
+- [Settings](#settings)
+  - [i18n-json/ignore-keys](#i18n-jsonignore-keys)
 - [Special Thanks](#special-thanks-)
 - [License](#license-)
 
@@ -43,6 +45,9 @@
 
 - sort translation keys in ascending order through eslint auto-fix (case-sensitive)
   - rule: `i18n-json/sorted-keys`
+
+- ability to ignore certain keys. Example: metadata keys, in progress translations, etc.
+  - setting: `i18n-json/ignore-keys` [Example](examples/ignore-keys/)
 
 - The plugin supports **any level of nesting** in the translation file. (escapes `.` in key names)
 
@@ -317,6 +322,44 @@ Check out the [Examples](examples/) folder to see different use cases.
   `error` (or `warning`) if it detects an invalid sort order for translation keys.
 
   ![](assets/fixable-sorting-notice.png)
+
+## Settings
+
+### i18n-json/ignore-keys
+
+- list of key paths (case sensitive) to ignore when checking syntax and doing key structure comparisons. [Example](examples/ignore-keys/)
+- this setting is used by the following rules: `i18n-json/identical-keys` and `i18n-json/valid-syntax`
+- if the key path points to an object, the nested paths are also ignored.
+  - e.g. if the key `a` was added to the `ignore-keys` list, then `a.b` will also be ignored.
+    ```json
+    {
+      "a": {
+        "b": "translation"
+      }
+    }
+    ```
+- example usage: metadata keys with values not corresponding to the syntax specified or work-in-progress translation keys which should not be used in comparisons.
+
+**Example setting configuration:**
+
+  ```javascript
+  // .eslintrc.js
+  {
+    settings: {
+      /*
+        None of the key paths listed below
+        will be checked for valid i18n syntax
+        nor be used in the identical-keys rule comparison.
+        (if the key path points to an object, the nested paths are also ignored)
+      */
+      'i18n-json/ignore-keys': [
+        'translationMetadata',
+        'login.form.inProgressTranslationKey',
+        'some-key'
+      ],
+    },
+  }
+  ```
 
 ## Disclaimer
 

@@ -8,7 +8,7 @@ exports[`Snapshot Tests for Invalid Code map of comparison files - structure mis
 @@ -2,10 +2,5 @@
     \\"translationLevelOne\\": Object {
 -     \\"translationKeyA\\": \\"Message<String>\\",
--     \\"translationsLevelTwo\\": Object {
+-     \\"translationLevelTwo\\": Object {
 -       \\"translationKeyB\\": \\"Message<String>\\",
 -       \\"translationsLevelThree\\": Object {
 -         \\"translationKeyC\\": \\"Message<String>\\",
@@ -28,7 +28,7 @@ exports[`Snapshot Tests for Invalid Code single comparison file - structure mism
 @@ -2,10 +2,5 @@
     \\"translationLevelOne\\": Object {
 -     \\"translationKeyA\\": \\"Message<String>\\",
--     \\"translationsLevelTwo\\": Object {
+-     \\"translationLevelTwo\\": Object {
 -       \\"translationKeyB\\": \\"Message<String>\\",
 -       \\"translationsLevelThree\\": Object {
 -         \\"translationKeyC\\": \\"Message<String>\\",

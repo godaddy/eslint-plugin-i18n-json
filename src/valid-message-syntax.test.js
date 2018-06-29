@@ -7,7 +7,7 @@ const rule = require('./valid-message-syntax');
 
 const ruleTester = new RuleTester();
 
-jest.mock('./upper-case-only-format.js', () => (message) => {
+jest.mock('path/to/upper-case-only-format.js', () => (message) => {
   if (message.toUpperCase() !== message) {
     throw new SyntaxError('MESSAGE MUST BE IN UPPERCASE!');
   }
@@ -79,7 +79,7 @@ ruleTester.run('valid-message-syntax', rule, {
       `,
       options: [
         {
-          syntax: './upper-case-only-format.js',
+          syntax: 'path/to/upper-case-only-format.js',
         },
       ],
     },
@@ -105,6 +105,29 @@ ruleTester.run('valid-message-syntax', rule, {
         },
       ],
     },
+    // ignore keys
+    {
+      code: `
+      /*{
+          "translationKeyA": "invalid translation { value a",
+          "translationKeyB": "translation value b",
+          "translationKeyC": {
+            "metadata": [ "value" ] 
+          }
+      }*/
+      `,
+      options: [
+        {
+          syntax: 'icu',
+        },
+      ],
+      settings: {
+        'i18n-json/ignore-keys': [
+          'translationKeyA',
+          'translationKeyC',
+        ],
+      },
+    },
   ],
   invalid: [
     // bad path for custom message format
@@ -117,12 +140,12 @@ ruleTester.run('valid-message-syntax', rule, {
       `,
       options: [
         {
-          syntax: './does-not-exist.js',
+          syntax: 'path/to/does-not-exist.js',
         },
       ],
       errors: [
         {
-          message: /Error configuring syntax validator\. Rule option specified: .\/does-not-exist\.js\. Error: cannot find module /ig,
+          message: /Error configuring syntax validator\. Rule option specified: path\/to\/does-not-exist\.js\. Error: cannot find module /ig,
           line: 0,
         },
       ],
@@ -173,7 +196,7 @@ describe('Snapshot Tests for Invalid Code', () => {
       `,
       options: [
         {
-          syntax: './upper-case-only-format.js',
+          syntax: 'path/to/upper-case-only-format.js',
         },
       ],
     });
