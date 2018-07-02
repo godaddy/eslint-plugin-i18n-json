@@ -26,6 +26,7 @@
   - [i18n-json/ignore-keys](#i18n-jsonignore-keys)
 - [Special Thanks](#special-thanks-)
 - [License](#license-)
+- [Changelog](CHANGELOG.md)
 
 
 ## Features 🚀
