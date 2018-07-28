@@ -37,7 +37,8 @@
     "collectCoverageFrom": [
       "src/**/*.js",
       "formatter.js"
-    ]
+    ],
+    "testEnvironment": "node"
   },
   "license": "MIT",
   "engines": {
