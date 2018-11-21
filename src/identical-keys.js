@@ -11,7 +11,13 @@ const getKeyStructureFromMap = (filePathMap, sourceFilePath) => {
     .filter(filePath => sourceFilePath.endsWith(filePath)).pop();
   if (match) {
     try {
-      return require(filePathMap[match]);
+      const filepath = filePathMap[match];
+
+      // Delete the file from the require cache.
+      // This forces the file to be read from disk again.
+      delete require.cache[filepath];
+
+      return require(filepath);
     } catch (e) {
       throw new Error(`\n Error parsing or retrieving key structure comparison file based on "filePath" mapping\n\n "${match}" => "${filePathMap[match]}".\n\n Check the "filePath" option for this rule. \n ${e}`);
     }
