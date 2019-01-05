@@ -1,4 +1,5 @@
 /* eslint-disable global-require, import/no-dynamic-require */
+const requireNoCache = require('./util/require-no-cache'); 
 const compareTranslationsStructure = require('./util/compare-translations-structure');
 
 const noDifferenceRegex = /Compared\s+values\s+have\s+no\s+visual\s+difference/i;
@@ -12,12 +13,7 @@ const getKeyStructureFromMap = (filePathMap, sourceFilePath) => {
   if (match) {
     try {
       const filepath = filePathMap[match];
-
-      // Delete the file from the require cache.
-      // This forces the file to be read from disk again.
-      delete require.cache[filepath];
-
-      return require(filepath);
+      return requireNoCache(filepath);
     } catch (e) {
       throw new Error(`\n Error parsing or retrieving key structure comparison file based on "filePath" mapping\n\n "${match}" => "${filePathMap[match]}".\n\n Check the "filePath" option for this rule. \n ${e}`);
     }
