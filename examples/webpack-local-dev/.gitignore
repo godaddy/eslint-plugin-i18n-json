@@ -1,2 +1,2 @@
 dist/
-.lock
+yarn.lock

@@ -16,7 +16,7 @@
     "clean-webpack-plugin": "^1.0.0",
     "eslint": "^5.12.0",
     "eslint-loader": "^2.1.1",
-    "eslint-plugin-i18n-json": "^2.4.0",
+    "eslint-plugin-i18n-json": "godaddy/eslint-plugin-i18n-json#bug/webpackpack-local-dev-fix-update",
     "html-webpack-plugin": "^3.2.0",
     "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2",
