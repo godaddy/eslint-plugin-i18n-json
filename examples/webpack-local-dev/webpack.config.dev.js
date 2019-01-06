@@ -4,7 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
   mode: 'development',
   devServer: {
-    contentBase: './dist'
+    contentBase: './dist',
   },
   module: {
     rules: [
@@ -18,8 +18,8 @@ module.exports = {
         include: /i18n/,
         loader: 'eslint-loader',
         options: {
-          formatter: require("eslint-plugin-i18n-json/formatter.js"),
-        }
+          formatter: require('eslint-plugin-i18n-json/formatter.js'),
+        },
       },
     ],
   },

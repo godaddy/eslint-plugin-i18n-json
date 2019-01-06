@@ -62,7 +62,7 @@ const getKeyStructureToMatch = (options = {}, currentTranslations, sourceFilePat
 
   if (typeof filePath === 'string') {
     try {
-      keyStructure = require(filePath); //eslint-disable-line
+      keyStructure = requireNoCache(filePath); //eslint-disable-line
     } catch (e) {
       return {
         errors: [{
