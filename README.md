@@ -123,7 +123,7 @@ simple
 
 5) >npm run lint
 
-6) **Profit!** Relax knowing that each change to the translations project will go through strict checks by eslint plugin.
+6) **Profit!** Relax knowing that each change to the translations project will go through strict checks by the eslint plugin.
 
     *Example where we have invalid ICU message syntax.*
     
