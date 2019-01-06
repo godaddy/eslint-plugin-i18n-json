@@ -1,5 +1,4 @@
-/* eslint-disable global-require, import/no-dynamic-require */
-const requireNoCache = require('./util/require-no-cache'); 
+const requireNoCache = require('./util/require-no-cache');
 const compareTranslationsStructure = require('./util/compare-translations-structure');
 
 const noDifferenceRegex = /Compared\s+values\s+have\s+no\s+visual\s+difference/i;

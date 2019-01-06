@@ -1,4 +1,3 @@
-/* eslint-disable global-require, import/no-dynamic-require */
 const set = require('lodash.set');
 const diff = require('jest-diff');
 const isPlainObject = require('lodash.isplainobject');
@@ -7,7 +6,7 @@ const icuValidator = require('./message-validators/icu');
 const notEmpty = require('./message-validators/not-empty');
 const isString = require('./message-validators/is-string');
 const deepForOwn = require('./util/deep-for-own');
-const requireNoCache = require('./util/require-no-cache'); 
+const requireNoCache = require('./util/require-no-cache');
 
 /* Error tokens */
 const EMPTY_OBJECT = Symbol.for('EMPTY_OBJECT');
