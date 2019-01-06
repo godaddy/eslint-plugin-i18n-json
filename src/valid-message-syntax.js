@@ -68,7 +68,7 @@ const createValidator = (syntax) => {
     };
   }
   // custom validator
-  const customValidator = requireNoCache(syntax); // eslint-disable import/no-dynamic-require
+  const customValidator = requireNoCache(syntax);
   return (value, key) => {
     customValidator(value, key);
   };
