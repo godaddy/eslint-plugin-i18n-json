@@ -16,12 +16,6 @@
 - [Features](#features-)
 - [Getting started](#getting-started)
 - [Examples](#examples)
-  - [Basic Setup](examples/simple)
-  - [Custom Message Syntax](examples/custom-message-syntax)
-  - [Identical Keys (Simple)](examples/identical-keys-simple)
-  - [Ignoring Keys](examples/ignore-keys)
-  - [Multiple Files Per Locale](examples/multiple-files-per-locale)
-  - [Webpack Development (eslint-loader)](examples/webpack-local-dev)
 - [Configuring your .eslintrc file](#configuring-your-eslintrc-file)
 - [Rules](#rules)
   - [i18n-json/valid-json](#i18n-jsonvalid-json)
@@ -131,6 +125,13 @@ simple
 
 ## Examples
 Check out the [Examples](examples/) folder to see different use cases.
+
+ - [Basic Setup](examples/simple)
+ - [Custom Message Syntax](examples/custom-message-syntax)
+ - [Identical Keys (Simple)](examples/identical-keys-simple)
+ - [Ignoring Keys](examples/ignore-keys)
+ - [Multiple Files Per Locale](examples/multiple-files-per-locale)
+ - [Webpack Development (eslint-loader)](examples/webpack-local-dev)
 
 ## Configuring your .eslintrc file
 - Simply update your `.eslintrc.*` with overrides for the individual rules.
