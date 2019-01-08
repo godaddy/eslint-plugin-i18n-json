@@ -132,13 +132,6 @@ simple
 ## Examples
 Check out the [Examples](examples/) folder to see different use cases.
 
-- [Basic Setup](examples/simple)
-- [Custom Message Syntax](examples/custom-message-syntax)
-- [Identical Keys (Simple)](examples/identical-keys-simple)
-- [Ignoring Keys](examples/ignore-keys)
-- [Multiple Files Per Locale](examples/multiple-files-per-locale)
-- [Webpack Development (eslint-loader)](examples/webpack-local-dev)
-
 ## Configuring your .eslintrc file
 - Simply update your `.eslintrc.*` with overrides for the individual rules.
 - Eslint severities: 2 = error, 1 = warning, 0 = off
