@@ -9,8 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Fixed
 
-- update to make plugin compatible when used within a file watching service. e.g) webpack dev server
-- new example project showcasing how to configure the plugin with webpack dev server.
+- update to make plugin compatible when used within a file watching service. e.g) webpack dev server.
+- new example project showcasing how to configure the plugin with webpack development.
 - Related PRs
   - [#21](https://github.com/godaddy/eslint-plugin-i18n-json/pull/21) - Thanks [@maccuaa](https://github.com/maccuaa)
   - [#23](https://github.com/godaddy/eslint-plugin-i18n-json/pull/23)
