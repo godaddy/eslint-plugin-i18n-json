@@ -1,25 +1,27 @@
 const rule = require('./valid-json');
-const {
-  RuleTester,
-} = require('eslint');
+const { RuleTester } = require('eslint');
 
 const ruleTester = new RuleTester();
-
-jest.mock('./json-linter-error.js', () => () => {
-  throw new SyntaxError('line 5: invalid json syntax');
-}, {
-  virtual: true,
-});
-
-jest.mock('./json-linter-pass.js', () => () => ({}), {
-  virtual: true,
-});
 
 jest.mock('chalk', () => ({
   bold: {
     red: jest.fn(str => str),
   },
 }));
+
+jest.mock('./util/require-no-cache', () =>
+  jest.fn().mockImplementation((path) => {
+    switch (path) {
+      case './json-linter-pass.js':
+        return () => ({});
+      case './json-linter-error.js':
+        return () => {
+          throw new SyntaxError('line 5: invalid json syntax');
+        };
+      default:
+        return undefined;
+    }
+  }));
 
 ruleTester.run('valid-json', rule, {
   valid: [

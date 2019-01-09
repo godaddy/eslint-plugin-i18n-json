@@ -1,8 +1,7 @@
-/* eslint-disable global-require, import/no-dynamic-require */
-
 const jsonlint = require('jsonlint');
 const isPlainObject = require('lodash.isplainobject');
 const chalk = require('chalk');
+const requireNoCache = require('./util/require-no-cache');
 
 const lineRegex = /line\s+(\d+):?/i;
 
@@ -15,7 +14,7 @@ const validJSON = ([{
 
     if (linter) {
       // use custom linter
-      parsed = require(linter)(source);
+      parsed = requireNoCache(linter)(source);
     } else {
       parsed = jsonlint.parse(source);
     }

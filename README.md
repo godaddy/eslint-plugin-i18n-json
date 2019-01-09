@@ -117,7 +117,7 @@ simple
 
 5) >npm run lint
 
-6) **Profit!** Relax knowing that each change to the translations project will go through strict checks by eslint plugin.
+6) **Profit!** Relax knowing that each change to the translations project will go through strict checks by the eslint plugin.
 
     *Example where we have invalid ICU message syntax.*
     
@@ -125,6 +125,13 @@ simple
 
 ## Examples
 Check out the [Examples](examples/) folder to see different use cases.
+
+ - [Basic Setup](examples/simple)
+ - [Custom Message Syntax](examples/custom-message-syntax)
+ - [Identical Keys (Simple)](examples/identical-keys-simple)
+ - [Ignoring Keys](examples/ignore-keys)
+ - [Multiple Files Per Locale](examples/multiple-files-per-locale)
+ - [Webpack Development (eslint-loader)](examples/webpack-local-dev)
 
 ## Configuring your .eslintrc file
 - Simply update your `.eslintrc.*` with overrides for the individual rules.
