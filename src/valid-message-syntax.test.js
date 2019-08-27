@@ -22,7 +22,9 @@ ruleTester.run('valid-message-syntax', rule, {
       code: `
       /*{
           "translationKeyA": "translation value a",
-          "translationKeyB": "translation value b"
+          "translationKeyB": "translation value b",
+          "translationKeyC": "translation value escaped curly brackets '{}'",
+          "translationKeyD": "translation value with backslash \u005C"
       }*/
       `,
       options: [
@@ -209,6 +211,7 @@ describe('Snapshot Tests for Invalid Code', () => {
         "levelOne": {
           "translationKeyA": "translation value a",
           "translationKeyB": "translation value b {",
+          "translationKeyD": "translation value d '{}",
           "levelTwo" : {
             "translationKeyC": "translation value c {"
           }
