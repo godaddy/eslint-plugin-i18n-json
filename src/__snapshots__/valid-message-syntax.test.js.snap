@@ -22,10 +22,12 @@ exports[`Snapshot Tests for Invalid Code nested translations - icu syntax check 
     \\"levelOne\\": Object {
       \\"levelTwo\\": Object {
 -       \\"translationKeyC\\": \\"ValidMessage<String>\\",
-+       \\"translationKeyC\\": \\"String('translation value c {') ===> Expected '0', [1-9] or [^ tnr,.+={}#] but end of input found.\\",
++       \\"translationKeyC\\": \\"String('translation value c {') ===> Expected argNameOrNumber but end of input found.\\",
       },
 -     \\"translationKeyB\\": \\"ValidMessage<String>\\",
-+     \\"translationKeyB\\": \\"String('translation value b {') ===> Expected '0', [1-9] or [^ tnr,.+={}#] but end of input found.\\",
+-     \\"translationKeyD\\": \\"ValidMessage<String>\\",
++     \\"translationKeyB\\": \\"String('translation value b {') ===> Expected argNameOrNumber but end of input found.\\",
++     \\"translationKeyD\\": \\"String('translation value d '{}') ===> Expected ''', '''', or [^'] but end of input found.\\",
     },
   }"
 `;
