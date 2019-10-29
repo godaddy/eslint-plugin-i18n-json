@@ -2,12 +2,11 @@ const jsonlint = require('jsonlint');
 const isPlainObject = require('lodash.isplainobject');
 const chalk = require('chalk');
 const requireNoCache = require('./util/require-no-cache');
+const getTranslationFileSource = require('./util/get-translation-file-source');
 
 const lineRegex = /line\s+(\d+):?/i;
 
-const validJSON = ([{
-  linter,
-} = {}], source) => {
+const validJSON = ([{ linter } = {}], source) => {
   const errors = [];
   try {
     let parsed;
@@ -29,9 +28,9 @@ const validJSON = ([{
       loc: {
         start: {
           line: Number.parseInt(lineNumber, 10),
-          col: 0,
-        },
-      },
+          col: 0
+        }
+      }
     });
   }
   return errors;
@@ -42,29 +41,32 @@ module.exports = {
     docs: {
       category: 'Validation',
       description: 'Validates the JSON translation file',
-      recommended: true,
+      recommended: true
     },
-    schema: [{
-      properties: {
-        linter: {
-          type: 'string',
+    schema: [
+      {
+        properties: {
+          linter: {
+            type: 'string'
+          }
         },
-      },
-      type: 'object',
-      additionalProperties: false,
-    }],
+        type: 'object',
+        additionalProperties: false
+      }
+    ]
   },
   create(context) {
     return {
       Program(node) {
-        const {
-          value: source,
-        } = node.comments[0];
+        const { source } = getTranslationFileSource(node);
+        if (!source) {
+          return;
+        }
         const errors = validJSON(context.options, source);
-        errors.forEach((error) => {
+        errors.forEach(error => {
           context.report(error);
         });
-      },
+      }
     };
-  },
+  }
 };
