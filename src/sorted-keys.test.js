@@ -1,45 +1,58 @@
-const {
-  RuleTester,
-} = require('eslint');
+const { RuleTester } = require('eslint');
 const rule = require('./sorted-keys');
 
 const ruleTester = new RuleTester();
 
 ruleTester.run('sorted-keys', rule, {
   valid: [
+    // ignores non json files
+    {
+      code: `
+        /*var x = 123;*//*path/to/file.js*/
+      `,
+      options: [],
+      filename: 'file.js',
+    },
     // default sort order and indentSpace.
     {
       code: `
       /*{
           "translationKeyA": "translation value a",
           "translationKeyB": "translation value b"
-      }*/
+      }*//*path/to/file.json*/
       `,
       options: [],
+      filename: 'file.json'
     },
     {
       code: `
       /*{
           "translationKeyA": "translation value a",
           "translationKeyB": "translation value b"
-      }*/
+      }*//*path/to/file.json*/
       `,
-      options: [{
-        order: 'asc',
-        indentSpaces: 2,
-      }],
+      options: [
+        {
+          order: 'asc',
+          indentSpaces: 2
+        }
+      ],
+      filename: 'file.json'
     },
     {
       code: `
       /*{
           "translationKeyB": "translation value b",
           "translationKeyA": "translation value a"
-      }*/
+      }*//*path/to/file.json*/
       `,
-      options: [{
-        order: 'desc',
-        indentSpaces: 2,
-      }],
+      options: [
+        {
+          order: 'desc',
+          indentSpaces: 2
+        }
+      ],
+      filename: 'file.json'
     },
     {
       code: `
@@ -49,12 +62,15 @@ ruleTester.run('sorted-keys', rule, {
             "nested1": "nested value 2"
           },
           "translationKeyA": "translation value a"
-      }*/
+      }*//*path/to/file.json*/
       `,
-      options: [{
-        order: 'desc',
-        indentSpaces: 2,
-      }],
+      options: [
+        {
+          order: 'desc',
+          indentSpaces: 2
+        }
+      ],
+      filename: 'file.json'
     },
     {
       code: `
@@ -64,23 +80,29 @@ ruleTester.run('sorted-keys', rule, {
             "nested2": "nested value 2"
           },
           "translationKeyB": "translation value a"
-      }*/
+      }*//*path/to/file.json*/
       `,
-      options: [{
-        order: 'asc',
-        indentSpaces: 2,
-      }],
+      options: [
+        {
+          order: 'asc',
+          indentSpaces: 2
+        }
+      ],
+      filename: 'file.json'
     },
     {
       // error parsing the json - ignore to allow i18n-json/valid-json rule to handle it
       code: `
-      /*{*/
+      /*{*//*path/to/file.json*/
       `,
-      options: [{
-        order: 'asc',
-        indentSpaces: 2,
-      }],
-    },
+      options: [
+        {
+          order: 'asc',
+          indentSpaces: 2
+        }
+      ],
+      filename: 'file.json'
+    }
   ],
   invalid: [
     /*
@@ -96,25 +118,32 @@ ruleTester.run('sorted-keys', rule, {
       /*{
           "translationKeyB": "translation value b",
           "translationKeyA": "translation value a"
-      }*/
+      }*//*path/to/file.json*/
       `,
-      options: [{
-        order: 'asc',
-        indentSpaces: 2,
-      }],
+      options: [
+        {
+          order: 'asc',
+          indentSpaces: 2
+        }
+      ],
+      filename: 'file.json',
       errors: [
         {
           message: 'Keys should be sorted, please use --fix.',
           line: 0,
           fix: {
             range: [0, 118],
-            text: JSON.stringify({
-              translationA: 'translation value a',
-              translationB: 'translation value b',
-            }, null, 2),
-          },
-        },
-      ],
+            text: JSON.stringify(
+              {
+                translationA: 'translation value a',
+                translationB: 'translation value b'
+              },
+              null,
+              2
+            )
+          }
+        }
+      ]
     },
     // descending order test
     {
@@ -122,25 +151,32 @@ ruleTester.run('sorted-keys', rule, {
       /*{
           "translationKeyA": "translation value a",
           "translationKeyB": "translation value b"
-      }*/
+      }*//*path/to/file.json*/
       `,
-      options: [{
-        order: 'desc',
-        indentSpaces: 1,
-      }],
+      options: [
+        {
+          order: 'desc',
+          indentSpaces: 1
+        }
+      ],
+      filename: 'file.json',
       errors: [
         {
           message: 'Keys should be sorted, please use --fix.',
           line: 0,
           fix: {
             range: [0, 118],
-            text: JSON.stringify({
-              translationB: 'translation value b',
-              translationA: 'translation value a',
-            }, null, 1),
-          },
-        },
-      ],
-    },
-  ],
+            text: JSON.stringify(
+              {
+                translationB: 'translation value b',
+                translationA: 'translation value a'
+              },
+              null,
+              1
+            )
+          }
+        }
+      ]
+    }
+  ]
 });

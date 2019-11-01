@@ -209,8 +209,11 @@ module.exports = {
   create(context) {
     return {
       Program(node) {
-        const { source, sourceFilePath } = getTranslationFileSource(node);
-        if (!source) {
+        const { valid, source, sourceFilePath } = getTranslationFileSource({
+          context,
+          node
+        });
+        if (!valid) {
           return;
         }
         const errors = identicalKeys(context, source, sourceFilePath);

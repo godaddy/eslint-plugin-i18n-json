@@ -5,20 +5,18 @@ const espree = require('espree');
   errors.
 */
 
-module.exports = rule => ({
-  code,
-  options,
-}) => {
+module.exports = rule => ({ code, options, filename }) => {
   const node = espree.parse(code, {
-    comment: true,
+    comment: true
   });
   const receivedErrors = [];
   const test = {
     context: {
       report: error => receivedErrors.push(error),
       options,
+      getFilename: () => filename
     },
-    node,
+    node
   };
   rule.create(test.context).Program(test.node);
   return receivedErrors;

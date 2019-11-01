@@ -25,25 +25,35 @@ jest.mock('./util/require-no-cache', () =>
 
 ruleTester.run('valid-json', rule, {
   valid: [
+    // ignores non json files
+    {
+      code: `
+        /*var x = 123;*//*path/to/file.js*/
+      `,
+      options: [],
+      filename: 'file.js',
+    },
     {
       code: `
       /*{
           "translationKeyA": "translation value a",
           "translationKeyB": "translation value b"
-      }*/
+      }*//*path/to/file.json*/
       `,
       options: [],
+      filename: 'file.json',
     },
     // supports a custom linter
     {
       code: `
-        /*{}*/
+        /*{}*//*path/to/file.json*/
       `,
       options: [
         {
           linter: './json-linter-pass.js',
         },
       ],
+      filename: 'file.json',
     },
   ],
   invalid: [
@@ -52,9 +62,10 @@ ruleTester.run('valid-json', rule, {
       /*{
           "translationKeyA": "translation value a"
           "translationKeyB: "translation value b"
-      }*/
+      }*//*path/to/file.json*/
       `,
       options: [],
+      filename: 'file.json',
       errors: [
         {
           message: /\nInvalid JSON\.\n\n.*/,
@@ -65,9 +76,10 @@ ruleTester.run('valid-json', rule, {
     },
     {
       code: `
-      /**/
+      /**//*path/to/file.json*/
       `,
       options: [],
+      filename: 'file.json',
       errors: [
         {
           message: /\nInvalid JSON\.\n\n.*/,
@@ -79,13 +91,14 @@ ruleTester.run('valid-json', rule, {
     // supports a custom linter
     {
       code: `
-        /*{*/
+        /*{*//*path/to/file.json*/
       `,
       options: [
         {
           linter: './json-linter-error.js',
         },
       ],
+      filename: 'file.json',
       errors: [
         {
           message: /\nInvalid JSON\.\n\n.*/,
@@ -97,9 +110,10 @@ ruleTester.run('valid-json', rule, {
     // parser must return a plain object
     {
       code: `
-        /*"SOME_VALID_JSON"*/
+        /*"SOME_VALID_JSON"*//*path/to/file.json*/
       `,
       options: [],
+      filename: 'file.json',
       errors: [
         {
           message: /\nInvalid JSON\.\n\n.*SyntaxError: Translation file must be a JSON object\./,

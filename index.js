@@ -1,7 +1,5 @@
 /* eslint-disable global-require */
 
-const PLUGIN_HEADER = 'eslint-plugin-i18n-json';
-
 module.exports = {
   rules: {
     'valid-json': require('./src/valid-json'),
@@ -15,7 +13,7 @@ module.exports = {
         // augment the json into a comment
         // along with the source path :D
         // so we can pass it to the rules
-        return [`/*${PLUGIN_HEADER}*//*${source.trim()}*//*${filePath.trim()}*/\n`];
+        return [`/*${source.trim()}*//*${filePath.trim()}*/\n`];
       },
       // since we only return one line in the preprocess step,
       // we only care about the first array of errors

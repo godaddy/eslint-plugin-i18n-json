@@ -58,8 +58,11 @@ module.exports = {
   create(context) {
     return {
       Program(node) {
-        const { source } = getTranslationFileSource(node);
-        if (!source) {
+        const { valid, source } = getTranslationFileSource({
+          context,
+          node
+        });
+        if (!valid) {
           return;
         }
         const errors = validJSON(context.options, source);

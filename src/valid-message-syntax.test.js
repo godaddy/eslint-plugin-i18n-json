@@ -1,22 +1,32 @@
-const {
-  RuleTester,
-} = require('eslint');
+const { RuleTester } = require('eslint');
 const strip = require('strip-ansi');
 const runRule = require('../test/run-rule');
 const rule = require('./valid-message-syntax');
 
 const ruleTester = new RuleTester();
 
-jest.mock('path/to/upper-case-only-format.js', () => (message) => {
-  if (message.toUpperCase() !== message) {
-    throw new SyntaxError('MESSAGE MUST BE IN UPPERCASE!');
+jest.mock(
+  'path/to/upper-case-only-format.js',
+  () => message => {
+    if (message.toUpperCase() !== message) {
+      throw new SyntaxError('MESSAGE MUST BE IN UPPERCASE!');
+    }
+  },
+  {
+    virtual: true
   }
-}, {
-  virtual: true,
-});
+);
 
 ruleTester.run('valid-message-syntax', rule, {
   valid: [
+    // ignores non json files
+    {
+      code: `
+        /*var x = 123;*//*path/to/file.js*/
+      `,
+      options: [],
+      filename: 'file.js'
+    },
     // integrated icu check
     {
       code: `
@@ -25,13 +35,14 @@ ruleTester.run('valid-message-syntax', rule, {
           "translationKeyB": "translation value b",
           "translationKeyC": "translation value escaped curly brackets '{}'",
           "translationKeyD": "translation value with backslash \u005C"
-      }*/
+      }*//*path/to/file.json*/
       `,
       options: [
         {
-          syntax: 'icu',
-        },
+          syntax: 'icu'
+        }
       ],
+      filename: 'file.json'
     },
     // non-empty-string check nested translations
     {
@@ -44,13 +55,14 @@ ruleTester.run('valid-message-syntax', rule, {
             "translationKeyC": "translation value c"
           }
         }
-      }*/
+      }*//*path/to/file.json*/
       `,
       options: [
         {
-          syntax: 'icu',
-        },
+          syntax: 'icu'
+        }
       ],
+      filename: 'file.json'
     },
     // non-empty-string check nested translations
     {
@@ -63,13 +75,14 @@ ruleTester.run('valid-message-syntax', rule, {
             "translationKeyC": "c"
           }
         }
-      }*/
+      }*//*path/to/file.json*/
       `,
       options: [
         {
-          syntax: 'non-empty-string',
-        },
+          syntax: 'non-empty-string'
+        }
       ],
+      filename: 'file.json'
     },
     // custom message format (upper case only)
     {
@@ -77,35 +90,38 @@ ruleTester.run('valid-message-syntax', rule, {
       /*{
           "translationKeyA": "TRANSLATION VALUE A",
           "translationKeyB": "TRANSLATION VALUE B"
-      }*/
+      }*//*path/to/file.json*/
       `,
       options: [
         {
-          syntax: 'path/to/upper-case-only-format.js',
-        },
+          syntax: 'path/to/upper-case-only-format.js'
+        }
       ],
+      filename: 'file.json'
     },
     // no keys
     {
       code: `
-      /*{}*/
+      /*{}*//*path/to/file.json*/
       `,
       options: [
         {
-          syntax: 'icu',
-        },
+          syntax: 'icu'
+        }
       ],
+      filename: 'file.json'
     },
     {
       // error parsing the json - ignore to allow i18n-json/valid-json rule to handle it
       code: `
-      /*{*/
+      /*{*//*path/to/file.json*/
       `,
       options: [
         {
-          syntax: 'icu',
-        },
+          syntax: 'icu'
+        }
       ],
+      filename: 'file.json'
     },
     // ignore keys
     {
@@ -116,20 +132,18 @@ ruleTester.run('valid-message-syntax', rule, {
           "translationKeyC": {
             "metadata": [ "value" ] 
           }
-      }*/
+      }*//*path/to/file.json*/
       `,
       options: [
         {
-          syntax: 'icu',
-        },
+          syntax: 'icu'
+        }
       ],
+      filename: 'file.json',
       settings: {
-        'i18n-json/ignore-keys': [
-          'translationKeyA',
-          'translationKeyC',
-        ],
-      },
-    },
+        'i18n-json/ignore-keys': ['translationKeyA', 'translationKeyC']
+      }
+    }
   ],
   invalid: [
     // bad path for custom message format
@@ -138,36 +152,38 @@ ruleTester.run('valid-message-syntax', rule, {
       /*{
           "translationKeyA": "translation value a",
           "translationKeyB": "translation value b"
-      }*/
+      }*//*path/to/file.json*/
       `,
       options: [
         {
-          syntax: 'path/to/does-not-exist.js',
-        },
+          syntax: 'path/to/does-not-exist.js'
+        }
       ],
+      filename: 'file.json',
       errors: [
         {
-          message: /Error configuring syntax validator\. Rule option specified: path\/to\/does-not-exist\.js\. Error: cannot find module /ig,
-          line: 0,
-        },
-      ],
+          message: /Error configuring syntax validator\. Rule option specified: path\/to\/does-not-exist\.js\. Error: cannot find module /gi,
+          line: 0
+        }
+      ]
     },
     // no option specified
     {
       code: `
       /*{
           "translationKeyA": "translation value a {"
-      }*/
+      }*//*path/to/file.json*/
       `,
       options: [],
+      filename: 'file.json',
       errors: [
         {
           message: /"syntax" not specified in rule option/g,
-          line: 0,
-        },
-      ],
-    },
-  ],
+          line: 0
+        }
+      ]
+    }
+  ]
 });
 
 describe('Snapshot Tests for Invalid Code', () => {
@@ -178,13 +194,14 @@ describe('Snapshot Tests for Invalid Code', () => {
       /*{
           "translationKeyA": "",
           "translationKeyB": null
-      }*/
+      }*//*path/to/file.json*/
       `,
       options: [
         {
-          syntax: 'non-empty-string',
-        },
+          syntax: 'non-empty-string'
+        }
       ],
+      filename: 'file.json'
     });
     expect(strip(errors[0].message)).toMatchSnapshot();
   });
@@ -194,13 +211,14 @@ describe('Snapshot Tests for Invalid Code', () => {
       /*{
           "translationKeyA": "translation value a",
           "translationKeyB": "translation value b"
-      }*/
+      }*//*path/to/file.json*/
       `,
       options: [
         {
-          syntax: 'path/to/upper-case-only-format.js',
-        },
+          syntax: 'path/to/upper-case-only-format.js'
+        }
       ],
+      filename: 'file.json'
     });
     expect(strip(errors[0].message)).toMatchSnapshot();
   });
@@ -216,13 +234,14 @@ describe('Snapshot Tests for Invalid Code', () => {
             "translationKeyC": "translation value c {"
           }
         }
-      }*/
+      }*//*path/to/file.json*/
       `,
       options: [
         {
-          syntax: 'icu',
-        },
+          syntax: 'icu'
+        }
       ],
+      filename: 'file.json'
     });
     expect(strip(errors[0].message)).toMatchSnapshot();
   });
@@ -231,13 +250,14 @@ describe('Snapshot Tests for Invalid Code', () => {
       code: `
       /*{
         "levelOne": {}
-      }*/
+      }*//*path/to/file.json*/
       `,
       options: [
         {
-          syntax: 'icu',
-        },
+          syntax: 'icu'
+        }
       ],
+      filename: 'file.json'
     });
     expect(strip(errors[0].message)).toMatchSnapshot();
   });
@@ -247,13 +267,14 @@ describe('Snapshot Tests for Invalid Code', () => {
       /*{
         "levelOne": [ "data" ],
         "levelTwo": 5
-      }*/
+      }*//*path/to/file.json*/
       `,
       options: [
         {
-          syntax: 'icu',
-        },
+          syntax: 'icu'
+        }
       ],
+      filename: 'file.json'
     });
     expect(strip(errors[0].message)).toMatchSnapshot();
   });

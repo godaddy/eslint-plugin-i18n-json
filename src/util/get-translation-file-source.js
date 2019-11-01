@@ -1,15 +1,14 @@
 const path = require('path');
 
-const isJSONFile = sourceFilePath => {
-  return path.extname(sourceFilePath) === '.json';
+const isJSONFile = context => {
+  return path.extname(context.getFilename()) === '.json';
 };
 
-const INVALID_FILE_SOURCE = {
+const INVALID_SOURCE = {
+  valid: false,
   source: null,
   sourceFilePath: null
 };
-
-const PLUGIN_HEADER = 'eslint-plugin-i18n-json';
 
 // map out flow of json files and non json files.
 
@@ -22,24 +21,23 @@ const PLUGIN_HEADER = 'eslint-plugin-i18n-json';
 
 */
 
-module.exports = node => {
-  if (!Array.isArray(node.comments) || node.comments.length !== 3) {
-    return INVALID_FILE_SOURCE;
+module.exports = ({ context, node }) => {
+  if (
+    !isJSONFile(context) ||
+    !Array.isArray(node.comments) ||
+    node.comments.length < 2
+  ) {
+    // is not a json file or the file
+    // has not been through the plugin preprocessor
+    return INVALID_SOURCE;
   }
 
-  const { value: pluginHeader } = node.comments[0];
-  const { value: source } = node.comments[1];
-  const { value: sourceFilePath } = node.comments[2];
+  const { value: source } = node.comments[0];
+  const { value: sourceFilePath } = node.comments[1];
 
-  if (pluginHeader !== PLUGIN_HEADER) {
-    return INVALID_FILE_SOURCE;
-  }
-
-  if (!isJSONFile(sourceFilePath)) {
-    return INVALID_FILE_SOURCE;
-  }
-
+  // valid source
   return {
+    valid: true,
     source,
     sourceFilePath
   };
