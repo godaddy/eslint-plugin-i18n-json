@@ -1,0 +1,17 @@
+{
+  "author": "",
+  "description": "",
+  "devDependencies": {
+    "eslint": "^5.0.0",
+    "eslint-plugin-i18n-json": "^2.4.2",
+    "eslint-plugin-import": "^2.0.0"
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "name": "simple",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint --fix --ext .js,.json  --format node_modules/eslint-plugin-i18n-json/formatter.js src/"
+  },
+  "version": "1.0.0"
+}
