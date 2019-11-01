@@ -66,7 +66,7 @@ module.exports = {
           return;
         }
         const errors = validJSON(context.options, source);
-        errors.forEach(error => {
+        errors.forEach((error) => {
           context.report(error);
         });
       }

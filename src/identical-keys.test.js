@@ -70,7 +70,7 @@ ruleTester.run('identical-keys', rule, {
         /*var x = 123;*//*path/to/file.js*/
       `,
       options: [],
-      filename: 'file.js',
+      filename: 'file.js'
     },
     // single file path to compare with
     {
@@ -170,8 +170,7 @@ ruleTester.run('identical-keys', rule, {
       filename: 'file.json',
       settings: {
         'i18n-json/ignore-keys': ['translationLevelOne.translationLevelTwo']
-      },
-      filename: 'file.json'
+      }
     }
   ],
   invalid: [

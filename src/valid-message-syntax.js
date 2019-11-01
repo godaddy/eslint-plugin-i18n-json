@@ -54,10 +54,10 @@ const formatReceivedValue = ({ value, error }) => {
   }
 };
 
-const createValidator = syntax => {
+const createValidator = (syntax) => {
   // each syntax type defined here must have a case!
   if (['icu', 'non-empty-string'].includes(syntax)) {
-    return value => {
+    return (value) => {
       switch (syntax) {
         case 'icu':
           notEmpty(value);
@@ -168,7 +168,7 @@ const validMessageSyntax = (context, source) => {
   if (invalidMessages.length > 0) {
     const expected = {};
     const received = {};
-    invalidMessages.forEach(invalidMessage => {
+    invalidMessages.forEach((invalidMessage) => {
       set(expected, invalidMessage.path, formatExpectedValue(invalidMessage));
       set(received, invalidMessage.path, formatReceivedValue(invalidMessage));
     });
@@ -220,7 +220,7 @@ module.exports = {
           return;
         }
         const errors = validMessageSyntax(context, source);
-        errors.forEach(error => {
+        errors.forEach((error) => {
           context.report(error);
         });
       }

@@ -10,8 +10,8 @@ describe('formatter', () => {
         filePath: 'some/file',
         messages: [],
         warningCount: 0,
-        errorCount: 0,
-      },
+        errorCount: 0
+      }
     ])).toMatchSnapshot();
   });
   it('will not display any message for an individual file which does not have any warnings or errors', () => {
@@ -21,17 +21,17 @@ describe('formatter', () => {
         messages: [{
           ruleId: 'some-rule',
           severity: 2,
-          message: 'file is bad',
+          message: 'file is bad'
         }],
         errorCount: 1,
-        warningCount: 0,
+        warningCount: 0
       },
       {
         filePath: 'good/file',
         messages: [],
         warningCount: 0,
-        errorCount: 0,
-      },
+        errorCount: 0
+      }
     ]);
     expect(output).toMatchSnapshot();
   });
@@ -43,27 +43,27 @@ describe('formatter', () => {
           {
             ruleId: 'some-rule',
             severity: 1,
-            message: 'file has first warning',
+            message: 'file has first warning'
           },
           {
             ruleId: 'some-rule',
             severity: 1,
-            message: 'file has second warning',
+            message: 'file has second warning'
           },
           {
             ruleId: 'some-rule',
             severity: 2,
-            message: 'file is bad',
+            message: 'file is bad'
           },
           {
             ruleId: 'some-rule',
             severity: 2,
-            message: 'file is pretty bad',
-          },
+            message: 'file is pretty bad'
+          }
         ],
         errorCount: 2,
-        warningCount: 2,
-      },
+        warningCount: 2
+      }
     ]);
     expect(output).toMatchSnapshot();
   });
@@ -74,20 +74,20 @@ describe('formatter', () => {
         messages: [{
           ruleId: 'some-rule',
           severity: 2,
-          message: 'file is bad',
+          message: 'file is bad'
         }],
         errorCount: 1,
-        warningCount: 0,
+        warningCount: 0
       },
       {
         filePath: 'bad/file2',
         messages: [{
           ruleId: 'some-rule',
           severity: 1,
-          message: 'file has a warning',
+          message: 'file has a warning'
         }],
         errorCount: 0,
-        warningCount: 1,
+        warningCount: 1
       },
       {
         filePath: 'bad/file3',
@@ -95,17 +95,17 @@ describe('formatter', () => {
           {
             ruleId: 'some-rule',
             severity: 2,
-            message: 'file is bad',
+            message: 'file is bad'
           },
           {
             ruleId: 'some-rule',
             severity: 1,
-            message: 'file has a warning',
-          },
+            message: 'file has a warning'
+          }
         ],
         errorCount: 1,
-        warningCount: 1,
-      },
+        warningCount: 1
+      }
     ]);
     expect(output).toMatchSnapshot();
   });

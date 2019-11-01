@@ -11,7 +11,7 @@ ruleTester.run('sorted-keys', rule, {
         /*var x = 123;*//*path/to/file.js*/
       `,
       options: [],
-      filename: 'file.js',
+      filename: 'file.js'
     },
     // default sort order and indentSpace.
     {

@@ -7,7 +7,7 @@ const ruleTester = new RuleTester();
 
 jest.mock(
   'path/to/upper-case-only-format.js',
-  () => message => {
+  () => (message) => {
     if (message.toUpperCase() !== message) {
       throw new SyntaxError('MESSAGE MUST BE IN UPPERCASE!');
     }

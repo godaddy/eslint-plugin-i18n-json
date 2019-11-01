@@ -5,8 +5,8 @@ const ruleTester = new RuleTester();
 
 jest.mock('chalk', () => ({
   bold: {
-    red: jest.fn(str => str),
-  },
+    red: jest.fn(str => str)
+  }
 }));
 
 jest.mock('./util/require-no-cache', () =>
@@ -31,7 +31,7 @@ ruleTester.run('valid-json', rule, {
         /*var x = 123;*//*path/to/file.js*/
       `,
       options: [],
-      filename: 'file.js',
+      filename: 'file.js'
     },
     {
       code: `
@@ -41,7 +41,7 @@ ruleTester.run('valid-json', rule, {
       }*//*path/to/file.json*/
       `,
       options: [],
-      filename: 'file.json',
+      filename: 'file.json'
     },
     // supports a custom linter
     {
@@ -50,11 +50,11 @@ ruleTester.run('valid-json', rule, {
       `,
       options: [
         {
-          linter: './json-linter-pass.js',
-        },
+          linter: './json-linter-pass.js'
+        }
       ],
-      filename: 'file.json',
-    },
+      filename: 'file.json'
+    }
   ],
   invalid: [
     {
@@ -70,9 +70,9 @@ ruleTester.run('valid-json', rule, {
         {
           message: /\nInvalid JSON\.\n\n.*/,
           line: 2,
-          col: 0,
-        },
-      ],
+          col: 0
+        }
+      ]
     },
     {
       code: `
@@ -84,9 +84,9 @@ ruleTester.run('valid-json', rule, {
         {
           message: /\nInvalid JSON\.\n\n.*/,
           line: 1,
-          col: 0,
-        },
-      ],
+          col: 0
+        }
+      ]
     },
     // supports a custom linter
     {
@@ -95,17 +95,17 @@ ruleTester.run('valid-json', rule, {
       `,
       options: [
         {
-          linter: './json-linter-error.js',
-        },
+          linter: './json-linter-error.js'
+        }
       ],
       filename: 'file.json',
       errors: [
         {
           message: /\nInvalid JSON\.\n\n.*/,
           line: 5,
-          col: 0,
-        },
-      ],
+          col: 0
+        }
+      ]
     },
     // parser must return a plain object
     {
@@ -118,9 +118,9 @@ ruleTester.run('valid-json', rule, {
         {
           message: /\nInvalid JSON\.\n\n.*SyntaxError: Translation file must be a JSON object\./,
           line: 0,
-          col: 0,
-        },
-      ],
-    },
-  ],
+          col: 0
+        }
+      ]
+    }
+  ]
 });

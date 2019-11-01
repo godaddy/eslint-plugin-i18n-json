@@ -9,17 +9,14 @@ module.exports = {
   },
   processors: {
     '.json': {
-      preprocess: (source, filePath) => {
+      preprocess: (source, filePath) =>
         // augment the json into a comment
         // along with the source path :D
         // so we can pass it to the rules
-        return [`/*${source.trim()}*//*${filePath.trim()}*/\n`];
-      },
+        [`/*${source.trim()}*//*${filePath.trim()}*/\n`],
       // since we only return one line in the preprocess step,
       // we only care about the first array of errors
-      postprocess: ([errors]) => {
-        return [...errors];
-      },
+      postprocess: ([errors]) => [...errors],
       supportsAutofix: true
     }
   },

@@ -1,25 +1,12 @@
 const path = require('path');
 
-const isJSONFile = context => {
-  return path.extname(context.getFilename()) === '.json';
-};
+const isJSONFile = context => path.extname(context.getFilename()) === '.json';
 
 const INVALID_SOURCE = {
   valid: false,
   source: null,
   sourceFilePath: null
 };
-
-// map out flow of json files and non json files.
-
-/*
-  PROJECT:
-    json files -> preprocessed
-    non json files -> not preprocessed
-
-    need to be able to distinguish b/w them. 
-
-*/
 
 module.exports = ({ context, node }) => {
   if (

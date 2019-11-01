@@ -16,14 +16,10 @@ const getKeyStructureFromMap = (filePathMap, sourceFilePath) => {
       const filepath = filePathMap[match];
       return requireNoCache(filepath);
     } catch (e) {
-      throw new Error(
-        `\n Error parsing or retrieving key structure comparison file based on "filePath" mapping\n\n "${match}" => "${filePathMap[match]}".\n\n Check the "filePath" option for this rule. \n ${e}`
-      );
+      throw new Error(`\n Error parsing or retrieving key structure comparison file based on "filePath" mapping\n\n "${match}" => "${filePathMap[match]}".\n\n Check the "filePath" option for this rule. \n ${e}`);
     }
   }
-  throw new Error(
-    '\n Current translation file does not have a matching entry in the "filePath" map.\n Check the "filePath" option for this rule.\n'
-  );
+  throw new Error('\n Current translation file does not have a matching entry in the "filePath" map.\n Check the "filePath" option for this rule.\n');
 };
 
 /*
@@ -217,7 +213,7 @@ module.exports = {
           return;
         }
         const errors = identicalKeys(context, source, sourceFilePath);
-        errors.forEach(error => {
+        errors.forEach((error) => {
           context.report(error);
         });
       }

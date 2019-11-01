@@ -7,7 +7,7 @@ const keyTraversals = {
       return 1;
     }
     return -1;
-  }),
+  })
 };
 
 module.exports = keyTraversals;

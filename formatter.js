@@ -21,7 +21,7 @@ const formatter = (results) => {
     filePath,
     messages: fileMessages,
     errorCount: fileErrorCount,
-    warningCount: fileWarningCount,
+    warningCount: fileWarningCount
   }) => {
     if (fileErrorCount + fileWarningCount === 0) {
       return '';
