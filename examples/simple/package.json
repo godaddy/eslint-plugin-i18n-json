@@ -10,7 +10,7 @@
   "name": "simple",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint --fix --ext .json  --format node_modules/eslint-plugin-i18n-json/formatter.js translations/"
+    "lint": "eslint --fix --ext .json,.js --format node_modules/eslint-plugin-i18n-json/formatter.js translations/"
   },
   "version": "1.0.0"
 }
