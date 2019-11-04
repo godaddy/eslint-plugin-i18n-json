@@ -1,61 +1,57 @@
 const getTranslationFileSource = require('./get-translation-file-source');
 
 const INVALID_FILE_SOURCE = {
+  valid: false,
   source: null,
   sourceFilePath: null
 };
 
 describe('#getTranslationFileSource', () => {
-  it('will return an invalid file source object if the file does not have comments', () => {
-    expect(getTranslationFileSource({})).toEqual(INVALID_FILE_SOURCE);
+  it('will return an invalid file source object if the file\'s extension is not .json', () => {
+    const context = {
+      getFilename: jest.fn().mockReturnValueOnce('file.js')
+    };
+    const node = {};
+    expect(getTranslationFileSource({ context, node })).toEqual(INVALID_FILE_SOURCE);
   });
-  it('will return an invalid file source object if the file does not have 3 comments exactly', () => {
-    expect(getTranslationFileSource({ comments: [1, 2, 3, 4] })).toEqual(INVALID_FILE_SOURCE);
-    expect(getTranslationFileSource({ comments: [1, 2] })).toEqual(INVALID_FILE_SOURCE);
+  it('will return an invalid file source object if parsed file ast node does not have a comments property', () => {
+    const context = {
+      getFilename: jest.fn().mockReturnValueOnce('file.json')
+    };
+    const node = {};
+    expect(getTranslationFileSource({ context, node })).toEqual(INVALID_FILE_SOURCE);
   });
-  it('will return an invalid file source object if the file does have the plugin header', () => {
-    expect(getTranslationFileSource({
+  it('will return an invalid file source object if parsed file ast node has less than 2 comments', () => {
+    const context = {
+      getFilename: jest.fn().mockReturnValueOnce('file.json')
+    };
+    const node = {
       comments: [
         {
-          value: 'a'
-        },
-        {
-          value: 'non json file'
-        },
-        {
-          value: 'passed to the plugin rules'
+          value: 'comment 1'
         }
       ]
-    })).toEqual(INVALID_FILE_SOURCE);
+    };
+    expect(getTranslationFileSource({ context, node })).toEqual(INVALID_FILE_SOURCE);
   });
-  it('will return an invalid file source object if the file does not end with the .json file extension', () => {
-    expect(getTranslationFileSource({
+  it('will return a valid file source if the source is a json file and it was processed by plugin preprocessor', () => {
+    const context = {
+      getFilename: jest.fn().mockReturnValueOnce('file.json')
+    };
+    const node = {
       comments: [
         {
-          value: 'eslint-plugin-i18n-json'
+          value: 'json source'
         },
         {
-          value: 'var xyz = "abc";'
-        },
-        {
-          value: '/path/to/file.json'
+          value: 'path/to/file.json'
         }
       ]
-    })).toEqual(INVALID_FILE_SOURCE);
-  });
-  it('for a valid json file will return the source and file path', () => {
-    expect(getTranslationFileSource({
-      comments: [
-        {
-          value: 'eslint-plugin-i18n-json'
-        },
-        {
-          value: '{ "a": "value" }'
-        },
-        {
-          value: '/path/to/file.json'
-        }
-      ]
-    })).toEqual(INVALID_FILE_SOURCE);
+    };
+    expect(getTranslationFileSource({ context, node })).toEqual({
+      valid: true,
+      source: 'json source',
+      sourceFilePath: 'path/to/file.json'
+    });
   });
 });
