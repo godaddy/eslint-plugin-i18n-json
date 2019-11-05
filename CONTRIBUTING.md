@@ -38,3 +38,18 @@ sure to include those changes (if they exist) in your commit.
 Please feel free to create an issue to discuss.
 
 Thanks!!! :smile:
+
+---
+
+## For Maintainers
+
+### publishing a new version
+
+**(ensure to lint and test beforehand)**
+
+1. `npm login --registry=https://registry.npmjs.org/`
+2. verify who you are: `npm whoami`
+3. bump package.json
+4. `git tag vX.X.X`
+5. `git push origin --tags`
+2. `npm publish`
