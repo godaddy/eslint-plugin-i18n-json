@@ -14,12 +14,12 @@ const defaultTraversal = obj => Object.keys(obj);
 
 const deepForOwn = (obj, iteratee, {
   keyTraversal = defaultTraversal,
-  ignorePaths = [],
+  ignorePaths = []
 } = {}) => {
   const queue = [];
   queue.push({
     currentObj: obj,
-    path: [],
+    path: []
   });
   while (queue.length > 0) {
     const { currentObj, path } = queue.shift();
@@ -32,7 +32,7 @@ const deepForOwn = (obj, iteratee, {
       if (isPlainObject(currentObj[key])) {
         queue.push({
           currentObj: currentObj[key],
-          path: keyPath,
+          path: keyPath
         });
       }
       return iteratee(currentObj[key], key, keyPath) !== false;

@@ -8,14 +8,14 @@ describe('keyTraversals', () => {
       A: 'value',
       b: 'value',
       a: 'value',
-      c: 'value',
+      c: 'value'
     })).toEqual([
       'c',
       'b',
       'a',
       'C',
       'B',
-      'A',
+      'A'
     ]);
   });
 });

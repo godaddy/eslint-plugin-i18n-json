@@ -4,7 +4,7 @@ const deepForOwn = require('./deep-for-own');
 
 const DIFF_OPTIONS = {
   expand: false,
-  contextLines: 1,
+  contextLines: 1
 };
 
 // we don't care what the actual values are.
@@ -18,7 +18,7 @@ const compareTranslationsStructure = (settings, translationsA, translationsB) =>
   const ignorePaths = settings['i18n-json/ignore-keys'] || [];
 
   const opts = {
-    ignorePaths,
+    ignorePaths
   };
 
   deepForOwn(translationsA, (value, key, path) => {

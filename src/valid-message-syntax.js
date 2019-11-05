@@ -7,6 +7,7 @@ const notEmpty = require('./message-validators/not-empty');
 const isString = require('./message-validators/is-string');
 const deepForOwn = require('./util/deep-for-own');
 const requireNoCache = require('./util/require-no-cache');
+const getTranslationFileSource = require('./util/get-translation-file-source');
 
 /* Error tokens */
 const EMPTY_OBJECT = Symbol.for('EMPTY_OBJECT');
@@ -21,8 +22,10 @@ const prettyFormatTypePlugin = {
     return typeof val === 'number' || typeof val === 'string';
   },
   serialize(val) {
-    return (typeof val === 'string' && `String(${`'${val}'`})`) || `Number(${val})`;
-  },
+    return (
+      (typeof val === 'string' && `String(${`'${val}'`})`) || `Number(${val})`
+    );
+  }
 };
 
 const formatExpectedValue = ({ value }) => {
@@ -38,7 +41,7 @@ const formatExpectedValue = ({ value }) => {
 const formatReceivedValue = ({ value, error }) => {
   const errorMessage = error.message
     .replace(ALL_BACKSLASHES, '')
-    .replace(ALL_DOUBLE_QUOTES, '\'');
+    .replace(ALL_DOUBLE_QUOTES, "'");
   switch (value) {
     case EMPTY_OBJECT:
       return `${prettyFormat({})} ===> ${error}`;
@@ -46,7 +49,7 @@ const formatReceivedValue = ({ value, error }) => {
       return `${prettyFormat([])} ===> ${error}`;
     default:
       return `${prettyFormat(value, {
-        plugins: [prettyFormatTypePlugin],
+        plugins: [prettyFormatTypePlugin]
       })} ===> ${errorMessage}`;
   }
 };
@@ -75,14 +78,9 @@ const createValidator = (syntax) => {
 };
 
 const validMessageSyntax = (context, source) => {
-  const {
-    options,
-    settings = {},
-  } = context;
+  const { options, settings = {} } = context;
 
-  let {
-    syntax,
-  } = options[0] || {};
+  let { syntax } = options[0] || {};
 
   syntax = syntax && syntax.trim();
 
@@ -90,15 +88,17 @@ const validMessageSyntax = (context, source) => {
   const invalidMessages = [];
 
   if (!syntax) {
-    return [{
-      message: '"syntax" not specified in rule option.',
-      loc: {
-        start: {
-          line: 0,
-          col: 0,
-        },
-      },
-    }];
+    return [
+      {
+        message: '"syntax" not specified in rule option.',
+        loc: {
+          start: {
+            line: 0,
+            col: 0
+          }
+        }
+      }
+    ];
   }
 
   try {
@@ -112,43 +112,58 @@ const validMessageSyntax = (context, source) => {
   try {
     validate = createValidator(syntax);
   } catch (e) {
-    return [{
-      message: `Error configuring syntax validator. Rule option specified: ${syntax}. ${e}`,
-      loc: {
-        start: {
-          line: 0,
-          col: 0,
-        },
-      },
-    }];
+    return [
+      {
+        message: `Error configuring syntax validator. Rule option specified: ${syntax}. ${e}`,
+        loc: {
+          start: {
+            line: 0,
+            col: 0
+          }
+        }
+      }
+    ];
   }
 
   const ignorePaths = settings['i18n-json/ignore-keys'] || [];
 
-  deepForOwn(translations, (value, key, path) => {
-    // empty object itself is an error
-    if (isPlainObject(value)) {
-      if (Object.keys(value).length === 0) {
+  deepForOwn(
+    translations,
+    (value, key, path) => {
+      // empty object itself is an error
+      if (isPlainObject(value)) {
+        if (Object.keys(value).length === 0) {
+          invalidMessages.push({
+            value: EMPTY_OBJECT,
+            key,
+            path,
+            error: new SyntaxError('Empty object.')
+          });
+        }
+      } else if (Array.isArray(value)) {
         invalidMessages.push({
-          value: EMPTY_OBJECT, key, path, error: new SyntaxError('Empty object.'),
+          value: ARRAY,
+          key,
+          path,
+          error: new TypeError('An Array cannot be a translation value.')
         });
+      } else {
+        try {
+          validate(value, key);
+        } catch (validationError) {
+          invalidMessages.push({
+            value,
+            key,
+            path,
+            error: validationError
+          });
+        }
       }
-    } else if (Array.isArray(value)) {
-      invalidMessages.push({
-        value: ARRAY, key, path, error: new TypeError('An Array cannot be a translation value.'),
-      });
-    } else {
-      try {
-        validate(value, key);
-      } catch (validationError) {
-        invalidMessages.push({
-          value, key, path, error: validationError,
-        });
-      }
+    },
+    {
+      ignorePaths
     }
-  }, {
-    ignorePaths,
-  });
+  );
 
   if (invalidMessages.length > 0) {
     const expected = {};
@@ -158,15 +173,17 @@ const validMessageSyntax = (context, source) => {
       set(received, invalidMessage.path, formatReceivedValue(invalidMessage));
     });
 
-    return [{
-      message: `\n${diff(expected, received)}`,
-      loc: {
-        start: {
-          line: 0,
-          col: 0,
-        },
-      },
-    }];
+    return [
+      {
+        message: `\n${diff(expected, received)}`,
+        loc: {
+          start: {
+            line: 0,
+            col: 0
+          }
+        }
+      }
+    ];
   }
   // no errors
   return [];
@@ -176,30 +193,37 @@ module.exports = {
   meta: {
     docs: {
       category: 'Validation',
-      description: 'Validates message syntax for each translation key in the file.',
-      recommended: true,
+      description:
+        'Validates message syntax for each translation key in the file.',
+      recommended: true
     },
-    schema: [{
-      properties: {
-        syntax: {
-          type: ['string'],
+    schema: [
+      {
+        properties: {
+          syntax: {
+            type: ['string']
+          }
         },
-      },
-      type: 'object',
-      additionalProperties: false,
-    }],
+        type: 'object',
+        additionalProperties: false
+      }
+    ]
   },
   create(context) {
     return {
       Program(node) {
-        const {
-          value: source,
-        } = node.comments[0];
+        const { valid, source } = getTranslationFileSource({
+          context,
+          node
+        });
+        if (!valid) {
+          return;
+        }
         const errors = validMessageSyntax(context, source);
         errors.forEach((error) => {
           context.report(error);
         });
-      },
+      }
     };
-  },
+  }
 };

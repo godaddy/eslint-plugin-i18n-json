@@ -5,9 +5,9 @@ describe('deepForOwn', () => {
     const obj = {
       a: {
         b: {
-          c: 'value',
-        },
-      },
+          c: 'value'
+        }
+      }
     };
     const visited = [];
     deepForOwn(obj, (value, key) => {
@@ -23,27 +23,27 @@ describe('deepForOwn', () => {
     const obj = {
       a: {
         b: {
-          c: 'value',
-        },
+          c: 'value'
+        }
       },
       d: {
         e: {
-          f: 'value',
-        },
+          f: 'value'
+        }
       },
       g: {
         h: {
-          i: 'value',
-        },
+          i: 'value'
+        }
       },
-      j: 'value',
+      j: 'value'
     };
     const visited = [];
     deepForOwn(obj, (value, key) => {
       visited.push(key);
       return true;
     }, {
-      ignorePaths: ['a.b', 'd.e.f', 'g'],
+      ignorePaths: ['a.b', 'd.e.f', 'g']
     });
     expect(visited).toEqual(['a', 'd', 'j', 'e']);
   });
