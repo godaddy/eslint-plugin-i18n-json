@@ -43,14 +43,17 @@ Thanks!!! :smile:
 
 ## For Maintainers
 
-### publishing a new version
+### Making PR(s)
+
+1. properly set your public git email locally for this repo: `git config user.email my-public-email@provider.com`
+
+### Publishing A New Version
 
 **(ensure to lint and test beforehand)**
 
-1. properly set your public git email locally for this repo: `git config user.email my-public-email@provider.com`
-2. `npm login --registry=https://registry.npmjs.org/`
-3. verify who you are: `npm whoami`
-4. bump package.json and merge
-5. `git tag vX.X.X`
-6. `git push origin --tags`
-7. `npm publish`
+1. `npm login --registry=https://registry.npmjs.org/`
+2. verify who you are: `npm whoami`
+3. bump `package.json` and merge
+4. `git tag vX.X.X`
+5. `git push origin --tags`
+6. `npm publish`
