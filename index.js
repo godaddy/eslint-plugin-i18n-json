@@ -15,7 +15,7 @@ module.exports = {
         // so we can pass it to the rules
 
         // note: due to the spaced comment rule, include
-        // spaces b/w comments
+        // spaced comments
         [`/* ${source.trim()} *//* ${filePath.trim()} */\n`],
       // since we only return one line in the preprocess step,
       // we only care about the first array of errors
