@@ -13,7 +13,10 @@ module.exports = {
         // augment the json into a comment
         // along with the source path :D
         // so we can pass it to the rules
-        [`/*${source.trim()}*//*${filePath.trim()}*/\n`],
+        
+        // note: due to the spaced comment rule, include 
+        // spaces b/w comments
+        [`/* ${source.trim()} *//* ${filePath.trim()} */\n`],
       // since we only return one line in the preprocess step,
       // we only care about the first array of errors
       postprocess: ([errors]) => [...errors],
