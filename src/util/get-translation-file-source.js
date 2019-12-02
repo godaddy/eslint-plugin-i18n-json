@@ -25,7 +25,7 @@ module.exports = ({ context, node }) => {
   // valid source
   return {
     valid: true,
-    source,
-    sourceFilePath
+    source: source && source.trim(),
+    sourceFilePath: sourceFilePath && sourceFilePath.trim()
   };
 };

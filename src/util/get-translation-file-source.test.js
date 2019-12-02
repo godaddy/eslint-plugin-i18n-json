@@ -34,17 +34,17 @@ describe('#getTranslationFileSource', () => {
     };
     expect(getTranslationFileSource({ context, node })).toEqual(INVALID_FILE_SOURCE);
   });
-  it('will return a valid file source if the source is a json file and it was processed by plugin preprocessor', () => {
+  it('will return a valid trimmed file source if the source is a json file and it was processed by plugin preprocessor', () => {
     const context = {
       getFilename: jest.fn().mockReturnValueOnce('file.json')
     };
     const node = {
       comments: [
         {
-          value: 'json source'
+          value: ' json source '
         },
         {
-          value: 'path/to/file.json'
+          value: ' path/to/file.json '
         }
       ]
     };
