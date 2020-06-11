@@ -177,6 +177,41 @@ ruleTester.run('sorted-keys', rule, {
           }
         }
       ]
+    },
+    // custom order test
+    {
+      code: `
+      /*{
+          "translationKeyA": "translation value a",
+          "otherTranslationKeyA": "other translation value a"
+      }*//*path/to/file.json*/
+      `,
+      options: [
+        {
+          customOrder: `obj => Object.keys(obj)
+            .sort((a, b) => a.slice(0, 2)
+              .localeCompare(b.slice(0, 2), undefined, { sensitivity: 'base' }))`,
+          indentSpaces: 2
+        }
+      ],
+      filename: 'file.json',
+      errors: [
+        {
+          message: 'Keys should be sorted, please use --fix.',
+          line: 0,
+          fix: {
+            range: [0, 118],
+            text: JSON.stringify(
+              {
+                otherTranslationKeyA: 'other translation value a',
+                translationKeyA: 'translation value a'
+              },
+              null,
+              1
+            )
+          }
+        }
+      ]
     }
   ]
 });

@@ -120,7 +120,7 @@ simple
 6) **Profit!** Relax knowing that each change to the translations project will go through strict checks by the eslint plugin.
 
     *Example where we have invalid ICU message syntax.*
-    
+
     ![](assets/invalid-icu-syntax-screenshot.png)
 
 ## Examples
@@ -226,7 +226,7 @@ Check out the [Examples](examples/) folder to see different use cases.
         },
       };
       ```
-  
+
     - **Can be an absolute path to a module which exports a Syntax Validator Function.**
 
       - `Function(message: String, key: String)`
@@ -324,6 +324,7 @@ Check out the [Examples](examples/) folder to see different use cases.
 - default severity: error | 2
 - **options**
   - `order`: String (Optional). Possible values: `asc|desc`. Default value: `asc`. Case-sensitive sort order of translation keys. The rule does a level order traversal of object keys. Supports nested objects.
+  - `customOrder`: String (Optional). Custom sort order of translation keys. The rule does a level order traversal of object keys. Supports nested objects. For example, `(obj) => Object.keys(obj).sort((a, b) => a.localeCompare(b, undefined, {sensitivity: 'base'}))`
   - `indentSpaces` : Number (Optional). Default value: `2`. The number of spaces to indent the emitted sorted translations with. (Will be passed to `JSON.stringify` when generating fixed output).
 
   In the case `--fix` is not supplied to eslint, and the `i18n-json/sorted-keys` rule is not switched off, it will emit an
