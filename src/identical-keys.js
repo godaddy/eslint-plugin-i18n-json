@@ -165,11 +165,12 @@ const identicalKeys = (context, source, sourceFilePath) => {
   }
 
   const { checkDuplicateValues = false } = comparisonOptions;
+  const isSourceFile = sourceFilePath === comparisonOptions.filePath;
   const diffString = compareTranslationsStructure(
     settings,
     keyStructure,
     currentTranslations,
-    checkDuplicateValues
+    checkDuplicateValues && !isSourceFile
   );
 
   if (noDifferenceRegex.test(diffString.trim())) {
