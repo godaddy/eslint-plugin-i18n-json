@@ -34,6 +34,11 @@ const getKeyStructureFromMap = (filePathMap, sourceFilePath) => {
 
     If it's an object , then it should have a mapping b/w file names
     and what key structure file to require.
+
+    checkDuplicateValues = boolean
+
+    If true, the values will also be checked for duplicates,
+    in comparison to the file specified in filePath.
   }
 */
 
@@ -159,10 +164,12 @@ const identicalKeys = (context, source, sourceFilePath) => {
     return errors;
   }
 
+  const { checkDuplicateValues = false } = comparisonOptions;
   const diffString = compareTranslationsStructure(
     settings,
     keyStructure,
-    currentTranslations
+    currentTranslations,
+    checkDuplicateValues
   );
 
   if (noDifferenceRegex.test(diffString.trim())) {
@@ -196,6 +203,9 @@ module.exports = {
         properties: {
           filePath: {
             type: ['string', 'object']
+          },
+          checkDuplicateValues: {
+            type: 'boolean'
           }
         },
         type: 'object'
