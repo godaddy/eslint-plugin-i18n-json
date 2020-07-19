@@ -14,7 +14,7 @@ module.exports = {
     */
     'i18n-json/ignore-keys': [
       'translationMetadata', 
-      'login.form.inProgressTranslationKey'
+      '*.inProgressTranslationKey' // No key path ending in `inProgressTranslationKey` will be checked.
     ]
   },
   rules: {
