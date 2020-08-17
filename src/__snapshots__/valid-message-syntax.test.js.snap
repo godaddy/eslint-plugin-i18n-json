@@ -25,9 +25,7 @@ exports[`Snapshot Tests for Invalid Code nested translations - icu syntax check 
 +       \\"translationKeyC\\": \\"String('translation value c {') ===> Expected argNameOrNumber but end of input found.\\",
       },
 -     \\"translationKeyB\\": \\"ValidMessage<String>\\",
--     \\"translationKeyD\\": \\"ValidMessage<String>\\",
 +     \\"translationKeyB\\": \\"String('translation value b {') ===> Expected argNameOrNumber but end of input found.\\",
-+     \\"translationKeyD\\": \\"String('translation value d '{}') ===> Expected ''', '''', or [^'] but end of input found.\\",
     },
   }"
 `;
