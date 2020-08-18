@@ -5,7 +5,7 @@ const deepForOwn = require('./util/deep-for-own');
 const keyTraversals = require('./util/key-traversals');
 const getTranslationFileSource = require('./util/get-translation-file-source');
 
-const sortedKeys = ([{ order = 'asc', indentSpaces = 2 } = {}], source) => {
+const sortedKeys = ([{ order = 'asc', sortFunctionPath, indentSpaces = 2 } = {}], source) => {
   let translations = null;
 
   try {
@@ -22,6 +22,13 @@ const sortedKeys = ([{ order = 'asc', indentSpaces = 2 } = {}], source) => {
   if (order.toLowerCase() === 'desc') {
     traversalOrder = keyTraversals.desc;
   }
+
+  /* eslint-disable global-require */
+  if (sortFunctionPath) {
+    // eslint-disable-next-line import/no-dynamic-require
+    traversalOrder = require(sortFunctionPath);
+  }
+  /* eslint-enable global-require */
 
   const sortedTranslations = {};
   const sortedTranslationPaths = [];
@@ -83,6 +90,9 @@ module.exports = {
       {
         properties: {
           order: {
+            type: 'string'
+          },
+          sortFunctionPath: {
             type: 'string'
           },
           indentSpaces: {

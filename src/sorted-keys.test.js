@@ -1,5 +1,6 @@
 const { RuleTester } = require('eslint');
 const rule = require('./sorted-keys');
+const path = require('path');
 
 const ruleTester = new RuleTester();
 
@@ -170,6 +171,39 @@ ruleTester.run('sorted-keys', rule, {
               {
                 translationB: 'translation value b',
                 translationA: 'translation value a'
+              },
+              null,
+              1
+            )
+          }
+        }
+      ]
+    },
+    // custom order test
+    {
+      code: `
+      /*{
+          "translationKeyA": "translation value a",
+          "otherTranslationKeyA": "other translation value a"
+      }*//*path/to/file.json*/
+      `,
+      options: [
+        {
+          sortFunctionPath: path.resolve('test/custom-sort.js'),
+          indentSpaces: 2
+        }
+      ],
+      filename: 'file.json',
+      errors: [
+        {
+          message: 'Keys should be sorted, please use --fix.',
+          line: 0,
+          fix: {
+            range: [0, 118],
+            text: JSON.stringify(
+              {
+                otherTranslationKeyA: 'other translation value a',
+                translationKeyA: 'translation value a'
               },
               null,
               1
