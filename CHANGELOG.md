@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is loosely based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [3.0.0] - 2020-08-18 - MAJOR BUMP
+
+- **security:** Bump intl-messageformat-parser from v3 to v5 due to [CVE-2020-7660](https://nvd.nist.gov/vuln/detail/CVE-2020-7660)
+- Major bump as a precaution, due to `intl-messageformat-parser` getting bumped from v3 to v5.
+- Related PRs
+  - [Issue #36](https://github.com/godaddy/eslint-plugin-i18n-json/pull/36) - Thanks Michael Desantis - Intertek Alchemy LP.
+
+
 ## [2.4.3] - 2019-11-05
 
 ### Fixed
