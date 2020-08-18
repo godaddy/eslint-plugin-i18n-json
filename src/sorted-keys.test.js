@@ -1,5 +1,6 @@
 const { RuleTester } = require('eslint');
 const rule = require('./sorted-keys');
+const path = require('path');
 
 const ruleTester = new RuleTester();
 
@@ -188,9 +189,7 @@ ruleTester.run('sorted-keys', rule, {
       `,
       options: [
         {
-          customOrder: `obj => Object.keys(obj)
-            .sort((a, b) => a.slice(0, 2)
-              .localeCompare(b.slice(0, 2), undefined, { sensitivity: 'base' }))`,
+          sortFunctionPath: path.resolve('test/custom-sort.js'),
           indentSpaces: 2
         }
       ],
