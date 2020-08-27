@@ -323,10 +323,26 @@ Check out the [Examples](examples/) folder to see different use cases.
 - automatic case-sensitive ascending sort of all keys in the translation file
 - default severity: error | 2
 - **options**
+  - `sortFunctionPath`: String (Optional). Absolute path to a module which exports a custom sort function. The function should return the desired order of translation keys. The rule will do a level order traversal of translations object and call this custom sort at each level of the object, hence supporting nested objects. This option takes precedence over the `order` option.
+      - `Function(translations: Object) : Array`
+      ```javascript
+      // .eslintrc.js
+      module.exports = {
+        rules: {
+          'i18n-json/sorted-keys': [2, {
+            filePath: path.resolve('path/to/custom-sort.js'),
+          }],
+        },
+      };
+      ```
+      ```javascript
+      // custom-sort.js example
+      module.exports = (translations) => {
+        return Object.keys(translations).sort((keyA, keyB) => keyA.localeCompare(keyB));
+      };
+      ```
   - `order`: String (Optional). Possible values: `asc|desc`. Default value: `asc`. Case-sensitive sort order of translation keys. The rule does a level order traversal of object keys. Supports nested objects.
   - `indentSpaces` : Number (Optional). Default value: `2`. The number of spaces to indent the emitted sorted translations with. (Will be passed to `JSON.stringify` when generating fixed output).
-  - `sortFunctionPath`: String (Optional). Path to a module that exports custom sort function.
-
   In the case `--fix` is not supplied to eslint, and the `i18n-json/sorted-keys` rule is not switched off, it will emit an
   `error` (or `warning`) if it detects an invalid sort order for translation keys.
 
