@@ -1,0 +1,20 @@
+{
+  "todos.removeTodo": "PIZZA Remove Todo",
+  "todos.previousPage": "PIZZA Previous",
+  "todos.nextPage": "PIZZA Next",
+  "todos.markCompleted": "PIZZA Mark Completed",
+  "todos.greeting": "PIZZA Welcome {userName}",
+  "todos.count": "PIZZA You have {count, plural, =0 {no todos} other { # todos} }",
+  "todos.addTodo": "PIZZA Add new todo",
+  "search.placeholder": "PIZZA Search Todos",
+  "search.noResults": "PIZZA No results found!",
+  "login": {
+    "lastLoginAt": "PIZZA Last Login at {lastLoginTime, time, short}",
+    "invalidAuth": "PIZZA Wrong Username or Password",
+    "form": {
+      "submit": "PIZZA Login Now!",
+      "resetPassword": "PIZZA Reset Password",
+      "cancel": "PIZZA Cancel"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "todos.removeTodo": "PIZZA Eliminar todo",
+  "todos.previousPage": "PIZZA Anterior",
+  "todos.nextPage": "PIZZA Siguiente",
+  "todos.markCompleted": "PIZZA Marca Completada",
+  "todos.greeting": "PIZZA Bienvenido {userName}",
+  "todos.count": "PIZZA Tienes {count, plural, =0 {no todos} other { # todos} }",
+  "todos.addTodo": "PIZZA Agregar nuevo Todo",
+  "search.placeholder": "PIZZA Buscar Todos",
+  "search.noResults": "PIZZA No se han encontrado resultados para {query}",
+  "login": {
+    "lastLoginAt": "PIZZA Último inicio de sesión en {lastLoginTime, time, short}",
+    "invalidAuth": "PIZZA Nombre de usuario o contraseña incorrectos",
+    "form": {
+      "submit": "PIZZA ¡Iniciar sesión!",
+      "resetPassword": "PIZZA Restablecer la contraseña",
+      "cancel": "PIZZA Cancelar"
+    }
+  }
+}
