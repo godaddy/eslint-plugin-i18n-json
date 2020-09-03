@@ -325,7 +325,7 @@ simple
 - default severity: error | 2
 - **options**
   - `sortFunctionPath`: String (Optional). Absolute path to a module which exports a custom sort function. The function should return the desired order of translation keys. The rule will do a level order traversal of the translations and call this custom sort at each level of the object, hence supporting nested objects. This option takes precedence over the `order` option.
-      - **NOTE**: eslint does additional verification passes on your files after a "fix" is applied. Ensure your sort function won't switch the ordering once the keys are already sorted. For example, if your sort function looks like `Object.keys(translations).reverse()`, then on the initial pass your keys would be sorted, but in the next pass you would reverse the ordering again. eslint will not apply the intended sorting fixes in this scenarios.
+      - **NOTE**: eslint does additional verification passes on your files after a "fix" is applied (in our case, once the sorted keys are written back to your JSON file). Ensure your sort function won't switch the ordering once the keys are already sorted. For example, if your sort function looks like `Object.keys(translations).reverse()`, then on the initial pass your keys would be sorted correctly, but in the next pass the order of keys would again be reversed. This would lead to a loop where eslint cannot verify the fix is working correctly. Eslint will not apply the intended sorting fixes in this scenarios.
       - `Function(translations: Object) : Array`
       ```javascript
       // .eslintrc.js

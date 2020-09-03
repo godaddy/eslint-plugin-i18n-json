@@ -1,6 +1,9 @@
 /*
-  An example descending sort function. 
+  An example ascending (a -> z) sort function. 
   Return the keys in the order you want them to be sorted.
+
+  The sort function is called at each level of the translations object. 
+  The sort function MUST ALWAYS return the same sorted order of keys. 
 */
 
 module.exports = (translations) => {
