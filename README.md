@@ -46,6 +46,7 @@
 
 - sort translation keys in ascending order through eslint auto-fix (case-sensitive)
   - rule: `i18n-json/sorted-keys`
+  - can support a custom sort function to satisfy different sorting needs
 
 - ability to ignore certain keys. Example: metadata keys, in progress translations, etc.
   - setting: `i18n-json/ignore-keys` [Example](examples/ignore-keys/)
@@ -82,7 +83,7 @@ Right out of the box you get the following through our recommended ruleset `i18n
   - default severity: error | 2
 - i18n-json/sorted-keys
   - automatic case-sensitive ascending sort of all keys in the translation file.
-  - configurable to sort in descending order
+  - can specifiy a custom sort function
   - Does a level order traversal of keys, and supports sorting nested objects
 
 Let's say your translations project directory looks like the following, (project name: simple)
