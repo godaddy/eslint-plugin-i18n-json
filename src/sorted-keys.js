@@ -4,6 +4,7 @@ const isPlainObject = require('lodash.isplainobject');
 const deepForOwn = require('./util/deep-for-own');
 const keyTraversals = require('./util/key-traversals');
 const getTranslationFileSource = require('./util/get-translation-file-source');
+const requireNoCache = require('./util/require-no-cache');
 
 const sortedKeys = ([{ order = 'asc', sortFunctionPath, indentSpaces = 2 } = {}], source) => {
   let translations = null;
@@ -16,19 +17,15 @@ const sortedKeys = ([{ order = 'asc', sortFunctionPath, indentSpaces = 2 } = {}]
     return [];
   }
 
-  // default traversal is asc.
-  let traversalOrder = keyTraversals.asc;
+  let traversalOrder = null;
 
-  if (order.toLowerCase() === 'desc') {
-    traversalOrder = keyTraversals.desc;
-  }
-
-  /* eslint-disable global-require */
   if (sortFunctionPath) {
-    // eslint-disable-next-line import/no-dynamic-require
-    traversalOrder = require(sortFunctionPath);
+    traversalOrder = requireNoCache(sortFunctionPath);
+  } else if (order.toLowerCase() === 'desc') {
+    traversalOrder = keyTraversals.desc;
+  } else {
+    traversalOrder = keyTraversals.asc;
   }
-  /* eslint-enable global-require */
 
   const sortedTranslations = {};
   const sortedTranslationPaths = [];
