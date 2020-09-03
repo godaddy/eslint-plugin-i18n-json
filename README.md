@@ -83,7 +83,6 @@ Right out of the box you get the following through our recommended ruleset `i18n
   - default severity: error | 2
 - i18n-json/sorted-keys
   - automatic case-sensitive ascending sort of all keys in the translation file.
-  - can specifiy a custom sort function
   - Does a level order traversal of keys, and supports sorting nested objects
 
 Let's say your translations project directory looks like the following, (project name: simple)
