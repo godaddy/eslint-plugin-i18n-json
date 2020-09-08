@@ -8,7 +8,7 @@
 
 module.exports = (translations) => {
   return Object.keys(translations).sort((keyA, keyB) => {
-    if (keyA == keyB) {
+    if (keyA === keyB) {
       return 0;
     } else if (keyA < keyB) {
       return -1;
