@@ -46,6 +46,7 @@
 
 - sort translation keys in ascending order through eslint auto-fix (case-sensitive)
   - rule: `i18n-json/sorted-keys`
+  - can support a custom sort function to satisfy different sorting needs
 
 - ability to ignore certain keys. Example: metadata keys, in progress translations, etc.
   - setting: `i18n-json/ignore-keys` [Example](examples/ignore-keys/)
@@ -59,6 +60,17 @@
 - eslint >= 4.0.0
 - node >= 6.0.0
 
+## Examples
+Check out the [Examples](examples/) folder to see different use cases.
+
+ - [Basic Setup](examples/simple)
+ - [Custom Message Syntax](examples/custom-message-syntax)
+ - [Custom Sorting Function For Keys](examples/custom-sort)
+ - [Identical Keys (Simple)](examples/identical-keys-simple)
+ - [Ignoring Keys](examples/ignore-keys)
+ - [Multiple Files Per Locale](examples/multiple-files-per-locale)
+ - [Webpack Development (eslint-loader)](examples/webpack-local-dev)
+
 ## Getting Started
 
 Right out of the box you get the following through our recommended ruleset `i18n-json/recommended`:
@@ -71,7 +83,6 @@ Right out of the box you get the following through our recommended ruleset `i18n
   - default severity: error | 2
 - i18n-json/sorted-keys
   - automatic case-sensitive ascending sort of all keys in the translation file.
-  - configurable to sort in descending order
   - Does a level order traversal of keys, and supports sorting nested objects
 
 Let's say your translations project directory looks like the following, (project name: simple)
@@ -120,18 +131,8 @@ simple
 6) **Profit!** Relax knowing that each change to the translations project will go through strict checks by the eslint plugin.
 
     *Example where we have invalid ICU message syntax.*
-    
+
     ![](assets/invalid-icu-syntax-screenshot.png)
-
-## Examples
-Check out the [Examples](examples/) folder to see different use cases.
-
- - [Basic Setup](examples/simple)
- - [Custom Message Syntax](examples/custom-message-syntax)
- - [Identical Keys (Simple)](examples/identical-keys-simple)
- - [Ignoring Keys](examples/ignore-keys)
- - [Multiple Files Per Locale](examples/multiple-files-per-locale)
- - [Webpack Development (eslint-loader)](examples/webpack-local-dev)
 
 ## Configuring your .eslintrc file
 - Simply update your `.eslintrc.*` with overrides for the individual rules.
@@ -226,7 +227,7 @@ Check out the [Examples](examples/) folder to see different use cases.
         },
       };
       ```
-  
+
     - **Can be an absolute path to a module which exports a Syntax Validator Function.**
 
       - `Function(message: String, key: String)`
@@ -321,11 +322,39 @@ Check out the [Examples](examples/) folder to see different use cases.
 ### i18n-json/sorted-keys
 
 - automatic case-sensitive ascending sort of all keys in the translation file
+- if turned on, the this rule by will sort keys in an ascending order by default.
 - default severity: error | 2
 - **options**
-  - `order`: String (Optional). Possible values: `asc|desc`. Default value: `asc`. Case-sensitive sort order of translation keys. The rule does a level order traversal of object keys. Supports nested objects.
+  - `sortFunctionPath`: String (Optional). Absolute path to a module which exports a custom sort function. The function should return the desired order of translation keys. The rule will do a level order traversal of the translations and call this custom sort at each level of the object, hence supporting nested objects. This option takes precedence over the `order` option.
+      - **NOTE**: eslint does additional verification passes on your files after a "fix" is applied (in our case, once the sorted keys are written back to your JSON file). Ensure your sort function won't switch the ordering once the keys are already sorted. For example, if your sort function looks like `Object.keys(translations).reverse()`, then on the initial pass your keys would be sorted correctly, but in the next pass the order of keys would again be reversed. This would lead to a loop where eslint cannot verify the fix is working correctly. Eslint will not apply the intended sorting fixes in this scenarios.
+      - `Function(translations: Object) : Array`
+      ```javascript
+      // .eslintrc.js
+      module.exports = {
+        rules: {
+          'i18n-json/sorted-keys': [2, {
+            sortFunctionPath: path.resolve('path/to/custom-sort.js'),
+          }],
+        },
+      };
+      ```
+      ```javascript
+      // custom-sort.js example
+      // Ascending sort
+      module.exports = (translations) => {
+        return Object.keys(translations).sort((keyA, keyB) => {
+          if (keyA == keyB) {
+            return 0;
+          } else if (keyA < keyB) {
+            return -1;
+          } else {
+            return 1;
+          }
+        })
+      };
+      ```
+  - `order`: String (Optional). Possible values: `asc|desc`. Default value: `asc`. Case-sensitive sort order of translation keys. The rule does a level order traversal of object keys. Supports nested objects. Note: if you supply a custom sort function through `sortFunctionPath`, then this option will be ignored.
   - `indentSpaces` : Number (Optional). Default value: `2`. The number of spaces to indent the emitted sorted translations with. (Will be passed to `JSON.stringify` when generating fixed output).
-
   In the case `--fix` is not supplied to eslint, and the `i18n-json/sorted-keys` rule is not switched off, it will emit an
   `error` (or `warning`) if it detects an invalid sort order for translation keys.
 
