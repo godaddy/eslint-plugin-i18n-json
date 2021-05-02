@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-i18n-json",
-  "version": "2.4.4",
+  "version": "3.1.0",
   "description": "Fully extendable eslint plugin for JSON i18n translation files.",
   "main": "index.js",
   "scripts": {
@@ -58,7 +58,7 @@
   "dependencies": {
     "chalk": "^2.3.2",
     "indent-string": "^3.2.0",
-    "intl-messageformat-parser": "^3.0.7",
+    "intl-messageformat-parser": "^5.4.0",
     "jest-diff": "^22.0.3",
     "jsonlint": "^1.6.2",
     "lodash.get": "^4.4.2",

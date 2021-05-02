@@ -1,6 +1,14 @@
 const { RuleTester } = require('eslint');
 const rule = require('./sorted-keys');
 
+jest.mock(
+  'path/to/custom-sort.js',
+  () => translations => Object.keys(translations).sort((keyA, keyB) => keyA.localeCompare(keyB, 'de')),
+  {
+    virtual: true
+  }
+);
+
 const ruleTester = new RuleTester();
 
 ruleTester.run('sorted-keys', rule, {
@@ -91,6 +99,21 @@ ruleTester.run('sorted-keys', rule, {
       filename: 'file.json'
     },
     {
+      code: `
+      /*{
+          "äTranslationKey": "translation value ä",
+          "zTranslationKey": "translation value z"
+      }*//*path/to/file.json*/
+      `,
+      options: [
+        {
+          sortFunctionPath: 'path/to/custom-sort.js',
+          indentSpaces: 2
+        }
+      ],
+      filename: 'file.json'
+    },
+    {
       // error parsing the json - ignore to allow i18n-json/valid-json rule to handle it
       code: `
       /*{*//*path/to/file.json*/
@@ -132,7 +155,7 @@ ruleTester.run('sorted-keys', rule, {
           message: 'Keys should be sorted, please use --fix.',
           line: 0,
           fix: {
-            range: [0, 118],
+            range: [0, 112],
             text: JSON.stringify(
               {
                 translationA: 'translation value a',
@@ -165,14 +188,46 @@ ruleTester.run('sorted-keys', rule, {
           message: 'Keys should be sorted, please use --fix.',
           line: 0,
           fix: {
-            range: [0, 118],
+            range: [0, 112],
             text: JSON.stringify(
               {
                 translationB: 'translation value b',
                 translationA: 'translation value a'
               },
               null,
-              1
+              2
+            )
+          }
+        }
+      ]
+    },
+    {
+      code: `
+      /*{
+          "zTranslationKey": "translation value z",
+          "äTranslationKey": "translation value ä"
+      }*//*path/to/file.json*/
+      `,
+      options: [
+        {
+          sortFunctionPath: 'path/to/custom-sort.js',
+          indentSpaces: 2
+        }
+      ],
+      filename: 'file.json',
+      errors: [
+        {
+          message: 'Keys should be sorted, please use --fix.',
+          line: 0,
+          fix: {
+            range: [0, 112],
+            text: JSON.stringify(
+              {
+                äTranslationKey: 'translation value ä',
+                zTranslationKey: 'translation value z'
+              },
+              null,
+              2
             )
           }
         }
