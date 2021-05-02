@@ -47,4 +47,32 @@ describe('deepForOwn', () => {
     });
     expect(visited).toEqual(['a', 'd', 'j', 'e']);
   });
+  it('will not traverse ignored paths using glob', () => {
+    const obj = {
+      a: {
+        b: {
+          c: 'value'
+        }
+      },
+      d: {
+        e: {
+          f: 'value'
+        }
+      },
+      g: {
+        h: {
+          i: 'value'
+        }
+      },
+      j: 'value'
+    };
+    const visited = [];
+    deepForOwn(obj, (value, key) => {
+      visited.push(key);
+      return true;
+    }, {
+      ignorePaths: ['*.b', 'd.*.f', 'g.*']
+    });
+    expect(visited).toEqual(['a', 'd', 'g', 'j', 'e']);
+  });
 });
