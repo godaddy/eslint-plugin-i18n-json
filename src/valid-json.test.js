@@ -69,7 +69,7 @@ ruleTester.run('valid-json', rule, {
       errors: [
         {
           message: /\nInvalid JSON\.\n\n.*/,
-          line: 2,
+          line: 0,
           col: 0
         }
       ]
@@ -83,7 +83,7 @@ ruleTester.run('valid-json', rule, {
       errors: [
         {
           message: /\nInvalid JSON\.\n\n.*/,
-          line: 1,
+          line: 0,
           col: 0
         }
       ]

@@ -60,12 +60,12 @@
     "indent-string": "^3.2.0",
     "intl-messageformat-parser": "^5.4.0",
     "jest-diff": "^22.0.3",
-    "jsonlint": "^1.6.2",
     "lodash.get": "^4.4.2",
     "lodash.isequal": "^4.5.0",
     "lodash.isplainobject": "^4.0.6",
     "lodash.set": "^4.3.2",
     "log-symbols": "^2.2.0",
+    "parse-json": "^2.2.0",
     "plur": "^2.1.2",
     "pretty-format": "^22.0.3"
   }
