@@ -315,6 +315,8 @@ simple
       };
       ```
 
+  - `checkDuplicateValues`: Boolean (Optional). Default value: `false`. If true, the values will also be checked for duplicates, in comparison to the file specified in `filePath`.
+
   Output from the slightly advanced [identical keys](/examples/multiple-keys-per-locale) example where some keys from the reference translation file (`en-US`) were not found during comparison.
 
   ![](assets/identical-keys-error-screenshot-2018-04-30.png)

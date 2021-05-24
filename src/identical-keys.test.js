@@ -94,6 +94,29 @@ ruleTester.run('identical-keys', rule, {
       ],
       filename: 'file.json'
     },
+    // single file path to compare with, while checking for duplicate values
+    {
+      code: `
+      /*{
+        "translationLevelOne": {
+          "translationKeyA": "translated value a",
+          "translationLevelTwo": {
+            "translationKeyB": "translated value b",
+            "translationsLevelThree": {
+              "translationKeyC": "translated value c"
+            }
+          }
+        }
+      }*//*path/to/file.json*/
+      `,
+      options: [
+        {
+          filePath: 'path/to/compare-file-a.json',
+          checkDuplicateValues: true
+        }
+      ],
+      filename: 'file.json'
+    },
     // mapping to match which file we should use to compare structure
     {
       code: `
@@ -287,6 +310,31 @@ describe('Snapshot Tests for Invalid Code', () => {
       options: [
         {
           filePath: 'path/to/compare-file-a.json'
+        }
+      ],
+      filename: 'file.json'
+    });
+    expect(strip(errors[0].message)).toMatchSnapshot();
+  });
+  test('single comparison file - duplicate values', () => {
+    const errors = run({
+      code: `
+      /*{
+        "translationLevelOne": {
+          "translationKeyA": "value a",
+          "translationLevelTwo": {
+            "translationKeyB": "value b",
+            "translationsLevelThree": {
+              "translationKeyC": "value c"
+            }
+          }
+        }
+      }*//*/path/to/invalid-file.json*/
+      `,
+      options: [
+        {
+          filePath: 'path/to/compare-file-a.json',
+          checkDuplicateValues: true
         }
       ],
       filename: 'file.json'
