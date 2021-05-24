@@ -1,4 +1,4 @@
-const jsonlint = require('jsonlint');
+const parseJson = require('parse-json');
 const isPlainObject = require('lodash.isplainobject');
 const chalk = require('chalk');
 const requireNoCache = require('./util/require-no-cache');
@@ -15,7 +15,7 @@ const validJSON = ([{ linter } = {}], source) => {
       // use custom linter
       parsed = requireNoCache(linter)(source);
     } else {
-      parsed = jsonlint.parse(source);
+      parsed = parseJson(source);
     }
 
     if (!isPlainObject(parsed)) {
