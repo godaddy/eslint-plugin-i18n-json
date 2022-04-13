@@ -56,9 +56,9 @@
     "strip-ansi": "^4.0.0"
   },
   "dependencies": {
+    "@formatjs/icu-messageformat-parser": "^2.0.18",
     "chalk": "^2.3.2",
     "indent-string": "^3.2.0",
-    "intl-messageformat-parser": "^5.4.0",
     "jest-diff": "^22.0.3",
     "lodash.get": "^4.4.2",
     "lodash.isequal": "^4.5.0",

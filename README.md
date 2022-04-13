@@ -22,6 +22,7 @@
   - [i18n-json/valid-message-syntax](#i18n-jsonvalid-message-syntax)
   - [i18n-json/identical-keys](#i18n-jsonidentical-keys)
   - [i18n-json/sorted-keys](#i18n-jsonsorted-keys)
+  - [i18n-json/identical-placeholders](#i18n-jsonidentical-placeholders)
 - [Settings](#settings)
   - [i18n-json/ignore-keys](#i18n-jsonignore-keys)
 - [Special Thanks](#special-thanks-)
@@ -47,6 +48,9 @@
 - sort translation keys in ascending order through eslint auto-fix (case-sensitive)
   - rule: `i18n-json/sorted-keys`
   - can support a custom sort function to satisfy different sorting needs
+
+- ensure translation files have identical placeholders
+  - rule: `i18n-json/identical-placeholders`
 
 - ability to ignore certain keys. Example: metadata keys, in progress translations, etc.
   - setting: `i18n-json/ignore-keys` [Example](examples/ignore-keys/)
@@ -79,7 +83,7 @@ Right out of the box you get the following through our recommended ruleset `i18n
   - linting of each JSON translation file
   - default severity: error | 2
 - i18n-json/valid-message-syntax
-  - default ICU Message syntax validation (using `intl-messageformat-parser`)
+  - default ICU Message syntax validation (using `@formatjs/icu-messageformat-parser`)
   - default severity: error | 2
 - i18n-json/sorted-keys
   - automatic case-sensitive ascending sort of all keys in the translation file.
@@ -212,7 +216,7 @@ simple
 
 ### i18n-json/valid-message-syntax
 
-- default ICU Message syntax validation (using `intl-messageformat-parser`)
+- default ICU Message syntax validation (using `@formatjs/icu-messageformat-parser`)
 - default severity: error | 2
 - **options**
   - `syntax`: String (Optional). Default value: `icu`.
@@ -360,12 +364,31 @@ simple
 
   ![](assets/fixable-sorting-notice.png)
 
+### i18n-json/identical-placeholders
+
+- compare each translation's placeholders with the refrence file to ensure consistency
+- severity: 0 | off , this rule is OFF by default
+- Can turn this rule on by specifying options for it through your `.eslintrc.*` file.
+- **options**
+  - `filePath` : String (Required)
+
+    - **Can be an absolute path to the reference translation file.**
+      ```javascript
+      // .eslintrc.js
+      module.exports = {
+        rules: {
+          'i18n-json/identical-placeholders': [2, {
+            filePath: path.resolve('path/to/locale/en-US.json'),
+          }],
+        },
+      };
+      ```
 ## Settings
 
 ### i18n-json/ignore-keys
 
 - list of key paths (case sensitive) to ignore when checking syntax and doing key structure comparisons. [Example](examples/ignore-keys/)
-- this setting is used by the following rules: `i18n-json/identical-keys` and `i18n-json/valid-syntax`
+- this setting is used by the following rules: `i18n-json/identical-keys`, `i18n-json/valid-syntax` and `i18n-json/identical-placeholders`.
 - if the key path points to an object, the nested paths are also ignored.
   - e.g. if the key `a` was added to the `ignore-keys` list, then `a.b` will also be ignored.
     ```json
@@ -406,7 +429,7 @@ simple
 
 - Jest platform packages
 
-- intl-messageformat-parser
+- @formatjs/icu-messageformat-parser
 
 - report formatter ui heavily inspired from: https://github.com/sindresorhus/eslint-formatter-pretty
 

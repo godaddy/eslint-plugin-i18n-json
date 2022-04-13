@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is loosely based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [TBD] - TBD - MAJOR BUMP
+
+- Switch to `@formatjs/icu-messageformat-parser` as `intl-messageformat-parser` is now deprecated. This is a breaking change, the new parser uses icu4j implementation and has stricter validations.
+- Add new rule `i18n-json/identical-placeholders`.
+- Related PRs
+  - TBD
+
+
 ## [3.0.0] - 2020-08-18 - MAJOR BUMP
 
 - **security:** Bump intl-messageformat-parser from v3 to v5 due to [CVE-2020-7660](https://nvd.nist.gov/vuln/detail/CVE-2020-7660)

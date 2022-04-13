@@ -5,7 +5,8 @@ module.exports = {
     'valid-json': require('./src/valid-json'),
     'valid-message-syntax': require('./src/valid-message-syntax'),
     'identical-keys': require('./src/identical-keys'),
-    'sorted-keys': require('./src/sorted-keys')
+    'sorted-keys': require('./src/sorted-keys'),
+    'identical-placeholders': require('./src/identical-placeholders')
   },
   processors: {
     '.json': {
@@ -41,7 +42,8 @@ module.exports = {
             indentSpaces: 2
           }
         ],
-        'i18n-json/identical-keys': 0
+        'i18n-json/identical-keys': 0,
+        'i18n-json/identical-placeholders': 0
       }
     }
   }
