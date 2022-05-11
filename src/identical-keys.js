@@ -8,9 +8,8 @@ const noDifferenceRegex = /Compared\s+values\s+have\s+no\s+visual\s+difference/i
 // pick the first match.
 const getKeyStructureFromMap = (filePathMap, sourceFilePath) => {
   // do a suffix match
-  const match = Object.keys(filePathMap)
-    .filter(filePath => sourceFilePath.endsWith(filePath))
-    .pop();
+  const match = sourceFilePath.substr(sourceFilePath.lastIndexOf('/') + 1);
+  
   if (match) {
     try {
       const filepath = filePathMap[match];
