@@ -366,7 +366,7 @@ simple
 
 ### i18n-json/identical-placeholders
 
-- compare each translation's placeholders with the refrence file to ensure consistency
+- compare each translation's placeholders with the reference file to ensure consistency
 - severity: 0 | off , this rule is OFF by default
 - Can turn this rule on by specifying options for it through your `.eslintrc.*` file.
 - **options**
