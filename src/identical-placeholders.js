@@ -29,8 +29,7 @@ const compareAst = (astA, astB) => {
       return false;
     }
 
-    // Compare nested elements for type 5 (select) and 6 (plural)
-    if (elementA.type === 5 || elementA.type === 6) {
+    if (elementA.type === TYPE.select || elementA.type === TYPE.plural) {
       const elementAOptions = Object.keys(elementA.options).sort();
       const elementBOptions = Object.keys(elementB.options).sort();
       if (
