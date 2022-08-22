@@ -11,7 +11,7 @@ const sortAstNodes = (a, b) => `${a.type}${a.value}`.localeCompare(`${b.type}${b
 const compareAst = (astA, astB) => {
   // Skip raw text
   const astAFiltered = astA.filter(a => a.type !== TYPE.literal).sort(sortAstNodes);
-  const astBFiltered = astB.filter(a => a.type !== 0).sort(sortAstNodes);
+  const astBFiltered = astB.filter(a => a.type !== TYPE.literal).sort(sortAstNodes);
 
   if (astAFiltered.length !== astBFiltered.length) {
     return false;
