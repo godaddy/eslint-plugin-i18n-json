@@ -1,4 +1,4 @@
-const { parse } = require('@formatjs/icu-messageformat-parser');
+const { parse, TYPE } = require('@formatjs/icu-messageformat-parser');
 const set = require('lodash.set');
 const get = require('lodash.get');
 const diff = require('jest-diff');
