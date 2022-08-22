@@ -13,7 +13,7 @@ const validJSON = ([{ linter } = {}], source) => {
 
     if (linter) {
       // use custom linter
-      parsed = requireNoCache(linter)(source);
+      parsed = requireNoCache(linter).default ? requireNoCache(linter).default(source) : requireNoCache(linter)(source);
     } else {
       parsed = parseJson(source);
     }
