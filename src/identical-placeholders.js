@@ -44,7 +44,7 @@ const compareAst = (astA, astB) => {
     }
 
     // Compare children for type 8 (rich text)
-    if (elementA.type === 8) {
+    if (elementA.type === TYPE.tag) {
       return compareAst(elementA.children, elementB.children);
     }
 
