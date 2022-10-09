@@ -20,6 +20,24 @@ exports[`Snapshot Tests for Invalid Code map of comparison files - structure mis
   }"
 `;
 
+exports[`Snapshot Tests for Invalid Code single comparison file - duplicate values 1`] = `
+"
+- Expected
++ Received
+
+@@ -2,7 +2,7 @@
+    \\"translationLevelOne\\": Object {
+-     \\"translationKeyA\\": \\"Message<String>\\",
++     \\"translationKeyA\\": \\"value a\\",
+      \\"translationLevelTwo\\": Object {
+-       \\"translationKeyB\\": \\"Message<String>\\",
++       \\"translationKeyB\\": \\"value b\\",
+        \\"translationsLevelThree\\": Object {
+-         \\"translationKeyC\\": \\"Message<String>\\",
++         \\"translationKeyC\\": \\"value c\\",
+        },"
+`;
+
 exports[`Snapshot Tests for Invalid Code single comparison file - structure mismatch 1`] = `
 "
 - Expected
