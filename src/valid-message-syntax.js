@@ -11,7 +11,6 @@ const getTranslationFileSource = require('./util/get-translation-file-source');
 
 /* Error tokens */
 const EMPTY_OBJECT = Symbol.for('EMPTY_OBJECT');
-const ARRAY = Symbol.for('ARRAY');
 
 /* Formatting */
 const ALL_BACKSLASHES = /[\\]/g;
@@ -31,7 +30,6 @@ const prettyFormatTypePlugin = {
 const formatExpectedValue = ({ value }) => {
   switch (value) {
     case EMPTY_OBJECT:
-    case ARRAY:
       return 'ObjectContaining<ValidMessages> | ValidMessage<String>';
     default:
       return 'ValidMessage<String>';
@@ -45,8 +43,6 @@ const formatReceivedValue = ({ value, error }) => {
   switch (value) {
     case EMPTY_OBJECT:
       return `${prettyFormat({})} ===> ${error}`;
-    case ARRAY:
-      return `${prettyFormat([])} ===> ${error}`;
     default:
       return `${prettyFormat(value, {
         plugins: [prettyFormatTypePlugin]
@@ -140,13 +136,6 @@ const validMessageSyntax = (context, source) => {
             error: new SyntaxError('Empty object.')
           });
         }
-      } else if (Array.isArray(value)) {
-        invalidMessages.push({
-          value: ARRAY,
-          key,
-          path,
-          error: new TypeError('An Array cannot be a translation value.')
-        });
       } else {
         try {
           validate(value, key);

@@ -30,19 +30,6 @@ exports[`Snapshot Tests for Invalid Code nested translations - icu syntax check 
   }"
 `;
 
-exports[`Snapshot Tests for Invalid Code no arrays or numbers 1`] = `
-"
-- Expected
-+ Received
-
-  Object {
--   \\"levelOne\\": \\"ObjectContaining<ValidMessages> | ValidMessage<String>\\",
--   \\"levelTwo\\": \\"ValidMessage<String>\\",
-+   \\"levelOne\\": \\"Array [] ===> TypeError: An Array cannot be a translation value.\\",
-+   \\"levelTwo\\": \\"Number(5) ===> Message must be a String.\\",
-  }"
-`;
-
 exports[`Snapshot Tests for Invalid Code no empty objects 1`] = `
 "
 - Expected
@@ -51,6 +38,17 @@ exports[`Snapshot Tests for Invalid Code no empty objects 1`] = `
   Object {
 -   \\"levelOne\\": \\"ObjectContaining<ValidMessages> | ValidMessage<String>\\",
 +   \\"levelOne\\": \\"Object {} ===> SyntaxError: Empty object.\\",
+  }"
+`;
+
+exports[`Snapshot Tests for Invalid Code no numbers 1`] = `
+"
+- Expected
++ Received
+
+  Object {
+-   \\"levelOne\\": \\"ValidMessage<String>\\",
++   \\"levelOne\\": \\"Number(5) ===> Message must be a String.\\",
   }"
 `;
 
