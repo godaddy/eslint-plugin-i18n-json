@@ -261,12 +261,11 @@ describe('Snapshot Tests for Invalid Code', () => {
     });
     expect(strip(errors[0].message)).toMatchSnapshot();
   });
-  test('no arrays or numbers', () => {
+  test('no numbers', () => {
     const errors = run({
       code: `
       /*{
-        "levelOne": [ "data" ],
-        "levelTwo": 5
+        "levelOne": 5
       }*//*path/to/file.json*/
       `,
       options: [
