@@ -1,6 +1,6 @@
 {
   "name": "@laveez/eslint-plugin-i18n-json",
-  "version": "4.0.1",
+  "version": "4.0.3",
   "description": "Fully extendable eslint plugin for JSON i18n translation files.",
   "main": "index.js",
   "scripts": {
