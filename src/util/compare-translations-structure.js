@@ -11,11 +11,7 @@ const DIFF_OPTIONS = {
 // lodash.set will automatically convert a previous string value
 // into an object, if the current path states that a key is nested inside.
 // reminder, deepForOwn goes from the root level to the deepest level (preorder)
-const compareTranslationsStructure = (
-  settings,
-  translationsA,
-  translationsB
-) => {
+const compareTranslationsStructure = (settings, translationsA, translationsB) => {
   const augmentedTranslationsA = {};
   const augmentedTranslationsB = {};
 
@@ -25,20 +21,12 @@ const compareTranslationsStructure = (
     ignorePaths
   };
 
-  deepForOwn(
-    translationsA,
-    (value, key, path) => {
-      set(augmentedTranslationsA, path, 'Message<String>');
-    },
-    opts
-  );
-  deepForOwn(
-    translationsB,
-    (value, key, path) => {
-      set(augmentedTranslationsB, path, 'Message<String>');
-    },
-    opts
-  );
+  deepForOwn(translationsA, (value, key, path) => {
+    set(augmentedTranslationsA, path, 'Message<String>');
+  }, opts);
+  deepForOwn(translationsB, (value, key, path) => {
+    set(augmentedTranslationsB, path, 'Message<String>');
+  }, opts);
   return diff(augmentedTranslationsA, augmentedTranslationsB, DIFF_OPTIONS);
 };
 

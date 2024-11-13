@@ -169,9 +169,7 @@ ruleTester.run('identical-keys', rule, {
       ],
       filename: 'file.json',
       settings: {
-        'i18n-json/ignore-keys': [
-          'translationLevelOne.translationLevelTwo'
-        ]
+        'i18n-json/ignore-keys': ['translationLevelOne.translationLevelTwo']
       }
     }
   ],
@@ -240,8 +238,7 @@ ruleTester.run('identical-keys', rule, {
       filename: 'file.json',
       errors: [
         {
-          message:
-            /Error parsing or retrieving key structure comparison file based on "filePath" mapping/,
+          message: /Error parsing or retrieving key structure comparison file based on "filePath" mapping/,
           line: 0
         }
       ]
@@ -261,8 +258,7 @@ ruleTester.run('identical-keys', rule, {
       filename: 'file.json',
       errors: [
         {
-          message:
-            /Current translation file does not have a matching entry in the "filePath" map/,
+          message: /Current translation file does not have a matching entry in the "filePath" map/,
           line: 0
         }
       ]

@@ -17,8 +17,7 @@ jest.mock(
     multipleVariables: 'Hi {user}, it is {today, date, medium}.',
     numberFormat: '{count, number} users',
     select: 'You selected {choice, select, yes {Yea} no {Nay} other {Maybe}}',
-    'nested.select':
-      '{done, select, no {There is more to it {count, number}.} other {Done.}}',
+    'nested.select': '{done, select, no {There is more to it {count, number}.} other {Done.}}',
     'plural.with.substitution':
       'Cart: {itemCount, plural, =0 {no items} one {# item} other {# items}}.',
     richText: 'this is the price <bold>{price, number}</bold>.'

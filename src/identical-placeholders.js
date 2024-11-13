@@ -5,17 +5,12 @@ const requireNoCache = require('./util/require-no-cache');
 const getTranslationFileSource = require('./util/get-translation-file-source');
 const deepForOwn = require('./util/deep-for-own');
 
-const sortAstNodes = (a, b) =>
-  `${a.type}${a.value}`.localeCompare(`${b.type}${b.value}`);
+const sortAstNodes = (a, b) => `${a.type}${a.value}`.localeCompare(`${b.type}${b.value}`);
 
 const compareAst = (astA, astB) => {
   // Skip raw text
-  const astAFiltered = astA
-    .filter(a => a.type !== TYPE.literal)
-    .sort(sortAstNodes);
-  const astBFiltered = astB
-    .filter(a => a.type !== TYPE.literal)
-    .sort(sortAstNodes);
+  const astAFiltered = astA.filter(a => a.type !== TYPE.literal).sort(sortAstNodes);
+  const astBFiltered = astB.filter(a => a.type !== TYPE.literal).sort(sortAstNodes);
 
   if (astAFiltered.length !== astBFiltered.length) {
     return false;
