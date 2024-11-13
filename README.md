@@ -1,6 +1,6 @@
 # eslint-plugin-i18n-json
 
-![NPM Version](https://img.shields.io/npm/v/%40laveez%2Feslint-plugin-i18n-json)
+[![NPM Version](https://img.shields.io/npm/v/%40laveez%2Feslint-plugin-i18n-json)](https://www.npmjs.com/package/@laveez/eslint-plugin-i18n-json)
 
 > Fully extendable eslint plugin for JSON i18n translation files.
 
