@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is loosely based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [4.0.1]
+
+- **security:** Bump Lodash due to [CVE-2020-8203](https://github.com/advisories/GHSA-p6mc-m468-83gw)
+- Update readme with instructions on how to use this package with npm `>= 9.0.0` as described in https://github.com/godaddy/eslint-plugin-i18n-json/issues/62
+
 ## [4.0.0] - 2021-04-13 - MAJOR BUMP
 
 - Switch to `@formatjs/icu-messageformat-parser` as `intl-messageformat-parser` is now deprecated. This is a breaking change, the new parser uses icu4j implementation and has stricter validations.
