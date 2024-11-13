@@ -1,6 +1,4 @@
-const set = require('lodash.set');
-const equal = require('lodash.isequal');
-const isPlainObject = require('lodash.isplainobject');
+const { set, isEqual, isPlainObject } = require('lodash');
 const deepForOwn = require('./util/deep-for-own');
 const keyTraversals = require('./util/key-traversals');
 const getTranslationFileSource = require('./util/get-translation-file-source');
@@ -48,7 +46,7 @@ const sortedKeys = ([{ order = 'asc', sortFunctionPath, indentSpaces = 2 } = {}]
     originalTranslationPaths.push(path);
   });
 
-  if (!equal(originalTranslationPaths, sortedTranslationPaths)) {
+  if (!isEqual(originalTranslationPaths, sortedTranslationPaths)) {
     const sortedWithIndent = JSON.stringify(
       sortedTranslations,
       null,

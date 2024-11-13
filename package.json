@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-i18n-json",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Fully extendable eslint plugin for JSON i18n translation files.",
   "main": "index.js",
   "scripts": {
@@ -27,7 +27,8 @@
   ],
   "author": "GoDaddy Operating Company, LLC",
   "contributors": [
-    "Mayank Jethva <mjethva@godaddy.com>"
+    "Mayank Jethva <mjethva@godaddy.com>",
+    "Niko Muukkonen <niko.muukkonen1@gmail.com>"
   ],
   "jest": {
     "roots": [
@@ -60,10 +61,7 @@
     "chalk": "^2.3.2",
     "indent-string": "^3.2.0",
     "jest-diff": "^22.0.3",
-    "lodash.get": "^4.4.2",
-    "lodash.isequal": "^4.5.0",
-    "lodash.isplainobject": "^4.0.6",
-    "lodash.set": "^4.3.2",
+    "lodash": "^4.17.21",
     "log-symbols": "^2.2.0",
     "parse-json": "^5.2.0",
     "plur": "^2.1.2",

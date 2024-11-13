@@ -141,7 +141,10 @@ ruleTester.run('valid-message-syntax', rule, {
       ],
       filename: 'file.json',
       settings: {
-        'i18n-json/ignore-keys': ['translationKeyA', 'translationKeyC']
+        'i18n-json/ignore-keys': [
+          'translationKeyA',
+          'translationKeyC'
+        ]
       }
     }
   ],
@@ -162,7 +165,8 @@ ruleTester.run('valid-message-syntax', rule, {
       filename: 'file.json',
       errors: [
         {
-          message: /Error configuring syntax validator\. Rule option specified: path\/to\/does-not-exist\.js\. Error: cannot find module /gi,
+          message:
+            /Error configuring syntax validator\. Rule option specified: path\/to\/does-not-exist\.js\. Error: cannot find module /gi,
           line: 0
         }
       ]
