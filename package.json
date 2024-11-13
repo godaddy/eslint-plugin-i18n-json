@@ -1,5 +1,5 @@
 {
-  "name": "eslint-plugin-i18n-json",
+  "name": "@laveez/eslint-plugin-i18n-json",
   "version": "4.0.1",
   "description": "Fully extendable eslint plugin for JSON i18n translation files.",
   "main": "index.js",
@@ -14,7 +14,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:godaddy/eslint-plugin-i18n-json"
+    "url": "git@github.com:laveez/eslint-plugin-i18n-json"
   },
   "keywords": [
     "eslint",

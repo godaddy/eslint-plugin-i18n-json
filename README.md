@@ -1,7 +1,6 @@
 # eslint-plugin-i18n-json
 
 [![Latest npm version](https://img.shields.io/npm/v/eslint-plugin-i18n-json.svg)](https://www.npmjs.com/package/eslint-plugin-i18n-json)
-[![Build Status](https://travis-ci.org/godaddy/eslint-plugin-i18n-json.svg?branch=master)](https://travis-ci.org/godaddy/eslint-plugin-i18n-json)
 
 > Fully extendable eslint plugin for JSON i18n translation files.
 
