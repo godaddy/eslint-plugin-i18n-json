@@ -5,3 +5,4 @@ coverage/
 .vscode
 package-lock.json
 *.lock
+/.idea
