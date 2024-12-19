@@ -1,6 +1,5 @@
 const { parse, TYPE } = require('@formatjs/icu-messageformat-parser');
-const set = require('lodash.set');
-const get = require('lodash.get');
+const { set, get } = require('lodash');
 const diff = require('jest-diff');
 const requireNoCache = require('./util/require-no-cache');
 const getTranslationFileSource = require('./util/get-translation-file-source');

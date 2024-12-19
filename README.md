@@ -6,7 +6,7 @@
 > Fully extendable eslint plugin for JSON i18n translation files.
 
 <p align="center">
-<img src="assets/logo-transparent.png" width="400"/>
+  <img src="assets/logo-transparent.png" width="400" alt="logo"/>
 </p>
 
 🎉 [**Check out the introductory blog post!**](https://godaddy.github.io/2018/04/02/introducing-eslint-plugin-i18n-json/)
@@ -16,7 +16,8 @@
 - [Features](#features-)
 - [Getting started](#getting-started)
 - [Examples](#examples)
-- [Configuring your .eslintrc file](#configuring-your-eslintrc-file)
+- [Configuring your .eslintrc file (ESLint version `< 9.0.0`)](#configuring-your-eslintrc-file-eslint-version--900)
+- [EsLint version `>= 9.0.0`](#eslint-version--900)
 - [Rules](#rules)
   - [i18n-json/valid-json](#i18n-jsonvalid-json)
   - [i18n-json/valid-message-syntax](#i18n-jsonvalid-message-syntax)
@@ -106,7 +107,7 @@ simple
 
 **In this project directory, do the following:**
 1) >npm install --save-dev eslint-plugin-i18n-json
-2) Create a `.eslintrc.js` file in the root dir of your project. For this example: `/simple/.eslintrc.js`.
+2) If you are using eslint `< 9.0.0` Create a `.eslintrc.js` file in the root dir of your project. For this example: `/simple/.eslintrc.js`.
 3) paste in the following:
     ```javascript
     module.exports = {
@@ -138,7 +139,7 @@ simple
 
     ![](assets/invalid-icu-syntax-screenshot.png)
 
-## Configuring your .eslintrc file
+## Configuring your .eslintrc file (ESLint version `< 9.0.0`)
 - Simply update your `.eslintrc.*` with overrides for the individual rules.
 - Eslint severities: 2 = error, 1 = warning, 0 = off
 - Example of the module's default rule configuration:
@@ -177,6 +178,29 @@ simple
     },
   };
   ```
+  
+## ESLint version `>= 9.0.0`
+
+- ESLint version `>= 9.0.0` uses flat configuration
+
+```javascript
+// eslint.config.(m)js
+import i18nJsonPlugin from 'eslint-plugin-i18n-json';
+
+export default {
+  files: ['**/*.json'],
+  plugins: { 'i18n-json': i18nJsonPlugin },
+  processor: {
+    meta: { name: '.json' },
+    ...i18nJsonPlugin.processors['.json'],
+  },
+  rules: {
+    ...i18nJsonPlugin.configs.recommended.rules,
+    'i18n-json/valid-message-syntax': 'off',
+  },
+};
+
+```
 
 ## Rules
 

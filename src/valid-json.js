@@ -1,5 +1,5 @@
 const parseJson = require('parse-json');
-const isPlainObject = require('lodash.isplainobject');
+const { isPlainObject } = require('lodash');
 const chalk = require('chalk');
 const requireNoCache = require('./util/require-no-cache');
 const getTranslationFileSource = require('./util/get-translation-file-source');

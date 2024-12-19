@@ -1,6 +1,5 @@
-const set = require('lodash.set');
+const { set, isPlainObject } = require('lodash');
 const diff = require('jest-diff');
-const isPlainObject = require('lodash.isplainobject');
 const prettyFormat = require('pretty-format');
 const icuValidator = require('./message-validators/icu');
 const notEmpty = require('./message-validators/not-empty');

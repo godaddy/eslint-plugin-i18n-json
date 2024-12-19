@@ -1,4 +1,4 @@
-const set = require('lodash.set');
+const { set } = require('lodash');
 const diff = require('jest-diff');
 const deepForOwn = require('./deep-for-own');
 
